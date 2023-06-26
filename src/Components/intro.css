@@ -1,0 +1,43 @@
+.image-slider {
+    width: 50%;
+    margin-left: 25%;
+    position: relative;
+  }
+  
+  .slider-container {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Optional: Enable smooth scrolling on iOS */
+  }
+  
+  .slide {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    width: 100%;
+  }
+  
+  .slide img {
+    width: 100%;
+  }
+  
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: gray;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dot.active {
+    background-color: black;
+  }
+  

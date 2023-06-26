@@ -10,6 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "typewriter-effect": "^2.20.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -24,13 +25,16 @@
     "extends": "react-app",
     "overrides": [
       {
-        "files": ["**/*.test.js", "**/*.spec.js"],
+        "files": [
+          "**/*.test.js",
+          "**/*.spec.js"
+        ],
         "env": {
           "jest": true
         }
       }
     ]
-  }, 
+  },
   "browserslist": {
     "production": [
       ">0.2%",
