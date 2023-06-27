@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Typewriter from 'typewriter-effect'
 import Intro from './Components/intro';
@@ -16,7 +16,13 @@ function App() {
             <p className='T-box'>
               <Typewriter 
                    onInit={(typewriter)=>{
-                    typewriter.changeDelay(20).typeString('Finding Balance').pauseFor(300).deleteAll().typeString('Nurturing Well-being').start()
+                    typewriter
+                    .changeDelay(20)
+                    .typeString('Finding Balance')
+                    .pauseFor(300)
+                    .deleteAll()
+                    .typeString('Nurturing Well-being')
+                    .start()
 
                    }}
               />
@@ -27,14 +33,14 @@ function App() {
    );
 
   setTimeout(
-   ()=>{ setLoaded(true) }, 3000
+   ()=>{ setLoaded(true) }, 6000
   )
 
 
 return (
     <>
     {
-      loaded === false ? <>{opening}</> : <>{opening}</>
+      loaded === false ? <>{opening}</> : <Intro />
     }
     </>
   )

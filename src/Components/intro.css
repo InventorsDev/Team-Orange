@@ -1,43 +1,75 @@
-.image-slider {
-    width: 50%;
-    margin-left: 25%;
-    position: relative;
-  }
-  
-  .slider-container {
-    display: flex;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* Optional: Enable smooth scrolling on iOS */
-  }
-  
-  .slide {
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    width: 100%;
-  }
-  
-  .slide img {
-    width: 100%;
-  }
-  
-  .dots-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: gray;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dot.active {
-    background-color: black;
-  }
-  
+.I--page{
+  background-color: #f3fbf4;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+}
+
+.slidebox {
+  width: 100vw;
+  height: fit-content;
+  padding-top: 20px  ;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  position: relative;
+}
+
+.button{
+  position: absolute;
+  top: 35%;
+  width: 20vw;
+  height: 30%;
+  background-color: transparent;
+  border: none;
+}
+
+.button.left{
+  left: 0px;
+}
+
+.button.right{
+  right: 0px;
+}
+.slides{
+  width: 100vw;
+  height: fit-content;
+  display: inline-block;
+  margin: 0px;
+  scroll-snap-align: center;
+}
+
+.slidebox::-webkit-scrollbar{
+    height: 0px;
+    width: 0px;
+}
+
+.image.mg1{
+    height: 250px;
+    width: 100vw;
+}
+
+.image.mg2{
+  height: 200px;
+  width: 100vw;
+}
+
+.image.mg3, .image.mg4{
+  height: 300px;
+  width: 100vw;
+}
+
+.dots{
+     width: 100px;
+     margin: 20px auto;
+     white-space: nowrap;
+}
+
+.dot{
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  margin: 0px 5px ;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+}
