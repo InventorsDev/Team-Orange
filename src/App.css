@@ -1,43 +1,14 @@
-.App {
-  color: #3bcd84;
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Lato&family=Montserrat&family=The+Nautigal:wght@700&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  width: 40vmin;
-  border-radius: 20vmin;
-  background-color: #3bcd84;
-}
 
-.opacity{
-  overflow-x: auto;
-  white-space: nowrap;
-  border-right: solid 0.1px #3bcd84;
-}
 
-.opacity::-webkit-scrollbar{
-  height: 0px;
-}
-
-@media (prefers-reduced-motion: no-preference) {
- .App-logo{
-  animation: App-logo-spin 2s;
- }
-.opacity{
-  animation: Changing-Opacity 2s ;
-}
-}
-.App-Name{
-  margin: 15vmin auto 15vmin auto;
-  height: 10vmin;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2em;
-  color: #f3fbf4;
-}
-
-.App-header {
+.O--container {
   background-color: #f3fbf4;
   min-height: 100vh;
   display: flex;
@@ -46,6 +17,53 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+
+.Tranquil-logo {
+  height: 40vmin;
+  width: 40vmin;
+  border-radius: 20vmin;
+  background-color: #3bcd84;
+}
+
+.T-Name{
+  margin: 15vmin auto 15vmin -15px ;
+  height: 10vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  font-family: 'The Nautigal', cursive;
+  color: #f3fbf4;
+}
+
+.T-box{
+  overflow-x: auto;
+  white-space: nowrap;
+  color: #3bcd84;
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-family: 'Lato', sans-serif;
+}
+
+.pointer{
+   display: inline-block;
+   height: 10px;
+   width: 2px;
+   background-color: #3bcd84;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+ .Tranquil-logo{
+  animation: App-logo-spin 2s;
+ }
+
+}
+
+
+
 
 
 @keyframes App-logo-spin {
@@ -59,14 +77,5 @@
   }
 }
 
-@keyframes Changing-Opacity {
-     from{
-      opacity: 0;
-      width: 20px;
-     }
-     to{
-      opacity: 1;
-      width: 100%;
-     }
-}
+
 
