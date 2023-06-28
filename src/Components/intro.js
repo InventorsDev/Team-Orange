@@ -6,6 +6,7 @@ import image3 from '../Assets/i-pic3.svg';
 import image4 from '../Assets/i-pic4.svg';
 import { First, Second, Third, Fourth } from './introComps';
 
+
 function Intro ()  {
 
 var [slideboxpos, setSlideboxpos] = useState(1);
@@ -22,21 +23,41 @@ const handleScroll = () => {
     console.log( slideboxpos) ;
 };
 
-// const handleScrollLeft = () => {
-//   if (slideboxpos > 1) {
-//   setSlideboxpos(slideboxpos -= 1)
-//   const totalwidth = slideRef.current.scrollWidth;
-//   slideRef.current.scrollLeft -= totalwidth/4
-//   }
-// } 
+const handleScrollLeft = (e) => {
+  e.preventDefault();
+  if (slideboxpos > 1) {
+  setSlideboxpos(slideboxpos -= 1)
+  const totalwidth = slideRef.current.scrollWidth;
+  slideRef.current.scrollLeft -= totalwidth/4
+  }
+} 
 
-// const handleScrollRight = () => {
-//   if (slideboxpos < 4) {
-//   setSlideboxpos(slideboxpos += 1) 
-//   const totalwidth = slideRef.current.scrollWidth;
-//   slideRef.current.scrollLeft += totalwidth/4
-//   }
-// } 
+const handleScrollRight = (e) => {
+  e.preventDefault();
+  if (slideboxpos < 4) {
+  setSlideboxpos(slideboxpos += 1) 
+  slideRef.current.scrollLeft +=  slideRef.current.scrollWidth/4
+  }
+} 
+
+var content ;
+
+switch (slideboxpos) {
+  case 1:
+   content = <First /> 
+   break;
+  case 2:
+    content = <Second /> 
+    break;
+  case 3:
+   content = <Third /> 
+   break;
+  case 4:
+   content= <Fourth /> 
+   break;
+ default:
+  content=''  
+}
 
   return (
     <div className='I--page'>
@@ -45,8 +66,8 @@ const handleScroll = () => {
 
       </div>
       <div className='buttons'>
-           {/* <button className='button left' onClick={handleScrollLeft}></button>    
-           <button className='button right' onClick={handleScrollRight}></button>  */}
+           <button className='button left' onClick={handleScrollLeft}></button>    
+           <button className='button right' onClick={handleScrollRight}></button> 
        <div className='slidebox' ref={slideRef} onScroll={handleScroll}>
          
             <span className='slides'>
@@ -69,17 +90,27 @@ const handleScroll = () => {
       </div>
 
       <div className='dots'>
-             <div className= {`dot ${slideboxpos === 1 ? 'active' : ''}`}></div>
-             <div className= {`dot ${slideboxpos === 2 ? 'active' : ''}`}></div>
-             <div className= {`dot ${slideboxpos === 3 ? 'active' : ''}`}></div>
-             <div className= {`dot ${slideboxpos === 4 ? 'active' : ''}`}></div>
+             <div className= {`dot ${slideboxpos === 1 ? 'active' : ''}`} onClick={()=>{
+              setSlideboxpos(1)
+              slideRef.current.scrollLeft = slideRef.current.scrollWidth/4  - slideRef.current.scrollWidth/4 
+              }}></div>
+             <div className= {`dot ${slideboxpos === 2 ? 'active' : ''}`} onClick={()=>{
+              setSlideboxpos(2)
+              slideRef.current.scrollLeft = slideRef.current.scrollWidth/4 
+              }}></div>
+             <div className= {`dot ${slideboxpos === 3 ? 'active' : ''}`} onClick={()=>{
+              setSlideboxpos(3)
+              slideRef.current.scrollLeft = slideRef.current.scrollWidth/2  
+              }}></div>
+             <div className= {`dot ${slideboxpos === 4 ? 'active' : ''}`} onClick={()=>{
+              setSlideboxpos(4)
+              slideRef.current.scrollLeft = slideRef.current.scrollWidth
+              }}></div>
       </div>
 
     <div className='introsDiv'>
-      { slideboxpos === 1 && <First />}
-      { slideboxpos === 2 && <Second /> }
-      { slideboxpos === 3 && <Third /> }
-      { slideboxpos === 4 && <Fourth /> }
+      
+      {content }
       
     </div>
 

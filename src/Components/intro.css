@@ -28,7 +28,7 @@
   height: 320px;
   padding-top: 20px  ;
   padding-bottom: 20px;
-  scroll-behavior: smooth;
+  scroll-behavior: initial;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -62,6 +62,7 @@
   position: relative;
   margin: 0px;
   scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .slidebox::-webkit-scrollbar{
