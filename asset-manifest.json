@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Team-Orange/static/css/main.77058638.css",
-    "main.js": "/Team-Orange/static/js/main.5800b41f.js",
+    "main.js": "/Team-Orange/static/js/main.3e591c23.js",
     "static/js/787.aa894972.chunk.js": "/Team-Orange/static/js/787.aa894972.chunk.js",
     "static/media/i-pic3.svg": "/Team-Orange/static/media/i-pic3.31550b273d1c67bff282e97915119499.svg",
     "static/media/i-pic4.svg": "/Team-Orange/static/media/i-pic4.8118c7016bd810b4d884f91f7ffc1dc0.svg",
@@ -9,11 +9,11 @@
     "static/media/i-pic2.svg": "/Team-Orange/static/media/i-pic2.2db0979258211920f2f4cd746bd8d9f2.svg",
     "index.html": "/Team-Orange/index.html",
     "main.77058638.css.map": "/Team-Orange/static/css/main.77058638.css.map",
-    "main.5800b41f.js.map": "/Team-Orange/static/js/main.5800b41f.js.map",
+    "main.3e591c23.js.map": "/Team-Orange/static/js/main.3e591c23.js.map",
     "787.aa894972.chunk.js.map": "/Team-Orange/static/js/787.aa894972.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.77058638.css",
-    "static/js/main.5800b41f.js"
+    "static/js/main.3e591c23.js"
   ]
 }
