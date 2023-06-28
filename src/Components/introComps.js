@@ -20,7 +20,7 @@ export function First () {
     return (
       <>
       <h1>Discover Insightful Exercises</h1>
-      <p>Unlock a collection of insightful exercises designed to boost your metal well-being.</p>
+      <p>Unlock a collection of insightful exercises designed to boost your mental well-being.</p>
       </>
     )
   }
@@ -29,7 +29,7 @@ export  function Fourth () {
     return (
       <>
       <h1>Track your Progress</h1>
-      <p>Track your progress and gain valuable insights into ypur mental health journey.</p>
+      <p>Track your progress and gain invaluable insights into your mental health journey.</p>
       </>
     )
   }
