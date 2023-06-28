@@ -21,7 +21,7 @@ function App() {
                     .typeString('Finding Balance')
                     .pauseFor(300)
                     .deleteAll()
-                    .typeString('Nurturing Well-being')
+                    .typeString('Nurturing Well-Being')
                     .start()
 
                    }}
