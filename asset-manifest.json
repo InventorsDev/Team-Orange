@@ -1,19 +1,22 @@
 {
   "files": {
-    "main.css": "/Team-Orange/static/css/main.77058638.css",
-    "main.js": "/Team-Orange/static/js/main.8ae8756a.js",
+    "main.css": "/Team-Orange/static/css/main.7b15b21e.css",
+    "main.js": "/Team-Orange/static/js/main.87bafad5.js",
     "static/js/787.aa894972.chunk.js": "/Team-Orange/static/js/787.aa894972.chunk.js",
     "static/media/i-pic3.svg": "/Team-Orange/static/media/i-pic3.31550b273d1c67bff282e97915119499.svg",
-    "static/media/i-pic4.svg": "/Team-Orange/static/media/i-pic4.8118c7016bd810b4d884f91f7ffc1dc0.svg",
     "static/media/i-pic1.svg": "/Team-Orange/static/media/i-pic1.d4782342662846e573d941c315d6ff6b.svg",
     "static/media/i-pic2.svg": "/Team-Orange/static/media/i-pic2.2db0979258211920f2f4cd746bd8d9f2.svg",
+    "static/media/brain-icon.svg": "/Team-Orange/static/media/brain-icon.655f257ab85b419dec1484af5b4cce21.svg",
+    "static/media/i-pic4.svg": "/Team-Orange/static/media/i-pic4.9aa11719a21addc56fe26b7e24232dcc.svg",
+    "static/media/google.svg": "/Team-Orange/static/media/google.c67bd8d34e0580952769ca8a46e951a9.svg",
+    "static/media/apple.svg": "/Team-Orange/static/media/apple.665720c1482a2dcdc875688d439994d0.svg",
     "index.html": "/Team-Orange/index.html",
-    "main.77058638.css.map": "/Team-Orange/static/css/main.77058638.css.map",
-    "main.8ae8756a.js.map": "/Team-Orange/static/js/main.8ae8756a.js.map",
+    "main.7b15b21e.css.map": "/Team-Orange/static/css/main.7b15b21e.css.map",
+    "main.87bafad5.js.map": "/Team-Orange/static/js/main.87bafad5.js.map",
     "787.aa894972.chunk.js.map": "/Team-Orange/static/js/787.aa894972.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77058638.css",
-    "static/js/main.8ae8756a.js"
+    "static/css/main.7b15b21e.css",
+    "static/js/main.87bafad5.js"
   ]
 }
