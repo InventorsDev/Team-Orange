@@ -5,7 +5,6 @@ import apple from '../Assets/apple.svg';
 import { Link } from 'react-router-dom';
 
 function SignUp () {
-    const loaded = true;
     return (
 
         <div className='Sg--page'>
@@ -23,14 +22,14 @@ function SignUp () {
                     
 
                     <button className='auths'>
-                        <div className='small-circs'><img src={google}/></div>
+                        <div className='small-circs'><img src={google} alt=''/></div>
                         <div  className='google-apple'>
                         <p>Login with Google</p>
                         </div>
                     </button>
 
                     <button className='auths'>
-                        <div className='small-circs'><img src={apple}/></div>
+                        <div className='small-circs'><img src={apple} alt=''/></div>
                         <div className='google-apple'>
                         <p>Login with Apple</p>
                         </div>
