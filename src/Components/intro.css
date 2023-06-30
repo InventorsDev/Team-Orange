@@ -16,12 +16,11 @@
 .circle.active{
   display: block;
   position: absolute;
-  top: -120px;
-  left: 50px;
-  width: 500px;
-  height: 500px;
-  border-radius: 250px;
-  background-color: #3bcd84;
+  top: -350px;
+  width: 700px;
+  height: 700px;
+  border-radius: 350px;
+  background-color: #fff4da;
 }
 .slidebox {
   width: 100vw;
@@ -96,9 +95,9 @@
  .image.mg4{
   position: absolute;
   top: 60px;
-  left: 5vw;
-  height: 250px;
-  width: 90vw;
+  left: 15vw;
+  height: 200px;
+  width: 70vw;
 }
 
 .dots{
@@ -145,7 +144,6 @@
   margin-left: 10vw;
   font-size: 15px;
   color: #161616;
-  font-weight: 100;
   font-family: 'Montserrat', sans-serif;
   height: 10vh;
 }

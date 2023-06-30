@@ -5,7 +5,7 @@ import image2 from '../Assets/i-pic2.svg';
 import image3 from '../Assets/i-pic3.svg';
 import image4 from '../Assets/i-pic4.svg';
 import { First, Second, Third, Fourth } from './introComps';
-
+import { Link } from 'react-router-dom';
 
 function Intro ()  {
 
@@ -59,6 +59,7 @@ switch (slideboxpos) {
   content=''  
 }
 
+
   return (
     <div className='I--page'>
 
@@ -71,19 +72,19 @@ switch (slideboxpos) {
        <div className='slidebox' ref={slideRef} onScroll={handleScroll}>
          
             <span className='slides'>
-                 <img src={image1} alt='' className='image mg1'/>
+                 <img src={image1} alt='Say Hi' className='image mg1'/>
              </span>
 
              <span className='slides'>
-                 <img src={image2} alt='' className='image mg2'/>
+                 <img src={image2} alt='Set Your Goals' className='image mg2'/>
              </span>
 
              <span className='slides'>
-                 <img src={image3} alt='' className='image mg3'/>
+                 <img src={image3} alt='Discover Exercises' className='image mg3'/>
              </span>
 
              <span className='slides'>
-                 <img src={image4} alt='' className='image mg4'/>
+                 <img src={image4} alt='Track your Progress' className='image mg4'/>
              </span>
 
       </div>
@@ -92,7 +93,7 @@ switch (slideboxpos) {
       <div className='dots'>
              <div className= {`dot ${slideboxpos === 1 ? 'active' : ''}`} onClick={()=>{
               setSlideboxpos(1)
-              slideRef.current.scrollLeft = slideRef.current.scrollWidth/4  - slideRef.current.scrollWidth/4 
+              slideRef.current.scrollLeft = 0;
               }}></div>
              <div className= {`dot ${slideboxpos === 2 ? 'active' : ''}`} onClick={()=>{
               setSlideboxpos(2)
@@ -115,7 +116,7 @@ switch (slideboxpos) {
     </div>
 
     <div className={`getStarted ${slideboxpos === 4 && 'active'}`}>
-      <button>Let's Get Started</button>
+      <Link to='/createAccount'><button disabled={slideboxpos === 4 ? false  : true} >Let's Get Started</button></Link>
     </div>
 
     </div>
