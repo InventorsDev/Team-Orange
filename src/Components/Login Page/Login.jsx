@@ -2,6 +2,7 @@ import "./Login.css";
 import brain from "../../Assets/brain-icon.svg";
 import google from "../../Assets/google.svg";
 import apple from "../../Assets/apple.svg";
+import brand from "../../Assets/brand_gold.svg";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
@@ -20,7 +21,7 @@ function LogIn() {
           <div className="Login">
                <div className="Braindiv">
                     <img src={brain} alt="Brain" />
-                    <p className="brand">Tranquil</p>
+                    <img src={brand} className="brand" alt="" />
                     <h1>Welcome</h1>
                     <p>
                          <Typewriter
@@ -63,7 +64,6 @@ function LogIn() {
 
                          <p className="neg-accnt">
                               Don't have an account ? <br />
-                              <br />
                               <Link to="/getStarted" className="span">
                                    Sign Up
                               </Link>

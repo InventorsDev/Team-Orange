@@ -3,12 +3,18 @@
 .Slides {
      width: 100vw;
      position: relative;
-     background-color: #f9f5ed;
+     background-color: #a4b2a7;
      height: 100vh;
      font-size: calc(10px + 2vmin);
      overflow: hidden;
 }
-
+.Slides.show {
+     background-color: #fff4da;
+     background-image: url(../../../Assets/ellipse-2.svg);
+     background-repeat: no-repeat;
+     background-size: 100% 70%;
+     background-position: left bottom;
+}
 .circle {
      display: none;
 }
@@ -106,9 +112,6 @@
 .background {
      height: 50vh;
      width: 100vw;
-     background-image: url(../../../Assets/ellipse-2.svg);
-     background-repeat: no-repeat;
-     background-size: cover;
 }
 
 .dots {
@@ -154,7 +157,7 @@
      width: 70vw;
      margin-left: 10vw;
      font-size: 15px;
-     color: #161616;
+     color: #fff;
      font-family: "Montserrat", sans-serif;
      height: 10vh;
 }
@@ -173,7 +176,7 @@
      padding: 20px;
      border-radius: 20px;
      cursor: not-allowed;
-     color: #ffffff;
+     color: #fff;
      font-family: "Montserrat", sans-serif;
 }
 
@@ -184,5 +187,5 @@
      padding: 20px;
      border-radius: 20px;
      cursor: pointer;
-     box-shadow: 0px 3px 2px -2px #d7b31b;
+     box-shadow: 0px 1px 20px 1px #00000020;
 }

@@ -59,7 +59,7 @@ function Slides() {
      }
 
      return (
-          <div className="Slides">
+          <div className={`Slides ${slideboxpos === 4 && "show"} `}>
                <div className={`circle ${slideboxpos === 3 && "active"}`}></div>
                <div className="ImageSlides">
                     <button

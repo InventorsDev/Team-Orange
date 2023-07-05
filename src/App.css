@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?&family=Ubuntu+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?&family=Poppins:wght@200&display=swap");
 
 * {
      padding: 0;
@@ -7,7 +7,7 @@
 }
 
 .Opening {
-     background-color: #f2fbf4;
+     background-color: #001104;
      height: 100vh;
 }
 
@@ -15,6 +15,7 @@
      background-image: url(./Assets/home.svg);
      background-repeat: no-repeat;
      background-size: cover;
+     background-position: center;
      background-color: transparent;
      height: 100%;
      display: flex;
@@ -37,9 +38,9 @@
 }
 
 .text {
-     font-family: "Ubuntu Mono" monospace;
+     font-family: "Poppins" sans-serif;
      text-align: center;
-     font-weight: 300;
+     font-weight: 200;
      color: #d7b31b;
      animation: opacity 4s;
 }

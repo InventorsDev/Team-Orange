@@ -1,7 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?&family=Montserrat:wght@100;400&family=Poppins:wght@400&family=The+Nautigal:wght@700&display=swap");
 
 .Login {
-     background-color: #f9f5ed;
+     background-color: #a4b2a7;
+     background-image: url(../../Assets/ellipse-1.svg);
+     background-repeat: no-repeat;
+     background-size: 100% 50%;
+     height: 100vh;
+     overflow: auto;
 }
 .Braindiv {
      position: relative;
@@ -21,12 +26,9 @@
 }
 
 .Braindiv .brand {
-     color: #3bcd84;
-     z-index: 60;
-     font-family: "The Nautigal";
-     font-size: 3em;
-     padding: 40px 0px 20px 0px;
-     text-align: center;
+     position: inherit;
+     margin: 0px auto;
+     width: 120px;
 }
 
 .Braindiv h1 {
@@ -49,9 +51,14 @@
      width: 100vw;
      height: 70vh;
      overflow-y: auto;
-     background-image: url(../../Assets/ellipse-1.svg);
+     /* background-image: url(../../Assets/ellipse-1.svg);
      background-repeat: no-repeat;
-     background-size: cover;
+     background-size: cover; */
+}
+
+.Authentications::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
 }
 
 .Auths_SignUP {
@@ -76,7 +83,7 @@
 }
 
 .Auths.google {
-     margin: 30px auto 20px auto;
+     margin: 20px auto 20px auto;
 }
 
 .Auths.apple {
@@ -105,15 +112,15 @@
 
 .unavailable {
      display: block;
-     color: #fa3c6b3e;
+     color: #fa3c6b52;
      height: 15px;
      font-size: 12px;
      margin-top: 5px;
-     margin-bottom: 10px;
+     margin-bottom: 7px;
 }
 
 .Auths.manual {
-     margin: 25px auto;
+     margin: 20px auto 5px;
      display: flex;
      justify-content: center;
      align-items: center;
@@ -125,11 +132,11 @@
      font-family: "Poppins", sans-serif;
      display: block;
      font-size: 15px;
-     padding: 30px;
+     padding: 20px;
 }
 
 .neg-accnt .span {
-     color: #d7b31b;
+     color: #3aa724;
      text-decoration: none;
 }
 
