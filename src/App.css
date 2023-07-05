@@ -1,81 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Lato&family=Montserrat&family=The+Nautigal:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?&family=Poppins:wght@200&display=swap");
 
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: 0;
+* {
+     padding: 0;
+     margin: 0;
+     box-sizing: 0;
 }
 
-
-
-.O--container {
-  background-color: #f3fbf4;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Opening {
+     background-color: #001104;
+     height: 100vh;
 }
 
-.Tranquil-logo {
-  height: 40vmin;
-  width: 40vmin;
-  border-radius: 20vmin;
-  background-color: #3bcd84;
+.Content {
+     background-image: url(./Assets/home.svg);
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center;
+     background-color: transparent;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.LogoText {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
 }
 
-.T-Name{
-  margin: 15vmin auto 15vmin -15px ;
-  height: 10vmin;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3em;
-  font-family: 'The Nautigal', cursive;
-  color: #f3fbf4;
+.Text-box {
+     color: #3bcd84;
 }
 
-.T-box{
-  overflow-x: auto;
-  white-space: nowrap;
-  color: #3bcd84;
-  padding-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  font-family: 'Lato', sans-serif;
+.Text-box img {
+     width: 100px;
 }
 
-.pointer{
-   display: inline-block;
-   height: 10px;
-   width: 2px;
-   background-color: #3bcd84;
+.text {
+     font-family: "Poppins" sans-serif;
+     text-align: center;
+     font-weight: 200;
+     color: #d7b31b;
+     animation: opacity 4s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
- .Tranquil-logo{
-  animation: App-logo-spin 2s;
- }
-
+@keyframes opacity {
+     0% {
+          opacity: 0;
+     }
+     40% {
+          opacity: 1;
+     }
+     50% {
+          opacity: 0;
+     }
+     100% {
+          opacity: 1;
+     }
 }
 
-
-
-
-
-@keyframes App-logo-spin {
-  from {
-    font-size: 0em;
-    transform: rotate(180deg);
-  }
-  to {
-    font-size: 1em;
-    transform: rotate(360deg);
-  }
+.pointer {
+     display: inline-block;
+     height: 10px;
+     width: 2px;
+     background-color: #3bcd84;
 }
-
-
-

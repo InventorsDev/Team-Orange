@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?&family=Montserrat:wght@100;400&family=Poppins:wght@400&family=The+Nautigal:wght@700&display=swap");
+
+.Login {
+     background-color: #a4b2a7;
+     background-image: url(../../Assets/ellipse-1.svg);
+     background-repeat: no-repeat;
+     background-size: 100% 50%;
+     height: 100vh;
+     overflow: auto;
+}
+.Braindiv {
+     position: relative;
+     height: 30vh;
+     width: 100%;
+     animation: grow 0.5s;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     /* margin-bottom: 30px; */
+}
+
+.Braindiv img {
+     position: absolute;
+     right: 0px;
+     height: 150px;
+}
+
+.Braindiv .brand {
+     position: inherit;
+     margin: 0px auto;
+     width: 120px;
+}
+
+.Braindiv h1 {
+     text-align: center;
+     font-size: 30px;
+     color: #161616;
+     font-family: "Montserrat", sans-serif;
+}
+
+.Braindiv p {
+     padding-top: 20px;
+     padding-bottom: 30px;
+     font-size: 15px;
+     text-align: center;
+     color: #161616;
+     font-family: "Montserrat", sans-serif;
+}
+
+.Authentications {
+     width: 100vw;
+     height: 70vh;
+     overflow-y: auto;
+     /* background-image: url(../../Assets/ellipse-1.svg);
+     background-repeat: no-repeat;
+     background-size: cover; */
+}
+
+.Authentications::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
+}
+
+.Auths_SignUP {
+     text-align: center;
+     width: 80vw;
+     margin-left: 10vw;
+     height: fit-content;
+     padding-top: 10vh;
+}
+
+.Auths {
+     display: flex;
+     flex-direction: row;
+     position: relative;
+     border: none;
+     width: 250px;
+     height: 70px;
+     border-radius: 60px;
+     text-align: left;
+     font-family: "Poppins", sans-serif;
+     background-color: #ffffff;
+}
+
+.Auths.google {
+     margin: 20px auto 20px auto;
+}
+
+.Auths.apple {
+     margin: 20px auto 0px auto;
+}
+.Auths-Provider {
+     display: flex;
+     margin: 11px 10px;
+     width: 48px;
+     height: 48px;
+     border-radius: 24px;
+     box-shadow: 1px 3px 20px 0px #00000020;
+     justify-content: center;
+     align-items: center;
+     vertical-align: text-bottom;
+}
+
+.google-apple {
+     display: flex;
+}
+
+.google-apple p {
+     font-size: 15px;
+     padding: 22px 0;
+}
+
+.unavailable {
+     display: block;
+     color: #fa3c6b52;
+     height: 15px;
+     font-size: 12px;
+     margin-top: 5px;
+     margin-bottom: 7px;
+}
+
+.Auths.manual {
+     margin: 20px auto 5px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #000000;
+     color: #ffffff;
+}
+
+.neg-accnt {
+     font-family: "Poppins", sans-serif;
+     display: block;
+     font-size: 15px;
+     padding: 20px;
+}
+
+.neg-accnt .span {
+     color: #3aa724;
+     text-decoration: none;
+}
+
+@keyframes grow {
+     from {
+          height: 60vh;
+     }
+     to {
+          height: 30vh;
+     }
+}

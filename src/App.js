@@ -1,51 +1,55 @@
-import { useState } from 'react';
-import './App.css';
-import Typewriter from 'typewriter-effect'
-import Intro from './Components/intro';
-
-
+import { useEffect, useRef, useState } from "react";
+import "./App.css";
+import Login from "./Components/Login Page/Login";
+import Slides from "./Components/SignUp Page/Slides/Slides";
+import SignUp from "./Components/SignUp Page/SignUp";
+import { Routes, Route } from "react-router";
+import Logo from "./Assets/home_logo.svg";
 
 function App() {
-  const [loaded, setLoaded] = useState(false)
+     const [loaded, setLoaded] = useState(false);
 
-  var opening =  (
-       <div className="O--page">
+     function Opening() {
+          const textRef = useRef();
+          const handleText = () => {
+               textRef.current.innerText = "Unleash The Power Within";
+          };
 
-         <header className="O--container">
-            <div className='Tranquil-logo'><p className='T-Name'>Tranquil</p></div>
-            <p className='T-box'>
-              <Typewriter 
-                   onInit={(typewriter)=>{
-                    typewriter
-                    .changeDelay(20)
-                    .typeString('Finding Balance')
-                    .pauseFor(300)
-                    .deleteAll()
-                    .typeString('Nurturing Well-Being')
-                    .start()
+          useEffect(() => {
+               window.addEventListener("load", handleText());
+               setTimeout(() => {
+                    textRef.current.innerText = "Find Your Inner Balance";
+               }, 2000);
+          });
+          return (
+               <div className="Opening">
+                    <header className="Content">
+                         <div className="LogoText">
+                              <div className="Text-box">
+                                   <img src={Logo} alt="" loading="lazy" />
+                              </div>
+                              <p ref={textRef} className="text"></p>
+                         </div>
+                    </header>
+               </div>
+          );
+     }
 
-                   }}
-              />
-              </p>
-         </header> 
+     setTimeout(() => {
+          setLoaded(true);
+     }, 4500);
 
-      </div>
-   );
-
-  setTimeout(
-   ()=>{ setLoaded(true) }, 6000
-  )
-
-
-return (
-    <>
-    {
-      loaded === false ? <>{opening}</> : <Intro />
-    }
-    </>
-  )
- 
-
+     return (
+          <Routes>
+               <Route
+                    exact
+                    path="/"
+                    element={loaded === false ? <Opening /> : <Login />}
+               />
+               <Route path="/getStarted" element={<Slides />} />
+               <Route path="/createAccount" element={<SignUp />} />
+          </Routes>
+     );
 }
 
 export default App;
