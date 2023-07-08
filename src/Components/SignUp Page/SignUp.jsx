@@ -119,16 +119,16 @@ function Credentials() {
                     authMeans: "manual",
                };
                console.log(userDetails);
-               var postContent = {
-                    method: "POST",
-                    body: JSON.stringify(userDetails),
-                    redirect: "follow",
-               };
+               // var postContent = {
+               //      method: "POST",
+               //      body: JSON.stringify(userDetails),
+               //      redirect: "follow",
+               // };
 
-               fetch("http://127.0.0.1:8000/api/v1/auth/register", postContent)
-                    .then((response) => response.text())
-                    .then((result) => console.log(result))
-                    .catch((error) => console.log("error"));
+               // fetch("http://127.0.0.1:8000/api/v1/auth/register", postContent)
+               //      .then((response) => response.text())
+               //      .then((result) => console.log(result))
+               //      .catch((error) => console.log("error"));
           } else {
                console.log("invalid details");
           }
