@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?&family=Lato&display=swap");
+.SignUP {
+     background: linear-gradient(#fff4da, #a4b2a7);
+     height: 100vh;
+     overflow: auto;
+     scroll-behavior: smooth;
+}
+
+.Credentials {
+     height: 60vh;
+     width: 80vw;
+     padding-top: 10vh;
+     margin-left: 10vw;
+}
+
+.Hello h1 {
+     padding-top: 20px;
+     font-family: "Lato", sans-serif;
+     font-size: 24px;
+     color: #1f2024;
+}
+
+.Hello p {
+     font-family: "Lato", sans-serif;
+     font-size: 14px;
+     color: #71727a;
+     margin-bottom: 30px;
+}
+
+fieldset {
+     border: none;
+}
+
+.Inputs {
+     background-color: transparent;
+     margin-bottom: 10px;
+     position: relative;
+}
+.Inputs label {
+     display: block;
+     font-family: "Lato", sans-serif;
+     font-size: 14px;
+     color: #2f3036;
+     margin-bottom: 10px;
+}
+.validateprompt {
+     display: none;
+}
+.validateprompt.show {
+     display: block;
+     color: #a43244;
+     font-family: "Lato";
+     font-size: 12px;
+     margin-top: 0px;
+     margin-bottom: 10px;
+}
+.inputs {
+     width: 80%;
+     height: 48px;
+     border: none;
+     border-radius: 12px;
+     background-color: transparent;
+     border: solid 1.5px #2f3036;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+
+.inputs:focus {
+     border: solid 1.5px #096e3a;
+     color: #096e3a;
+     outline: none;
+     padding-left: 20px;
+     caret-color: #096e3a;
+}
+.inputs:hover {
+     border: solid 1.5px #096e3a;
+     color: #096e3a;
+     outline: none;
+     padding-left: 20px;
+     caret-color: #096e3a;
+}
+
+.opt {
+     color: #a4b2a7;
+}
+.Inputs.password span {
+     position: absolute;
+     margin-top: 15px;
+     right: 18%;
+     width: 20px;
+     z-index: 50;
+}
+.inputs.password {
+     margin-top: 15px;
+}
+.Inputs.check label {
+     display: inline;
+}
+.Inputs.check label span {
+     color: #096e3a;
+}
+
+.Inputs.submit {
+     margin-top: 30px;
+}
+
+.inputs.submit {
+     margin-left: 5%;
+     height: 60px;
+     border: none;
+     background-color: #096e3a;
+     color: white;
+     border-radius: 20px;
+     font-size: 18px;
+     font-family: "Lato", sans-serif;
+     text-align: center;
+     padding: 0px;
+}
+
+.inputs.submit:disabled {
+     background-color: #2f3036;
+}

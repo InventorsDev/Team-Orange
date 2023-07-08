@@ -21,6 +21,9 @@ function App() {
                     textRef.current.innerText = "Find Your Inner Balance";
                }, 2000);
           });
+          setTimeout(() => {
+               setLoaded(true);
+          }, 4500);
           return (
                <div className="Opening">
                     <header className="Content">
@@ -34,10 +37,6 @@ function App() {
                </div>
           );
      }
-
-     setTimeout(() => {
-          setLoaded(true);
-     }, 4500);
 
      return (
           <Routes>

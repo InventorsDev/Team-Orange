@@ -7,16 +7,16 @@
      background-size: 100% 50%;
      height: 100vh;
      overflow: auto;
+     overflow-x: hidden;
+     scroll-behavior: smooth;
 }
 .Braindiv {
      position: relative;
-     height: 30vh;
+     height: 300px;
      width: 100%;
      animation: grow 0.5s;
      display: flex;
      flex-direction: column;
-     justify-content: center;
-     /* margin-bottom: 30px; */
 }
 
 .Braindiv img {
@@ -27,7 +27,7 @@
 
 .Braindiv .brand {
      position: inherit;
-     margin: 0px auto;
+     margin: 10px auto;
      width: 120px;
 }
 
@@ -49,11 +49,8 @@
 
 .Authentications {
      width: 100vw;
-     height: 70vh;
-     overflow-y: auto;
-     /* background-image: url(../../Assets/ellipse-1.svg);
-     background-repeat: no-repeat;
-     background-size: cover; */
+     height: 60vh;
+     overflow-y: visible;
 }
 
 .Authentications::-webkit-scrollbar {
@@ -66,7 +63,7 @@
      width: 80vw;
      margin-left: 10vw;
      height: fit-content;
-     padding-top: 10vh;
+     padding-top: 3vh;
 }
 
 .Auths {
@@ -145,6 +142,6 @@
           height: 60vh;
      }
      to {
-          height: 30vh;
+          height: 300px;
      }
 }

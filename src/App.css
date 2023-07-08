@@ -7,7 +7,7 @@
 }
 
 .Opening {
-     background-color: #001104;
+     background: linear-gradient(#9e9787 0%, #2c342e 40%, #2c342e 60%, #9e9787);
      height: 100vh;
 }
 

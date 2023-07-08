@@ -20,8 +20,8 @@ function LogIn() {
      return (
           <div className="Login">
                <div className="Braindiv">
-                    <img src={brain} alt="Brain" />
-                    <img src={brand} className="brand" alt="" />
+                    <img src={brain} alt="Brain" loading="lazy" />
+                    <img src={brand} className="brand" alt="" loading="lazy" />
                     <h1>Welcome</h1>
                     <p>
                          <Typewriter
@@ -41,16 +41,16 @@ function LogIn() {
                     <div className="Auths_SignUP">
                          <button className="Auths google">
                               <div className="Auths-Provider">
-                                   <img src={google} alt="" />
+                                   <img src={google} alt="" loading="lazy" />
                               </div>
-                              <div className="google-apple">
+                              <div className="google-apple" loading="lazy">
                                    <p>Login with Google</p>
                               </div>
                          </button>
 
                          <button className="Auths apple" onClick={appleClicked}>
                               <div className="Auths-Provider">
-                                   <img src={apple} alt="" />
+                                   <img src={apple} alt="" loading="lazy" />
                               </div>
                               <div className="google-apple">
                                    <p>Login with Apple</p>
