@@ -1,27 +1,26 @@
 {
   "files": {
-    "main.css": "/Team-Orange/static/css/main.204ff7d2.css",
-    "main.js": "/Team-Orange/static/js/main.e4f48460.js",
+    "main.css": "/Team-Orange/static/css/main.968d44b7.css",
+    "main.js": "/Team-Orange/static/js/main.004ca603.js",
     "static/js/787.aa894972.chunk.js": "/Team-Orange/static/js/787.aa894972.chunk.js",
     "static/media/home.svg": "/Team-Orange/static/media/home.94ea2005eea2f59e2046.svg",
     "static/media/i-pic3.svg": "/Team-Orange/static/media/i-pic3.31550b273d1c67bff282e97915119499.svg",
+    "static/media/i-pic4.svg": "/Team-Orange/static/media/i-pic4.8118c7016bd810b4d884f91f7ffc1dc0.svg",
     "static/media/brand_gold.svg": "/Team-Orange/static/media/brand_gold.b7c25fa72ed6619e6a4ed4bbb0082cfc.svg",
     "static/media/i-pic1.svg": "/Team-Orange/static/media/i-pic1.d4782342662846e573d941c315d6ff6b.svg",
     "static/media/home_logo.svg": "/Team-Orange/static/media/home_logo.ff820de8f2d4528b6d7a9478512bc53d.svg",
     "static/media/i-pic2.svg": "/Team-Orange/static/media/i-pic2.2db0979258211920f2f4cd746bd8d9f2.svg",
     "static/media/brain-icon.svg": "/Team-Orange/static/media/brain-icon.fdbdf0b1981861de41d3ab514261a009.svg",
-    "static/media/i-pic4.svg": "/Team-Orange/static/media/i-pic4.680ba9279f72457dbd130ac95fcf92bb.svg",
     "static/media/google.svg": "/Team-Orange/static/media/google.1ff695d218c2e81636435a6c50cb960d.svg",
     "static/media/apple.svg": "/Team-Orange/static/media/apple.6c538811cc093329be6e5d057d2fb5f2.svg",
     "index.html": "/Team-Orange/index.html",
     "static/media/ellipse-1.svg": "/Team-Orange/static/media/ellipse-1.8c247a2efc5db710c1bd.svg",
-    "static/media/ellipse-2.svg": "/Team-Orange/static/media/ellipse-2.88816f25a913d6ec75d0.svg",
-    "main.204ff7d2.css.map": "/Team-Orange/static/css/main.204ff7d2.css.map",
-    "main.e4f48460.js.map": "/Team-Orange/static/js/main.e4f48460.js.map",
+    "main.968d44b7.css.map": "/Team-Orange/static/css/main.968d44b7.css.map",
+    "main.004ca603.js.map": "/Team-Orange/static/js/main.004ca603.js.map",
     "787.aa894972.chunk.js.map": "/Team-Orange/static/js/787.aa894972.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.204ff7d2.css",
-    "static/js/main.e4f48460.js"
+    "static/css/main.968d44b7.css",
+    "static/js/main.004ca603.js"
   ]
 }
