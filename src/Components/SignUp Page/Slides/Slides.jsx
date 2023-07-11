@@ -79,7 +79,6 @@ function Slides() {
                                    src={image1}
                                    alt="Say Hi"
                                    className="image mg1"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -88,7 +87,6 @@ function Slides() {
                                    src={image2}
                                    alt="Set Your Goals"
                                    className="image mg2"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -97,7 +95,6 @@ function Slides() {
                                    src={image3}
                                    alt="Discover Exercises"
                                    className="image mg3"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -106,7 +103,6 @@ function Slides() {
                                    src={image4}
                                    alt="Track your Progress"
                                    className="image mg4"
-                                   loading="lazy"
                               />
                          </span>
                     </div>

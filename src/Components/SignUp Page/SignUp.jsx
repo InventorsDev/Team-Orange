@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //me using fon
 import { faCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import google from "./../../Assets/google.svg";
 import apple from "./../../Assets/apple.svg";
+import tranquil from "./../../Assets/brand_gold.svg";
 import { Link } from "react-router-dom";
 
 function Credentials() {
@@ -94,6 +95,7 @@ function Credentials() {
           };
           console.log(userDetails);
           clearForm();
+          setCurrentInput(4);
           // var postContent = {
           //      method: "POST",
           //      body: JSON.stringify(userDetails),
@@ -389,6 +391,25 @@ function Credentials() {
                </div>
           </>
      );
+     var [OTP, setOTP] = useState();
+     const otp = (
+          <>
+               <p className="otp">An otp has been sent to your email</p>
+               <fieldset className="fieldsetOtp">
+                    <input
+                         type="number"
+                         value={OTP}
+                         onChange={(e) => {
+                              if (e.target.value.length < 7) {
+                                   setOTP(e.target.value);
+                              }
+                         }}
+                         placeholder="*  *  *  *  *  *"
+                    />
+               </fieldset>
+               <button className="verify">Verify</button>
+          </>
+     );
      const auths = (
           <>
                <p className="or">or</p>
@@ -408,24 +429,31 @@ function Credentials() {
                <p className="exist">
                     Already have an account?{" "}
                     <Link to="/login" className="linktoLog">
-                         Login
+                         Sign in
                     </Link>
                </p>
+          </>
+     );
+
+     const hello = (
+          <>
+               <h1>Hello!</h1>
+               <p>Create an account to get Started</p>
           </>
      );
      return (
           <div className="SignUP">
                <div className="Credentials">
                     <div className="Hello">
-                         <h1>Hello!</h1>
-                         <p>Create an account to get Started</p>
+                         <img className="brand" src={tranquil} alt="" />
+                         {currentInput === 4 ? "" : <>{hello}</>}
                     </div>
-
                     <div className="FormContainer">
-                         <form onSubmit={handleSubmit}>
+                         <form onSubmit={handleSubmit} className="signUpForm">
                               {currentInput === 1 && <>{names}</>}
                               {currentInput === 2 && <>{email}</>}
-                              {currentInput === 3 && <>{passwords}</>}{" "}
+                              {currentInput === 3 && <>{passwords}</>}
+                              {currentInput === 4 && <>{otp}</>}{" "}
                               {/* I split the form parts so that all of them wouldnt appear at once an the design would look somehow*/}
                          </form>
                     </div>

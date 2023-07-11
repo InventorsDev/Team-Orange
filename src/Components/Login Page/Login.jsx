@@ -5,19 +5,23 @@ import apple from "../../Assets/apple.svg";
 import brand from "../../Assets/brand_gold.svg"; // imports of images, the react way
 import Typewriter from "typewriter-effect"; //This npm package produces the typing effect when you're on the login page
 import { Link } from "react-router-dom"; //React package to create links
-import { useRef } from "react"; // A little bit complicated, this is a react hook used to access attributes of a given element
-
+import { useState } from "react"; // A little bit complicated, this is a react hook used to access attributes of a given element
+import { useNavigate } from "react-router-dom";
 //The function that returns the html for the login page
 function LogIn() {
-     const unavailable = useRef();
+     const [click, setClick] = useState(false);
      const appleClicked = () => {
-          unavailable.current.innerText =
-               "This feature is Currently Unavailable !";
+          setClick(true);
           setTimeout(() => {
-               unavailable.current.innerText = "";
+               setClick(false);
           }, 3000);
      }; //This appears when a user clicks the apple icon because it currently doesn't work
+     const navigate = useNavigate();
 
+     const handleNavigation = (e) => {
+          e.preventDefault();
+          navigate("/signIn");
+     };
      return (
           //The return statement where the html lives
           <div className="Login">
@@ -59,11 +63,19 @@ function LogIn() {
                                    <p>Login with Apple</p>
                               </div>
                          </button>
-                         <p className="unavailable" ref={unavailable}></p>
+                         <p className="unavailable">
+                              {click === true &&
+                                   "This feature is currently unavailable"}
+                         </p>
 
                          <p className="or">or</p>
 
-                         <button className="Auths manual">Sign in</button>
+                         <button
+                              className="Auths manual"
+                              onClick={handleNavigation}
+                         >
+                              Sign in
+                         </button>
 
                          <p className="neg-accnt">
                               Don't have an account ? <br />

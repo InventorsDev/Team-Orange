@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?&family=Montserrat:wght@100;400&family=Poppins:wght@400&family=The+Nautigal:wght@700&display=swap");
 
 .Login {
-     background-color: #fff;
+     background-color: #f3fbf4;
      background-image: url(../../Assets/ellipse-1.svg);
      background-repeat: no-repeat;
      background-size: 100% 50%;
@@ -76,7 +76,8 @@
      border-radius: 60px;
      text-align: left;
      font-family: "Poppins", sans-serif;
-     background-color: #eefff6;
+     border: solid 0.01px #bebebf;
+     background-color: #fff;
 }
 
 .Auths.google {
@@ -110,7 +111,7 @@
 
 .unavailable {
      display: block;
-     color: #fa3c6b52;
+     color: #9a3258;
      height: 15px;
      font-size: 12px;
      margin-top: 5px;
