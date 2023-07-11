@@ -1,15 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import "./App.css";
+import { useEffect, useRef } from "react"; //react hooks
+import "./App.css"; // importing css
 import Login from "./Components/Login Page/Login";
 import Slides from "./Components/SignUp Page/Slides/Slides";
 import SignUp from "./Components/SignUp Page/SignUp";
-import { Routes, Route } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import Logo from "./Assets/home_logo.svg";
+import { useNavigate } from "react-router"; //Used to navigate to a defined route
 
 function App() {
-     const [loaded, setLoaded] = useState(false);
-
+     //This is the function that returns the page that shows when the website is loaded. As the name denotes, Opening
      function Opening() {
+          const navigate = useNavigate();
           const textRef = useRef();
           const handleText = () => {
                textRef.current.innerText = "Unleash The Power Within";
@@ -19,8 +20,11 @@ function App() {
                window.addEventListener("load", handleText());
                setTimeout(() => {
                     textRef.current.innerText = "Find Your Inner Balance";
-               }, 2000);
+               }, 2000); //This is for the animation that changes the text
           });
+          setTimeout(() => {
+               navigate("/login");
+          }, 4500); //This timeout here navigates to the login page automatically after 4500s
           return (
                <div className="Opening">
                     <header className="Content">
@@ -35,20 +39,14 @@ function App() {
           );
      }
 
-     setTimeout(() => {
-          setLoaded(true);
-     }, 4500);
-
      return (
           <Routes>
-               <Route
-                    exact
-                    path="/"
-                    element={loaded === false ? <Opening /> : <Login />}
-               />
+               <Route exact path="/" element={<Opening />} />
+               <Route path="/login" element={<Login />} />
                <Route path="/getStarted" element={<Slides />} />
                <Route path="/createAccount" element={<SignUp />} />
           </Routes>
+          //These are the routes to various parts of the app
      );
 }
 

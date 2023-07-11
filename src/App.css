@@ -7,7 +7,7 @@
 }
 
 .Opening {
-     background-color: #001104;
+     background-color: #fff;
      height: 100vh;
 }
 
@@ -40,8 +40,8 @@
 .text {
      font-family: "Poppins" sans-serif;
      text-align: center;
-     font-weight: 200;
      color: #d7b31b;
+     font-weight: 300;
      animation: opacity 4s;
 }
 

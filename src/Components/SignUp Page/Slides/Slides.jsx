@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
-import "./Slides.css";
+import "./Slides.css"; //css as usual
 import image1 from "../../../Assets/i-pic1.svg";
 import image2 from "../../../Assets/i-pic2.svg";
 import image3 from "../../../Assets/i-pic3.svg";
 import image4 from "../../../Assets/i-pic4.svg";
-import { First, Second, Third, Fourth } from "./SlideTexts";
-import { Link } from "react-router-dom";
+import { First, Second, Third, Fourth } from "./SlideTexts"; //these are whar we call react jsx elements. they return html, you,ll find their syntax in the slidesText.jsx file
+import { Link } from "react-router-dom"; //A neccessary import for navigation
 
 function Slides() {
      var [slideboxpos, setSlideboxpos] = useState(1);
@@ -18,9 +18,7 @@ function Slides() {
           setSlideboxpos(
                Math.round(4 * ((scrollAmount + totalwidth / 4) / totalwidth))
           );
-
-          console.log(slideboxpos);
-     };
+     }; //These are some maths logic to handle scrolling of the images . They're quite complex to be frank but this had to be done so that it would work
 
      const handleScrollLeft = (e) => {
           e.preventDefault();
@@ -56,10 +54,11 @@ function Slides() {
                break;
           default:
                content = "";
-     }
+     } //I'm switching the content to be displayed under the images depending on whcih image it is
 
      return (
           <div className={`Slides ${slideboxpos === 4 && "show"} `}>
+               {/* You should be familiar with this right? Anyways, I set the classname show to hwne the slidebox is in number 4. Then i toggle the css properties of normal the div by putting some styles to Slides and another to Slides.show the classnmae becomes Slides.show when the box is no 4, shey you get*/}
                <div className={`circle ${slideboxpos === 3 && "active"}`}></div>
                <div className="ImageSlides">
                     <button
@@ -80,6 +79,7 @@ function Slides() {
                                    src={image1}
                                    alt="Say Hi"
                                    className="image mg1"
+                                   loading="lazy"
                               />
                          </span>
 
@@ -88,6 +88,7 @@ function Slides() {
                                    src={image2}
                                    alt="Set Your Goals"
                                    className="image mg2"
+                                   loading="lazy"
                               />
                          </span>
 
@@ -96,6 +97,7 @@ function Slides() {
                                    src={image3}
                                    alt="Discover Exercises"
                                    className="image mg3"
+                                   loading="lazy"
                               />
                          </span>
 
@@ -104,11 +106,13 @@ function Slides() {
                                    src={image4}
                                    alt="Track your Progress"
                                    className="image mg4"
+                                   loading="lazy"
                               />
                          </span>
                     </div>
                </div>
                <div className={slideboxpos === 4 ? "background" : ""}>
+                    {/* The four dots and functions to set corresponding image when clicked*/}
                     <div className="dots">
                          <div
                               className={`dot ${
