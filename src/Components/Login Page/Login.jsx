@@ -1,12 +1,13 @@
-import "./Login.css";
+import "./Login.css"; // imports css
 import brain from "../../Assets/brain-icon.svg";
 import google from "../../Assets/google.svg";
 import apple from "../../Assets/apple.svg";
-import brand from "../../Assets/brand_gold.svg";
-import Typewriter from "typewriter-effect";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
+import brand from "../../Assets/brand_gold.svg"; // imports of images, the react way
+import Typewriter from "typewriter-effect"; //This npm package produces the typing effect when you're on the login page
+import { Link } from "react-router-dom"; //React package to create links
+import { useRef } from "react"; // A little bit complicated, this is a react hook used to access attributes of a given element
 
+//The function that returns the html for the login page
 function LogIn() {
      const unavailable = useRef();
      const appleClicked = () => {
@@ -15,11 +16,13 @@ function LogIn() {
           setTimeout(() => {
                unavailable.current.innerText = "";
           }, 3000);
-     };
+     }; //This appears when a user clicks the apple icon because it currently doesn't work
 
      return (
+          //The return statement where the html lives
           <div className="Login">
                <div className="Braindiv">
+                    {/*My naming can be funny ikr, this div has the tranquil app logo and the brain background*/}
                     <img src={brain} alt="Brain" loading="lazy" />
                     <img src={brand} className="brand" alt="" loading="lazy" />
                     <h1>Welcome</h1>
@@ -31,12 +34,12 @@ function LogIn() {
                                         .typeString(
                                              "Have a better Mindful Experience"
                                         )
-                                        .start();
+                                        .start(); //So this is how i implement the typewriter effect
                               }}
                          />
                     </p>
                </div>
-
+               {/* Forthe various sign in methods, you"ll see the styles in the login.css file*/}
                <div className="Authentications">
                     <div className="Auths_SignUP">
                          <button className="Auths google">
@@ -74,4 +77,4 @@ function LogIn() {
      );
 }
 
-export default LogIn;
+export default LogIn; //I export the entire login function using this syntax, then i can access it anywhere else simply by saying import Login from the loaction it is in, check app.js for this

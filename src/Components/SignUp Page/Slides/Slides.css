@@ -3,14 +3,12 @@
 .Slides {
      width: 100vw;
      position: relative;
-     background: linear-gradient(#a4b2a7, #9e9787);
+     background: linear-gradient(#fff, #fff4da);
      height: 100vh;
      font-size: calc(10px + 2vmin);
      overflow: hidden;
 }
 .Slides.show {
-     background-color: #9e9787;
-     background-image: url(../../../Assets/ellipse-2.svg);
      background-repeat: no-repeat;
      background-size: 100% 70%;
      background-position: left bottom;
@@ -43,7 +41,7 @@
 
 .ImageSlides {
      position: relative;
-     height: 50vh;
+     height: fit-content;
 }
 .button {
      position: absolute;
@@ -104,9 +102,9 @@
 .image.mg4 {
      position: absolute;
      top: 60px;
-     left: 15vw;
-     height: 200px;
-     width: 70vw;
+     left: 10vw;
+     height: 250px;
+     width: 80vw;
 }
 
 .background {
@@ -158,7 +156,7 @@
      margin-left: auto;
      margin-right: auto;
      font-size: 15px;
-     color: #fff;
+     color: #161616;
      font-family: "Montserrat", sans-serif;
      height: 10vh;
 }

@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
 import "./SignUp.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //me using font awesome in react requires the imports, I'd downloaded the packages via npm
+import { faCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import google from "./../../Assets/google.svg";
+import apple from "./../../Assets/apple.svg";
+import { Link } from "react-router-dom";
 
 function Credentials() {
+     //contains all the states to be managed by the form
      var [state, setState] = useState({
           firstName: "",
           middleName: "",
@@ -14,30 +17,24 @@ function Credentials() {
           confirmPassword: "",
           checked: false,
      });
-
-     var [firstNameValidated, setFnameVal] = useState(true);
+     var [firstNameValidated, setFnameVal] = useState(); //firstname validation and function to validate it. Same thing goes for the next functions
      const validateFirstName = () => {
           if (state.firstName.length < 1) {
                setFnameVal(false);
-               return false;
           } else {
                setFnameVal(true);
-               return true;
           }
      };
-
-     var [lastNameValidated, setLnameVal] = useState(true);
+     var [lastNameValidated, setLnameVal] = useState();
      const validateLastName = () => {
           if (state.lastName.length < 1) {
                setLnameVal(false);
-               return false;
           } else {
                setLnameVal(true);
-               return true;
           }
      };
 
-     var [emailValidated, setEmailVal] = useState(true);
+     var [emailValidated, setEmailVal] = useState(false);
      const validateEmail = () => {
           var emailValidator = String(state.email)
                .toLowerCase()
@@ -55,44 +52,22 @@ function Credentials() {
 
      var [passwordValidated, setPasswordVal] = useState(false);
      const validatePassword = () => {
-          if (state.password.length < 8 || state.password.length === null) {
+          if (state.password.length < 8) {
                setPasswordVal(false);
-               setPasswordInputed(false);
-               return false;
           } else {
                setPasswordVal(true);
-               setPasswordInputed(true);
-               return true;
           }
      };
 
-     var [confirmPasswordValidated, setConfirmPasswordVal] = useState(true);
+     var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
      const validateConfirmPassword = () => {
           if (state.confirmPassword === state.password) {
                setConfirmPasswordVal(true);
-               return true;
           } else {
                setConfirmPasswordVal(false);
-               return false;
           }
      };
-     var [passwordInputed, setPasswordInputed] = useState(false);
-     var passwordRef = useRef();
-     var confirmPasswordRef = useRef();
-     var [clicked, setClicked] = useState(false);
-
-     const [formValid, setFormValid] = useState(true);
-     const getFormValidationStatus = () => {
-          setFormValid(
-               validateFirstName() &&
-                    validateLastName() &&
-                    validateEmail() &&
-                    validatePassword() &&
-                    validateConfirmPassword() &&
-                    state.checked === true
-          );
-     };
-
+     //when submit button is clicked, clearform clears all the input fields
      const clearForm = () => {
           setState({
                ...state,
@@ -102,39 +77,342 @@ function Credentials() {
                email: "",
                password: "",
                confirmPassword: "",
-               checked: "",
+               checked: !state.checked,
           });
      };
+     //this returns the values provide by the user to backend point
      const handleSubmit = (e) => {
           e.preventDefault();
-          getFormValidationStatus();
           var userDetails;
-          if (formValid === true) {
-               userDetails = {
-                    lastName: `${state.lastName}`,
-                    firstName: `${state.firstName}`,
-                    middleName: `${state.middleName}`,
-                    email: `${state.email}`,
-                    password: `${state.password}`,
-                    authMeans: "manual",
-               };
-               console.log(userDetails);
-               // var postContent = {
-               //      method: "POST",
-               //      body: JSON.stringify(userDetails),
-               //      redirect: "follow",
-               // };
-
-               // fetch("http://127.0.0.1:8000/api/v1/auth/register", postContent)
-               //      .then((response) => response.text())
-               //      .then((result) => console.log(result))
-               //      .catch((error) => console.log("error"));
-          } else {
-               console.log("invalid details");
-          }
-
+          userDetails = {
+               lastName: `${state.lastName}`,
+               firstName: `${state.firstName}`,
+               middleName: `${state.middleName}`,
+               email: `${state.email}`,
+               password: `${state.password}`,
+               authMeans: "manual",
+          };
+          console.log(userDetails);
           clearForm();
+          // var postContent = {
+          //      method: "POST",
+          //      body: JSON.stringify(userDetails),
+          //      redirect: "follow",
+          // };
+
+          // fetch("http://127.0.0.1:8000/api/v1/auth/register", postContent)
+          //      .then((response) => response.text())
+          //      .then((result) => console.log(result))
+          //      .catch((error) => console.log("error"));
      };
+
+     var [currentInput, setCurrentInput] = useState(1);
+     //All these are additional logics, bare with me, i can't explain all
+     var passwordRef = useRef();
+     var confirmPasswordRef = useRef();
+     var [click, setClick] = useState(false);
+     //This const contain several fieldsets and inputs
+     const names = (
+          <>
+               <fieldset>
+                    <input
+                         id="firstName"
+                         type="text"
+                         placeholder="What's your first name?"
+                         value={state.firstName}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   firstName: e.target.value,
+                              });
+                         }}
+                         onFocus={(e) => {
+                              e.preventDefault();
+                              setFnameVal(true);
+                         }}
+                         onBlur={(e) => {
+                              e.preventDefault();
+                              validateFirstName();
+                         }}
+                    />
+               </fieldset>
+               <p
+                    className={`hide ${
+                         firstNameValidated === false && "validators"
+                    }`}
+               >
+                    This field cannot be empty ***
+               </p>
+               <fieldset>
+                    <input
+                         id="middleName"
+                         type="text"
+                         placeholder="Your middle name?  ( optional )"
+                         disabled={!firstNameValidated}
+                         value={state.middleName}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   middleName: e.target.value,
+                              });
+                         }}
+                    />
+               </fieldset>
+               <fieldset>
+                    <input
+                         id="lastName"
+                         type="text"
+                         placeholder="Your last name ?"
+                         disabled={!firstNameValidated}
+                         value={state.lastName}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   lastName: e.target.value,
+                              });
+                              setLnameVal(true);
+                         }}
+                         onBlur={(e) => {
+                              e.preventDefault();
+                              validateLastName();
+                         }}
+                    />
+               </fieldset>
+               <p
+                    className={`hide ${
+                         lastNameValidated === false && "validators"
+                    }`}
+               >
+                    This field cannot be empty ***
+               </p>
+
+               <button
+                    className="scroll"
+                    disabled={!lastNameValidated}
+                    onClick={(e) => {
+                         e.preventDefault();
+                         setCurrentInput(2);
+                    }}
+               >
+                    Next
+               </button>
+          </>
+     );
+
+     const email = (
+          <>
+               <fieldset>
+                    <input
+                         id="email"
+                         type="email"
+                         placeholder="Enter your email ( e.g abcd@gmail.com )"
+                         autoComplete="off"
+                         value={state.email}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   email: e.target.value,
+                              });
+                              setEmailVal(true);
+                         }}
+                         onBlur={(e) => {
+                              e.preventDefault();
+                              validateEmail();
+                         }}
+                    />
+               </fieldset>
+               <p
+                    className={`hide ${
+                         emailValidated === false && "validators"
+                    }`}
+               >
+                    Enter a valid email please ***
+               </p>
+               <div className="relatives">
+                    <button
+                         className="emailLeft"
+                         disabled={!emailValidated}
+                         onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentInput(3);
+                         }}
+                    >
+                         Next
+                    </button>
+                    <button
+                         className="emailright"
+                         type="buttton"
+                         onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentInput(1);
+                         }}
+                    >
+                         Previous
+                    </button>
+               </div>
+          </>
+     );
+
+     const passwords = (
+          <>
+               <fieldset>
+                    <input
+                         id="password"
+                         type="password"
+                         placeholder="Create a password"
+                         ref={passwordRef}
+                         value={state.password}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   password: e.target.value,
+                              });
+                              setPasswordVal(true);
+                         }}
+                         onFocus={(e) => {
+                              e.preventDefault();
+                              setPasswordVal(true);
+                         }}
+                         onBlur={(e) => {
+                              e.preventDefault();
+                              validatePassword();
+                         }}
+                    />
+                    <span
+                         onClick={(e) => {
+                              e.preventDefault();
+                              setClick(!click);
+                              if (click === false) {
+                                   passwordRef.current.type = "text";
+                                   confirmPasswordRef.current.type = "text";
+                              } else if (click === true) {
+                                   passwordRef.current.type = "password";
+                                   confirmPasswordRef.current.type = "password";
+                              }
+                         }}
+                    >
+                         {click === false ? (
+                              <FontAwesomeIcon icon={faEye} />
+                         ) : (
+                              <FontAwesomeIcon icon={faEyeSlash} />
+                         )}
+                    </span>
+               </fieldset>
+               <p
+                    className={`hide ${
+                         passwordValidated === false && "validators pass"
+                    }`}
+               >
+                    Password must be a minimum of 8 characters ***
+               </p>
+               <fieldset>
+                    <input
+                         id="confirm password"
+                         type="password"
+                         placeholder="Confirm password"
+                         ref={confirmPasswordRef}
+                         value={state.confirmPassword}
+                         disabled={!passwordValidated}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   confirmPassword: e.target.value,
+                              });
+                         }}
+                         onFocus={(e) => {
+                              e.preventDefault();
+                              setConfirmPasswordVal(true);
+                         }}
+                         onBlur={(e) => {
+                              e.preventDefault();
+                              validateConfirmPassword();
+                         }}
+                    />
+               </fieldset>
+               <p
+                    className={`hide ${
+                         confirmPasswordValidated === false && "validators"
+                    }`}
+               >
+                    Passwords must be identical ***
+               </p>
+               <div className="check">
+                    <div
+                         onClick={(e) => {
+                              if (confirmPasswordValidated === true) {
+                                   setState({
+                                        ...state,
+                                        checked: !state.checked,
+                                   });
+                              }
+                         }}
+                         className={state.checked && "checkmark"}
+                    >
+                         <p>
+                              {" "}
+                              {state.checked === true && (
+                                   <FontAwesomeIcon icon={faCheck} />
+                              )}
+                         </p>
+                    </div>
+                    <div className="terms">
+                         <p>
+                              I have read and agreed with the Terms and
+                              Conditions and Privacy Policy
+                         </p>
+                    </div>
+               </div>
+               <div className="relatives">
+                    <button
+                         className="emailLeft"
+                         disabled={!state.checked}
+                         type="submit"
+                    >
+                         Submit
+                    </button>
+                    <button
+                         className="emailright"
+                         type="buttton"
+                         onClick={(e) => {
+                              e.preventDefault();
+                              setCurrentInput(2);
+                         }}
+                    >
+                         Previous
+                    </button>
+               </div>
+          </>
+     );
+     const auths = (
+          <>
+               <p className="or">or</p>
+
+               <div className="Third-Parties">
+                    <div>
+                         <div className="thirdparty google">
+                              <img src={google} alt="" />
+                         </div>
+
+                         <div className="thirdparty apple">
+                              <img src={apple} alt="" />
+                         </div>
+                    </div>
+               </div>
+
+               <p className="exist">
+                    Already have an account?{" "}
+                    <Link to="/login" className="linktoLog">
+                         Login
+                    </Link>
+               </p>
+          </>
+     );
      return (
           <div className="SignUP">
                <div className="Credentials">
@@ -143,266 +421,18 @@ function Credentials() {
                          <p>Create an account to get Started</p>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
-                         <fieldset>
-                              <div className="Inputs">
-                                   <label htmlFor="firstName">First Name</label>
-                                   <input
-                                        id="firstName"
-                                        className="inputs"
-                                        type="text"
-                                        placeholder="First Name"
-                                        value={state.firstName}
-                                        onChange={(e) => {
-                                             setState({
-                                                  ...state,
-                                                  firstName: e.target.value,
-                                             });
-                                             setFnameVal(true);
-                                        }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             validateFirstName();
-                                        }}
-                                   />
-                                   <p
-                                        className={`validateprompt ${
-                                             firstNameValidated === false &&
-                                             "show"
-                                        }`}
-                                   >
-                                        This field cannot be empty *
-                                   </p>
-                              </div>
-
-                              <div className="Inputs">
-                                   <label htmlFor="middleName">
-                                        Middle Name
-                                        <span className="opt">
-                                             &#x0028;optional&#x0029;
-                                        </span>
-                                   </label>
-                                   <input
-                                        id="middleName"
-                                        className="inputs"
-                                        type="text"
-                                        placeholder="Middle Name"
-                                        value={state.middleName}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  middleName: e.target.value,
-                                             });
-                                        }}
-                                   />
-                              </div>
-
-                              <div className="Inputs">
-                                   <label htmlFor="lastName">Last Name</label>
-                                   <input
-                                        id="lastName"
-                                        className="inputs"
-                                        type="text"
-                                        placeholder="Last Name"
-                                        value={state.lastName}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  lastName: e.target.value,
-                                             });
-                                             setLnameVal(true);
-                                        }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             validateLastName();
-                                        }}
-                                   />
-                                   <p
-                                        className={`validateprompt ${
-                                             lastNameValidated === false &&
-                                             "show"
-                                        }`}
-                                   >
-                                        This field cannot be empty *
-                                   </p>
-                              </div>
-
-                              <div className="Inputs">
-                                   <label htmlFor="email">Email Address</label>
-                                   <input
-                                        id="email"
-                                        className="inputs"
-                                        type="email"
-                                        placeholder="abcd@gmail.com"
-                                        value={state.email}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  email: e.target.value,
-                                             });
-                                             setEmailVal(true);
-                                        }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             validateEmail();
-                                        }}
-                                   />
-                                   <p
-                                        className={`validateprompt ${
-                                             emailValidated === false && "show"
-                                        }`}
-                                   >
-                                        Email is either empty or invalid *
-                                   </p>
-                              </div>
-
-                              <div className="Inputs password">
-                                   <div>
-                                        <label htmlFor="password">
-                                             Password
-                                        </label>
-                                        <input
-                                             id="password"
-                                             className="inputs"
-                                             ref={passwordRef}
-                                             type="password"
-                                             placeholder="Create a password"
-                                             value={state.password}
-                                             onChange={(e) => {
-                                                  e.preventDefault();
-                                                  setConfirmPasswordVal(true);
-                                                  setState({
-                                                       ...state,
-                                                       password: e.target.value,
-                                                  });
-                                             }}
-                                             onBlur={(e) => {
-                                                  e.preventDefault();
-                                                  validatePassword();
-                                             }}
-                                        />
-                                        <span
-                                             className="visibility"
-                                             onClick={(e) => {
-                                                  e.preventDefault();
-                                                  if (clicked === false) {
-                                                       passwordRef.current.type =
-                                                            "text";
-                                                       confirmPasswordRef.current.type =
-                                                            "text";
-                                                       setClicked(true);
-                                                  } else {
-                                                       passwordRef.current.type =
-                                                            "password";
-                                                       confirmPasswordRef.current.type =
-                                                            "password";
-                                                       setClicked(false);
-                                                  }
-                                             }}
-                                        >
-                                             {" "}
-                                             {clicked === true ? (
-                                                  <FontAwesomeIcon
-                                                       icon={faEye}
-                                                  />
-                                             ) : (
-                                                  <FontAwesomeIcon
-                                                       icon={faEyeSlash}
-                                                  />
-                                             )}
-                                        </span>
-                                   </div>
-
-                                   <p
-                                        className={`validateprompt ${
-                                             passwordValidated === true
-                                                  ? ""
-                                                  : "show"
-                                        }`}
-                                   >
-                                        Password must be greater than or equal
-                                        to 8 characters*
-                                   </p>
-
-                                   <input
-                                        id="confirm password"
-                                        className="inputs password"
-                                        type="password"
-                                        ref={confirmPasswordRef}
-                                        placeholder="Confirm password"
-                                        value={state.confirmPassword}
-                                        disabled={
-                                             passwordInputed === false
-                                                  ? true
-                                                  : false
-                                        }
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  confirmPassword:
-                                                       e.target.value,
-                                             });
-                                             setConfirmPasswordVal(true);
-                                        }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             validateConfirmPassword();
-                                        }}
-                                   />
-                              </div>
-
-                              <p
-                                   className={`validateprompt ${
-                                        confirmPasswordValidated === true
-                                             ? ""
-                                             : "show"
-                                   }`}
-                              >
-                                   Passwords are not identical*
-                              </p>
-
-                              <div className="Inputs check">
-                                   <input
-                                        id="check"
-                                        type="checkbox"
-                                        className="checkbox"
-                                        value={state.checked}
-                                        onChange={() => {
-                                             setState({
-                                                  ...state,
-                                                  checked: !state.checked,
-                                             });
-                                        }}
-                                   />
-                                   <label htmlFor="check">
-                                        {" "}
-                                        I've read and agreed with the{" "}
-                                        <span>
-                                             Terms and Conditions
-                                        </span> and <span>Privacy Policy</span>
-                                   </label>
-                              </div>
-                              <p
-                                   className={`validateprompt ${
-                                        formValid === true ? "" : "show"
-                                   }`}
-                              >
-                                   Make sure to fill out all necessary fields*
-                              </p>
-                              <div className="Inputs submit">
-                                   <input
-                                        type="submit"
-                                        value="Next"
-                                        disabled={!state.checked}
-                                        className="inputs submit"
-                                   />
-                              </div>
-                         </fieldset>
-                    </form>
+                    <div className="FormContainer">
+                         <form onSubmit={handleSubmit}>
+                              {currentInput === 1 && <>{names}</>}
+                              {currentInput === 2 && <>{email}</>}
+                              {currentInput === 3 && <>{passwords}</>}{" "}
+                              {/* I split the form parts so that all of them wouldnt appear at once an the design would look somehow*/}
+                         </form>
+                    </div>
+                    <div className="absolutee">
+                         {" "}
+                         {currentInput === 1 && <>{auths}</>}
+                    </div>
                </div>
           </div>
      );

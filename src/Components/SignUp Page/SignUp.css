@@ -1,20 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?&family=Lato&display=swap");
 .SignUP {
-     background: linear-gradient(#fff4da, #a4b2a7);
+     background: linear-gradient(#fff 0%, #e7f6e6 80%);
      height: 100vh;
-     overflow: auto;
+     overflow: scroll;
      scroll-behavior: smooth;
 }
 
 .Credentials {
-     height: 60vh;
      width: 80vw;
-     padding-top: 10vh;
+     padding-top: 5vh;
      margin-left: 10vw;
+     position: relative;
+     height: 90vh;
 }
 
 .Hello h1 {
-     padding-top: 20px;
      font-family: "Lato", sans-serif;
      font-size: 24px;
      color: #1f2024;
@@ -27,96 +27,202 @@
      margin-bottom: 30px;
 }
 
+.FormContainer {
+     position: relative;
+     width: 80vw;
+     height: 40vh;
+}
+form {
+     position: relative;
+     overflow-x: hidden;
+}
 fieldset {
+     min-width: 70vw;
+     margin-top: 0px;
+     height: 50px;
+     border: none;
+     border: solid 0.5px #71727a;
+     border-radius: 12px;
+     margin-bottom: 30px;
+     animation: shake 0.5s;
+}
+
+fieldset:focus-within {
+     border: solid 1px #9a3258;
+}
+
+fieldset input {
+     background-color: transparent;
+     border: none;
+     height: 100%;
+     width: 85%;
+     margin-left: 5%;
+}
+
+fieldset input:focus {
+     background: transparent;
+     font-size: 12px;
+     caret-color: #9a3258;
+     color: #9a3258;
+     outline: none;
      border: none;
 }
 
-.Inputs {
-     background-color: transparent;
-     margin-bottom: 10px;
-     position: relative;
+fieldset span {
+     width: 10%;
+     color: #71727a;
 }
-.Inputs label {
-     display: block;
-     font-family: "Lato", sans-serif;
-     font-size: 14px;
-     color: #2f3036;
-     margin-bottom: 10px;
+
+@keyframes shake {
+     from {
+          margin-left: 70vw;
+     }
+     to {
+          margin-left: 0vw;
+     }
 }
-.validateprompt {
+
+.hide {
      display: none;
 }
-.validateprompt.show {
+
+.validators {
      display: block;
-     color: #a43244;
-     font-family: "Lato";
-     font-size: 12px;
-     margin-top: 0px;
+     margin-top: -25px;
+     margin-bottom: 30px;
+     color: #9a3258;
+     font-size: 10px;
+}
+
+.validators.pass {
+     animation: opacity;
+}
+
+.scroll {
+     color: #034c28;
+     width: 90%;
+     border: none;
+     background-color: transparent;
+     font-size: 15px;
+     font-family: "Lato", sans-serif;
+     text-align: right;
+     margin-bottom: 30px;
+}
+.relatives {
+     position: relative;
+     height: 30px;
+}
+.emailright {
+     position: absolute;
+     color: #034c28;
+     border: none;
+     background-color: transparent;
+     font-size: 15px;
+     font-family: "Lato", sans-serif;
+     text-align: left;
+     left: 2vw;
+     bottom: 0px;
+}
+
+.emailLeft {
+     position: absolute;
+     color: #034c28;
+     border: none;
+     background-color: transparent;
+     font-size: 15px;
+     font-family: "Lato", sans-serif;
+     text-align: right;
+     right: 2vw;
+     bottom: 0px;
+}
+
+.checkmark {
+     background-color: #71727a;
+}
+
+.check {
+     width: 80vw;
+     display: flex;
+     gap: 10px;
+}
+
+.check div:nth-child(1) {
+     border: solid 0.5px #71727a;
+     height: 20px;
+     width: 20px;
+     border-radius: 3px;
+}
+
+.checkmark p {
+     color: white;
+     text-align: center;
+     font-size: 17px;
+     vertical-align: middle;
+}
+
+.terms {
+     font-size: 12.5px;
+     border: none;
+     height: 30px;
+     width: fit-content;
+}
+
+hr {
+     width: 90%;
+     margin-left: 5%;
+     background-color: #034c28;
+}
+
+.absolutee {
+     position: absolute;
+     bottom: 20px;
+     width: 100%;
+}
+.or {
+     margin-bottom: 30px;
+     text-align: center;
+     font-size: 20px;
+     font-family: "Lato", sans-serif;
+     color: #034c28;
+}
+
+.Third-Parties p {
+     font-family: "Lato", sans-serif;
      margin-bottom: 10px;
 }
-.inputs {
-     width: 80%;
-     height: 48px;
-     border: none;
-     border-radius: 12px;
-     background-color: transparent;
-     border: solid 1.5px #2f3036;
-     padding-left: 20px;
-     padding-right: 20px;
+
+.Third-Parties div {
+     display: flex;
+     flex-direction: row;
+     gap: 10px;
+     justify-content: center;
 }
 
-.inputs:focus {
-     border: solid 1.5px #096e3a;
-     color: #096e3a;
-     outline: none;
-     padding-left: 20px;
-     caret-color: #096e3a;
-}
-.inputs:hover {
-     border: solid 1.5px #096e3a;
-     color: #096e3a;
-     outline: none;
-     padding-left: 20px;
-     caret-color: #096e3a;
+.thirdparty {
+     display: inline-block;
+     height: 50px;
+     width: 50px;
+     border: solid 0.5px #034c28;
+     border-radius: 25px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-bottom: 30px;
 }
 
-.opt {
-     color: #a4b2a7;
-}
-.Inputs.password span {
-     position: absolute;
-     margin-top: 15px;
-     right: 18%;
-     width: 20px;
-     z-index: 50;
-}
-.inputs.password {
-     margin-top: 15px;
-}
-.Inputs.check label {
-     display: inline;
-}
-.Inputs.check label span {
-     color: #096e3a;
+.thirdparty img {
+     width: 30px;
+     height: 30px;
 }
 
-.Inputs.submit {
-     margin-top: 30px;
+.linktoLog {
+     color: #034c28;
+     text-decoration: none;
 }
 
-.inputs.submit {
-     margin-left: 5%;
-     height: 60px;
-     border: none;
-     background-color: #096e3a;
-     color: white;
-     border-radius: 20px;
-     font-size: 18px;
-     font-family: "Lato", sans-serif;
+.exist {
      text-align: center;
-     padding: 0px;
-}
-
-.inputs.submit:disabled {
-     background-color: #2f3036;
+     font-size: 17px;
+     font-family: "Lato", sans-serif;
+     color: #71727a;
 }
