@@ -3,7 +3,7 @@ import "./App.css"; // importing css
 import Login from "./Components/Login Page/Login";
 import Slides from "./Components/SignUp Page/Slides/Slides";
 import SignUp from "./Components/SignUp Page/SignUp";
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route } from "react-router";
 import Logo from "./Assets/home_logo.svg";
 import { useNavigate } from "react-router"; //Used to navigate to a defined route
 
