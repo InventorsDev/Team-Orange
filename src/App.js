@@ -3,6 +3,7 @@ import "./App.css"; // importing css
 import Login from "./Components/Login Page/Login";
 import Slides from "./Components/SignUp Page/Slides/Slides";
 import SignUp from "./Components/SignUp Page/SignUp";
+import Otp from "./Components/SignUp Page/OTP/Otp";
 import { Routes, Route } from "react-router";
 import Logo from "./Assets/home_logo.svg";
 import { useNavigate } from "react-router"; //Used to navigate to a defined route
@@ -47,6 +48,7 @@ function App() {
                <Route path="/signIn" element={<SignIn />} />
                <Route path="/getStarted" element={<Slides />} />
                <Route path="/createAccount" element={<SignUp />} />
+               <Route path="/otp" element={<Otp />} />
           </Routes>
           //These are the routes to various parts of the app
      );

@@ -1,9 +1,10 @@
 .SignIn {
      width: 100vw;
      height: 100vh;
-     background: linear-gradient(#fff 0%, #e7f6e6 80%);
+     background: linear-gradient(#fdf2bf, #fff, #e7f6e6);
      display: flex;
      align-items: center;
+     overflow-x: hidden;
 }
 
 .user {
@@ -15,7 +16,9 @@
      display: flex;
      flex-direction: column;
      align-items: center;
+     white-space: nowrap;
      justify-content: center;
+     animation: slide 0.4s;
 }
 
 .hiThere h1 {
@@ -32,35 +35,35 @@
      margin-bottom: 30px;
 }
 
+.signInForm {
+     display: flex;
+     flex-direction: column;
+     animation: opa 1s;
+}
+
 .signInForm fieldset {
+     border: none;
+}
+
+.signInForm fieldset input {
      min-width: 70vw;
-     margin-top: 0px;
      height: 50px;
      border: none;
      border: solid 0.5px #71727a;
      border-radius: 12px;
-     margin-bottom: 30px;
-}
-
-.signInForm fieldset:focus-within {
-     border: solid 1px #9a3258;
-}
-
-.signInForm fieldset input {
-     background-color: transparent;
-     border: none;
-     height: 100%;
-     width: 85%;
-     margin-left: 5%;
+     padding-right: 5vw;
+     padding-left: 5vw;
+     background: transparent;
 }
 
 .signInForm input:focus {
+     border: solid 0.5px #9a3258;
+
      background: transparent;
      font-size: 12px;
      caret-color: #9a3258;
      color: #9a3258;
      outline: none;
-     border: none;
 }
 
 .signInForm p {
@@ -68,23 +71,24 @@
      width: 100%;
      text-align: center;
      color: #71727a;
-     margin-top: 20px;
+     margin-top: 5px;
 }
 
-.signInForm button {
-     font-size: 15px;
-     padding: 5px;
-     background: transparent;
+.signInButton {
+     width: 200px;
+     margin-top: 30px;
+     margin-bottom: 30px;
+     align-self: center;
+     height: 50px;
+     background-color: #034c28;
+     border-radius: 12px;
+     color: #fff;
      border: none;
-     color: #034c28;
-     border-radius: 5px;
-     margin-left: 60vw;
 }
 
 .signInForm .valids {
-     margin-top: -20px;
-     margin-bottom: 30px;
-     font-size: 12.5px;
+     margin-bottom: 10px;
+     font-size: 10px;
      text-align: left;
-     color: #9a3258;
+     color: #fa3c6a;
 }

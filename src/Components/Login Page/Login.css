@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?&family=Montserrat:wght@100;400&family=Poppins:wght@400&family=The+Nautigal:wght@700&display=swap");
 
 .Login {
-     background-color: #f3fbf4;
+     background-color: #e7f6e6;
      background-image: url(../../Assets/ellipse-1.svg);
      background-repeat: no-repeat;
      background-size: 100% 50%;
@@ -106,20 +106,20 @@
 
 .google-apple p {
      font-size: 15px;
-     padding: 22px 0;
+     padding: 22px 0px;
 }
 
 .unavailable {
      display: block;
-     color: #9a3258;
+     color: #fa3c6a;
      height: 15px;
-     font-size: 12px;
+     font-size: 10px;
      margin-top: 5px;
      margin-bottom: 7px;
 }
 
 .Auths.manual {
-     margin: 20px auto 5px;
+     margin: 0px auto 5px;
      display: flex;
      justify-content: center;
      align-items: center;
@@ -135,7 +135,7 @@
 }
 
 .neg-accnt .span {
-     color: #3aa724;
+     color: #3bcd84;
      text-decoration: none;
 }
 

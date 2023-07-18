@@ -92,8 +92,9 @@ function SignIn() {
                                         e.preventDefault();
                                         Clearform();
                                    }}
+                                   className="signInButton"
                               >
-                                   Submit
+                                   Sign In
                               </button>
 
                               <p>Forgot password ?</p>

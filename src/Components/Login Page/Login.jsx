@@ -65,10 +65,8 @@ function LogIn() {
                          </button>
                          <p className="unavailable">
                               {click === true &&
-                                   "This feature is currently unavailable"}
+                                   "This feature is currently unavailable !"}
                          </p>
-
-                         <p className="or">or</p>
 
                          <button
                               className="Auths manual"
@@ -79,7 +77,7 @@ function LogIn() {
 
                          <p className="neg-accnt">
                               Don't have an account ? <br />
-                              <Link to="/getStarted" className="span">
+                              <Link to="/createAccount" className="span">
                                    Sign Up
                               </Link>
                          </p>
