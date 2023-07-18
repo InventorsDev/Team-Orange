@@ -1,40 +1,36 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //me using font awesome in react requires the imports, I'd downloaded the packages via npm
-import { faCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //using font awesome in react requires the imports, I'd downloaded the packages via npm
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import google from "./../../Assets/google.svg";
 import apple from "./../../Assets/apple.svg";
+import tranquil from "./../../Assets/brand_gold.svg";
 import { Link } from "react-router-dom";
 
 function Credentials() {
+     const navigate = useNavigate();
      //contains all the states to be managed by the form
      var [state, setState] = useState({
-          firstName: "",
-          middleName: "",
-          lastName: "",
+          fullName: "",
           email: "",
           password: "",
           confirmPassword: "",
-          checked: false,
      });
-     var [firstNameValidated, setFnameVal] = useState(); //firstname validation and function to validate it. Same thing goes for the next functions
-     const validateFirstName = () => {
-          if (state.firstName.length < 1) {
-               setFnameVal(false);
+
+     var [fullNameValidated, setFullNameVal] = useState();
+     var [emailValidated, setEmailVal] = useState();
+     var [passwordValidated, setPasswordVal] = useState();
+     var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
+
+     const validateFullName = () => {
+          if (state.fullName.length > 1) {
+               setFullNameVal(true);
           } else {
-               setFnameVal(true);
-          }
-     };
-     var [lastNameValidated, setLnameVal] = useState();
-     const validateLastName = () => {
-          if (state.lastName.length < 1) {
-               setLnameVal(false);
-          } else {
-               setLnameVal(true);
+               setFullNameVal(false);
           }
      };
 
-     var [emailValidated, setEmailVal] = useState(false);
      const validateEmail = () => {
           var emailValidator = String(state.email)
                .toLowerCase()
@@ -50,50 +46,32 @@ function Credentials() {
           }
      };
 
-     var [passwordValidated, setPasswordVal] = useState(false);
-     const validatePassword = () => {
-          if (state.password.length < 8) {
-               setPasswordVal(false);
-          } else {
-               setPasswordVal(true);
-          }
-     };
+     // const validatePassword = () => {
+     //      if (state.password.length < 8) {
+     //           setPasswordVal(false);
+     //      } else {
+     //           setPasswordVal(true);
+     //      }
+     // };
 
-     var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
-     const validateConfirmPassword = () => {
-          if (state.confirmPassword === state.password) {
-               setConfirmPasswordVal(true);
-          } else {
-               setConfirmPasswordVal(false);
-          }
-     };
-     //when submit button is clicked, clearform clears all the input fields
-     const clearForm = () => {
-          setState({
-               ...state,
-               firstName: "",
-               middleName: "",
-               lastName: "",
-               email: "",
-               password: "",
-               confirmPassword: "",
-               checked: !state.checked,
-          });
-     };
-     //this returns the values provide by the user to backend point
+     // const validateConfirmPassword = () => {
+     //      if (state.confirmPassword === state.password) {
+     //           setConfirmPasswordVal(true);
+     //      } else {
+     //           setConfirmPasswordVal(false);
+     //      }
+     // };
+
      const handleSubmit = (e) => {
           e.preventDefault();
           var userDetails;
           userDetails = {
-               lastName: `${state.lastName}`,
-               firstName: `${state.firstName}`,
-               middleName: `${state.middleName}`,
+               full_Name: `${state.fullName}`,
                email: `${state.email}`,
                password: `${state.password}`,
-               authMeans: "manual",
           };
+
           console.log(userDetails);
-          clearForm();
           // var postContent = {
           //      method: "POST",
           //      body: JSON.stringify(userDetails),
@@ -104,334 +82,216 @@ function Credentials() {
           //      .then((response) => response.text())
           //      .then((result) => console.log(result))
           //      .catch((error) => console.log("error"));
+          navigate("/otp");
      };
 
-     var [currentInput, setCurrentInput] = useState(1);
-     //All these are additional logics, bare with me, i can't explain all
-     var passwordRef = useRef();
-     var confirmPasswordRef = useRef();
+     var [eyeclick, setEyeclick] = useState(false);
+     var [eyeclick2, setEyeclick2] = useState(false);
      var [click, setClick] = useState(false);
-     //This const contain several fieldsets and inputs
-     const names = (
-          <>
-               <fieldset>
-                    <input
-                         id="firstName"
-                         type="text"
-                         placeholder="What's your first name?"
-                         value={state.firstName}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   firstName: e.target.value,
-                              });
-                         }}
-                         onFocus={(e) => {
-                              e.preventDefault();
-                              setFnameVal(true);
-                         }}
-                         onBlur={(e) => {
-                              e.preventDefault();
-                              validateFirstName();
-                         }}
-                    />
-               </fieldset>
-               <p
-                    className={`hide ${
-                         firstNameValidated === false && "validators"
-                    }`}
-               >
-                    This field cannot be empty ***
-               </p>
-               <fieldset>
-                    <input
-                         id="middleName"
-                         type="text"
-                         placeholder="Your middle name?  ( optional )"
-                         disabled={!firstNameValidated}
-                         value={state.middleName}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   middleName: e.target.value,
-                              });
-                         }}
-                    />
-               </fieldset>
-               <fieldset>
-                    <input
-                         id="lastName"
-                         type="text"
-                         placeholder="Your last name ?"
-                         disabled={!firstNameValidated}
-                         value={state.lastName}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   lastName: e.target.value,
-                              });
-                              setLnameVal(true);
-                         }}
-                         onBlur={(e) => {
-                              e.preventDefault();
-                              validateLastName();
-                         }}
-                    />
-               </fieldset>
-               <p
-                    className={`hide ${
-                         lastNameValidated === false && "validators"
-                    }`}
-               >
-                    This field cannot be empty ***
-               </p>
 
-               <button
-                    className="scroll"
-                    disabled={!lastNameValidated}
-                    onClick={(e) => {
-                         e.preventDefault();
-                         setCurrentInput(2);
-                    }}
-               >
-                    Next
-               </button>
-          </>
-     );
+     const handleClick = () => {
+          setClick(true);
+          setTimeout(() => {
+               setClick(false);
+          }, 1500);
+     };
 
-     const email = (
-          <>
-               <fieldset>
-                    <input
-                         id="email"
-                         type="email"
-                         placeholder="Enter your email ( e.g abcd@gmail.com )"
-                         autoComplete="off"
-                         value={state.email}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   email: e.target.value,
-                              });
-                              setEmailVal(true);
-                         }}
-                         onBlur={(e) => {
-                              e.preventDefault();
-                              validateEmail();
-                         }}
-                    />
-               </fieldset>
-               <p
-                    className={`hide ${
-                         emailValidated === false && "validators"
-                    }`}
-               >
-                    Enter a valid email please ***
-               </p>
-               <div className="relatives">
-                    <button
-                         className="emailLeft"
-                         disabled={!emailValidated}
-                         onClick={(e) => {
-                              e.preventDefault();
-                              setCurrentInput(3);
-                         }}
-                    >
-                         Next
-                    </button>
-                    <button
-                         className="emailright"
-                         type="buttton"
-                         onClick={(e) => {
-                              e.preventDefault();
-                              setCurrentInput(1);
-                         }}
-                    >
-                         Previous
-                    </button>
-               </div>
-          </>
-     );
-
-     const passwords = (
-          <>
-               <fieldset>
-                    <input
-                         id="password"
-                         type="password"
-                         placeholder="Create a password"
-                         ref={passwordRef}
-                         value={state.password}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   password: e.target.value,
-                              });
-                              setPasswordVal(true);
-                         }}
-                         onFocus={(e) => {
-                              e.preventDefault();
-                              setPasswordVal(true);
-                         }}
-                         onBlur={(e) => {
-                              e.preventDefault();
-                              validatePassword();
-                         }}
-                    />
-                    <span
-                         onClick={(e) => {
-                              e.preventDefault();
-                              setClick(!click);
-                              if (click === false) {
-                                   passwordRef.current.type = "text";
-                                   confirmPasswordRef.current.type = "text";
-                              } else if (click === true) {
-                                   passwordRef.current.type = "password";
-                                   confirmPasswordRef.current.type = "password";
-                              }
-                         }}
-                    >
-                         {click === false ? (
-                              <FontAwesomeIcon icon={faEye} />
-                         ) : (
-                              <FontAwesomeIcon icon={faEyeSlash} />
-                         )}
-                    </span>
-               </fieldset>
-               <p
-                    className={`hide ${
-                         passwordValidated === false && "validators pass"
-                    }`}
-               >
-                    Password must be a minimum of 8 characters ***
-               </p>
-               <fieldset>
-                    <input
-                         id="confirm password"
-                         type="password"
-                         placeholder="Confirm password"
-                         ref={confirmPasswordRef}
-                         value={state.confirmPassword}
-                         disabled={!passwordValidated}
-                         onChange={(e) => {
-                              e.preventDefault();
-                              setState({
-                                   ...state,
-                                   confirmPassword: e.target.value,
-                              });
-                         }}
-                         onFocus={(e) => {
-                              e.preventDefault();
-                              setConfirmPasswordVal(true);
-                         }}
-                         onBlur={(e) => {
-                              e.preventDefault();
-                              validateConfirmPassword();
-                         }}
-                    />
-               </fieldset>
-               <p
-                    className={`hide ${
-                         confirmPasswordValidated === false && "validators"
-                    }`}
-               >
-                    Passwords must be identical ***
-               </p>
-               <div className="check">
-                    <div
-                         onClick={(e) => {
-                              if (confirmPasswordValidated === true) {
-                                   setState({
-                                        ...state,
-                                        checked: !state.checked,
-                                   });
-                              }
-                         }}
-                         className={state.checked && "checkmark"}
-                    >
-                         <p>
-                              {" "}
-                              {state.checked === true && (
-                                   <FontAwesomeIcon icon={faCheck} />
-                              )}
-                         </p>
-                    </div>
-                    <div className="terms">
-                         <p>
-                              I have read and agreed with the Terms and
-                              Conditions and Privacy Policy
-                         </p>
-                    </div>
-               </div>
-               <div className="relatives">
-                    <button
-                         className="emailLeft"
-                         disabled={!state.checked}
-                         type="submit"
-                    >
-                         Submit
-                    </button>
-                    <button
-                         className="emailright"
-                         type="buttton"
-                         onClick={(e) => {
-                              e.preventDefault();
-                              setCurrentInput(2);
-                         }}
-                    >
-                         Previous
-                    </button>
-               </div>
-          </>
-     );
-     const auths = (
-          <>
-               <p className="or">or</p>
-
-               <div className="Third-Parties">
-                    <div>
-                         <div className="thirdparty google">
-                              <img src={google} alt="" />
-                         </div>
-
-                         <div className="thirdparty apple">
-                              <img src={apple} alt="" />
-                         </div>
-                    </div>
-               </div>
-
-               <p className="exist">
-                    Already have an account?{" "}
-                    <Link to="/login" className="linktoLog">
-                         Login
-                    </Link>
-               </p>
-          </>
-     );
      return (
           <div className="SignUP">
-               <div className="Credentials">
-                    <div className="Hello">
+               <div className="pageContainer">
+                    <header className="Hello">
+                         <img className="brand" src={tranquil} alt="" />
                          <h1>Hello!</h1>
                          <p>Create an account to get Started</p>
-                    </div>
+                         <p>
+                              Already have an account?{" "}
+                              <Link to="/login" className="loginLink">
+                                   Sign in
+                              </Link>
+                         </p>
+                    </header>
+                    <form onSubmit={handleSubmit} className="signUpForm">
+                         <fieldset>
+                              <label htmlFor="fullName">Name</label>
+                              <input
+                                   id="fullName"
+                                   type="text"
+                                   placeholder="Enter your full name"
+                                   value={state.fullName}
+                                   onChange={(e) => {
+                                        e.preventDefault();
+                                        setState({
+                                             ...state,
+                                             fullName: e.target.value,
+                                        });
+                                   }}
+                                   onBlur={(e) => {
+                                        e.preventDefault();
+                                        validateFullName();
+                                   }}
+                              />
+                              <p className="fieldCheckers">
+                                   {fullNameValidated === false &&
+                                        "*Make sure to input your full name*"}
+                              </p>
+                         </fieldset>
 
-                    <div className="FormContainer">
-                         <form onSubmit={handleSubmit}>
-                              {currentInput === 1 && <>{names}</>}
-                              {currentInput === 2 && <>{email}</>}
-                              {currentInput === 3 && <>{passwords}</>}{" "}
-                              {/* I split the form parts so that all of them wouldnt appear at once an the design would look somehow*/}
-                         </form>
-                    </div>
-                    <div className="absolutee">
-                         {" "}
-                         {currentInput === 1 && <>{auths}</>}
+                         {/******************************************/}
+
+                         <fieldset>
+                              <label htmlFor="email">Email</label>
+                              <input
+                                   id="email"
+                                   type="email"
+                                   placeholder="Enter your email ( e.g abcd@gmail.com )"
+                                   autoComplete="off"
+                                   value={state.email}
+                                   onChange={(e) => {
+                                        e.preventDefault();
+                                        setState({
+                                             ...state,
+                                             email: e.target.value,
+                                        });
+                                   }}
+                                   onBlur={(e) => {
+                                        e.preventDefault();
+                                        validateEmail();
+                                   }}
+                              />
+
+                              <p className="fieldCheckers">
+                                   {emailValidated === false &&
+                                        "*Enter a valid email address*"}
+                              </p>
+                         </fieldset>
+
+                         {/******************************************/}
+
+                         <fieldset className="passwordField">
+                              <label htmlFor="password">Password</label>
+                              <div className="spanContainers">
+                                   <input
+                                        id="password"
+                                        type={
+                                             eyeclick === true
+                                                  ? "text"
+                                                  : "password"
+                                        }
+                                        placeholder="Create a password"
+                                        value={state.password}
+                                        onChange={(e) => {
+                                             e.preventDefault();
+                                             setState({
+                                                  ...state,
+                                                  password: e.target.value,
+                                             });
+                                             setPasswordVal(true);
+                                        }}
+                                        onBlur={(e) => {
+                                             e.preventDefault();
+                                             // validatePassword();
+                                        }}
+                                   />
+                                   <span
+                                        onClick={() => {
+                                             setEyeclick(!eyeclick);
+                                        }}
+                                        className="eyeIcon"
+                                   >
+                                        {eyeclick === true ? (
+                                             <FontAwesomeIcon icon={faEye} />
+                                        ) : (
+                                             <FontAwesomeIcon
+                                                  icon={faEyeSlash}
+                                             />
+                                        )}
+                                   </span>
+                                   <p className="fieldCheckers">{/****/}</p>
+                              </div>
+                              <div className="spanContainers">
+                                   <input
+                                        id="confirmPassword"
+                                        type={
+                                             eyeclick2 === true
+                                                  ? "text"
+                                                  : "password"
+                                        }
+                                        placeholder="Confirm password"
+                                        value={state.confirmPassword}
+                                        onChange={(e) => {
+                                             e.preventDefault();
+                                             setState({
+                                                  ...state,
+                                                  confirmPassword:
+                                                       e.target.value,
+                                             });
+                                        }}
+                                        onBlur={(e) => {
+                                             e.preventDefault();
+                                             // validateConfirmPassword();
+                                        }}
+                                   />
+                                   <span
+                                        onClick={() => {
+                                             setEyeclick2(!eyeclick2);
+                                        }}
+                                        className="eyeIcon2"
+                                   >
+                                        {eyeclick2 === true ? (
+                                             <FontAwesomeIcon icon={faEye} />
+                                        ) : (
+                                             <FontAwesomeIcon
+                                                  icon={faEyeSlash}
+                                             />
+                                        )}
+                                   </span>
+                                   <p className="fieldCheckers">
+                                        {confirmPasswordValidated === false &&
+                                             "*Passwords must be identical*"}
+                                   </p>
+                              </div>
+                         </fieldset>
+
+                         {/*******************************************/}
+                         <fieldset className="check">
+                              <input type="checkbox" className="checkb" />
+
+                              <p className="term">
+                                   I have read and agreed to the{" "}
+                                   <span className="terms">
+                                        Terms and Conditions
+                                   </span>{" "}
+                                   and{" "}
+                                   <span className="terms">Privacy Policy</span>
+                              </p>
+                         </fieldset>
+
+                         <button type="submit" className="createAccount">
+                              Create Account
+                         </button>
+                    </form>
+                    <div className="alt">
+                         <div className="liners one"></div>{" "}
+                         <p className="or">or</p>
+                         <div className="liners"></div>
+                         <div className="Third-Parties">
+                              <div>
+                                   <div className="thirdparty google">
+                                        <img src={google} alt="" />
+                                   </div>
+
+                                   <div
+                                        className="thirdparty apple"
+                                        onClick={handleClick}
+                                   >
+                                        <img src={apple} alt="" />
+                                   </div>
+                              </div>
+                         </div>
+                         <p>
+                              {click === true &&
+                                   "This feature is currently unavailable !"}
+                         </p>
                     </div>
                </div>
           </div>

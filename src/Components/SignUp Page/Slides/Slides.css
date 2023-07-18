@@ -4,15 +4,13 @@
      width: 100vw;
      position: relative;
      background: linear-gradient(#fff, #fff4da);
+     background: linear-gradient(#e7f6e6, #fff);
      height: 100vh;
      font-size: calc(10px + 2vmin);
-     overflow: hidden;
+     overflow-y: auto;
+     overflow-x: hidden;
 }
-.Slides.show {
-     background-repeat: no-repeat;
-     background-size: 100% 70%;
-     background-position: left bottom;
-}
+
 .circle {
      display: none;
 }
@@ -76,11 +74,20 @@
      scroll-snap-stop: always;
 }
 
+@keyframes opa {
+     from {
+          opacity: 0;
+     }
+     to {
+          opacity: 1;
+     }
+}
 .image.mg1 {
      position: absolute;
      top: 35px;
      height: 250px;
      width: 100vw;
+     animation: opa 1s;
 }
 
 .image.mg2 {
@@ -112,10 +119,20 @@
      width: 100vw;
 }
 
+@keyframes moveUp {
+     from {
+          margin-top: 30vh;
+     }
+     to {
+          margin-top: 20px;
+     }
+}
+
 .dots {
      width: 100px;
      margin: 20px auto;
      white-space: nowrap;
+     animation: moveUp 0.5s;
 }
 
 .dot {
@@ -131,7 +148,7 @@
 }
 
 .dot.active {
-     width: 30px;
+     width: 20px;
      background-color: #3bcd84;
 }
 

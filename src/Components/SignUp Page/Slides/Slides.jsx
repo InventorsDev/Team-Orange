@@ -57,8 +57,7 @@ function Slides() {
      } //I'm switching the content to be displayed under the images depending on whcih image it is
 
      return (
-          <div className={`Slides ${slideboxpos === 4 && "show"} `}>
-               {/* You should be familiar with this right? Anyways, I set the classname show to hwne the slidebox is in number 4. Then i toggle the css properties of normal the div by putting some styles to Slides and another to Slides.show the classnmae becomes Slides.show when the box is no 4, shey you get*/}
+          <div className="Slides">
                <div className={`circle ${slideboxpos === 3 && "active"}`}></div>
                <div className="ImageSlides">
                     <button
@@ -79,7 +78,6 @@ function Slides() {
                                    src={image1}
                                    alt="Say Hi"
                                    className="image mg1"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -88,7 +86,6 @@ function Slides() {
                                    src={image2}
                                    alt="Set Your Goals"
                                    className="image mg2"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -97,7 +94,6 @@ function Slides() {
                                    src={image3}
                                    alt="Discover Exercises"
                                    className="image mg3"
-                                   loading="lazy"
                               />
                          </span>
 
@@ -106,70 +102,54 @@ function Slides() {
                                    src={image4}
                                    alt="Track your Progress"
                                    className="image mg4"
-                                   loading="lazy"
                               />
                          </span>
                     </div>
                </div>
-               <div className={slideboxpos === 4 ? "background" : ""}>
-                    {/* The four dots and functions to set corresponding image when clicked*/}
-                    <div className="dots">
-                         <div
-                              className={`dot ${
-                                   slideboxpos === 1 ? "active" : ""
-                              }`}
-                              onClick={() => {
-                                   setSlideboxpos(1);
-                                   slideRef.current.scrollLeft = 0;
-                              }}
-                         ></div>
-                         <div
-                              className={`dot ${
-                                   slideboxpos === 2 ? "active" : ""
-                              }`}
-                              onClick={() => {
-                                   setSlideboxpos(2);
-                                   slideRef.current.scrollLeft =
-                                        slideRef.current.scrollWidth / 4;
-                              }}
-                         ></div>
-                         <div
-                              className={`dot ${
-                                   slideboxpos === 3 ? "active" : ""
-                              }`}
-                              onClick={() => {
-                                   setSlideboxpos(3);
-                                   slideRef.current.scrollLeft =
-                                        slideRef.current.scrollWidth / 2;
-                              }}
-                         ></div>
-                         <div
-                              className={`dot ${
-                                   slideboxpos === 4 ? "active" : ""
-                              }`}
-                              onClick={() => {
-                                   setSlideboxpos(4);
-                                   slideRef.current.scrollLeft =
-                                        slideRef.current.scrollWidth;
-                              }}
-                         ></div>
-                    </div>
 
-                    <div className="introsDiv">{content}</div>
-
+               {/* The four dots and functions to set corresponding image when clicked*/}
+               <div className="dots">
                     <div
-                         className={`getStarted ${
-                              slideboxpos === 4 && "active"
-                         }`}
-                    >
-                         <Link to="/createAccount">
-                              <button
-                                   disabled={slideboxpos === 4 ? false : true}
-                              >
-                                   Let's Get Started
-                              </button>
-                         </Link>
-                    </div>
+                         className={`dot ${slideboxpos === 1 ? "active" : ""}`}
+                         onClick={() => {
+                              setSlideboxpos(1);
+                              slideRef.current.scrollLeft = 0;
+                         }}
+                    ></div>
+                    <div
+                         className={`dot ${slideboxpos === 2 ? "active" : ""}`}
+                         onClick={() => {
+                              setSlideboxpos(2);
+                              slideRef.current.scrollLeft =
+                                   slideRef.current.scrollWidth / 4;
+                         }}
+                    ></div>
+                    <div
+                         className={`dot ${slideboxpos === 3 ? "active" : ""}`}
+                         onClick={() => {
+                              setSlideboxpos(3);
+                              slideRef.current.scrollLeft =
+                                   slideRef.current.scrollWidth / 2;
+                         }}
+                    ></div>
+                    <div
+                         className={`dot ${slideboxpos === 4 ? "active" : ""}`}
+                         onClick={() => {
+                              setSlideboxpos(4);
+                              slideRef.current.scrollLeft =
+                                   slideRef.current.scrollWidth;
+                         }}
+                    ></div>
+               </div>
+
+               <div className="introsDiv">{content}</div>
+
+               <div className={`getStarted ${slideboxpos === 4 && "active"}`}>
+                    <Link to="">
+                         <button disabled={slideboxpos === 4 ? false : true}>
+                              Let's Get Started
+                         </button>
+                    </Link>
                </div>
           </div>
      );

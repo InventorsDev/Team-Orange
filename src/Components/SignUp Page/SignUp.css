@@ -1,20 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?&family=Lato&display=swap");
 .SignUP {
-     background: linear-gradient(#fff 0%, #e7f6e6 80%);
+     background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
+     scroll-behavior: smooth;
      height: 100vh;
      overflow: scroll;
-     scroll-behavior: smooth;
+     overflow-x: hidden;
 }
 
-.Credentials {
-     width: 80vw;
+.pageContainer {
+     width: 100vw;
      padding-top: 5vh;
-     margin-left: 10vw;
      position: relative;
-     height: 90vh;
+     animation: slide 0.5s;
 }
 
+@keyframes slide {
+     0% {
+          margin-left: 80vw;
+     }
+     100% {
+          margin-left: 0vw;
+     }
+}
+
+.Hello {
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+}
+
+.Hello img {
+     margin-top: 15px;
+}
 .Hello h1 {
+     margin-top: 5px;
      font-family: "Lato", sans-serif;
      font-size: 24px;
      color: #1f2024;
@@ -24,169 +43,130 @@
      font-family: "Lato", sans-serif;
      font-size: 14px;
      color: #71727a;
-     margin-bottom: 30px;
+     margin-bottom: 10px;
 }
 
-.FormContainer {
+.signUpForm {
      position: relative;
      width: 80vw;
-     height: 40vh;
+     margin-left: 10vw;
+     display: flex;
+     flex-direction: column;
 }
-form {
-     position: relative;
-     overflow-x: hidden;
+
+.signUpForm fieldset {
+     border: none;
 }
-fieldset {
-     min-width: 70vw;
-     margin-top: 0px;
+
+.signUpForm label {
+     display: block;
+     margin-bottom: 5px;
+     font-size: 14px;
+     font-family: "Lato";
+     color: #2f3036;
+}
+#fullName,
+#email,
+#password,
+#confirmPassword {
+     width: 70vw;
      height: 50px;
      border: none;
      border: solid 0.5px #71727a;
+     padding-left: 20px;
+     padding-right: 20px;
      border-radius: 12px;
-     margin-bottom: 30px;
-     animation: shake 0.5s;
-}
-
-fieldset:focus-within {
-     border: solid 1px #9a3258;
-}
-
-fieldset input {
      background-color: transparent;
-     border: none;
-     height: 100%;
-     width: 85%;
-     margin-left: 5%;
 }
 
-fieldset input:focus {
-     background: transparent;
+#fullName:focus,
+#email:focus,
+#password:focus,
+#confirmPassword:focus {
+     outline: none;
+     border: solid 0.5px #9a3258;
      font-size: 12px;
      caret-color: #9a3258;
      color: #9a3258;
-     outline: none;
-     border: none;
 }
 
-fieldset span {
-     width: 10%;
+.passwordField {
+     position: relative;
+}
+
+.spanContainers {
+     position: relative;
+}
+.eyeIcon,
+.eyeIcon2 {
+     position: absolute;
+     right: 8vw;
+     top: 17px;
+     font-size: 16px;
      color: #71727a;
 }
 
-@keyframes shake {
-     from {
-          margin-left: 70vw;
-     }
-     to {
-          margin-left: 0vw;
-     }
-}
-
-.hide {
-     display: none;
-}
-
-.validators {
+.fieldCheckers {
      display: block;
-     margin-top: -25px;
-     margin-bottom: 30px;
-     color: #9a3258;
+     margin-top: 5px;
+     margin-bottom: 10px;
+     color: #fa3c6a;
      font-size: 10px;
 }
 
-.validators.pass {
-     animation: opacity;
-}
-
-.scroll {
-     color: #034c28;
-     width: 90%;
-     border: none;
-     background-color: transparent;
-     font-size: 15px;
-     font-family: "Lato", sans-serif;
-     text-align: right;
-     margin-bottom: 30px;
-}
-.relatives {
-     position: relative;
-     height: 30px;
-}
-.emailright {
-     position: absolute;
-     color: #034c28;
-     border: none;
-     background-color: transparent;
-     font-size: 15px;
-     font-family: "Lato", sans-serif;
-     text-align: left;
-     left: 2vw;
-     bottom: 0px;
-}
-
-.emailLeft {
-     position: absolute;
-     color: #034c28;
-     border: none;
-     background-color: transparent;
-     font-size: 15px;
-     font-family: "Lato", sans-serif;
-     text-align: right;
-     right: 2vw;
-     bottom: 0px;
-}
-
-.checkmark {
-     background-color: #71727a;
-}
-
 .check {
-     width: 80vw;
      display: flex;
+     flex-direction: row;
      gap: 10px;
 }
-
-.check div:nth-child(1) {
-     border: solid 0.5px #71727a;
-     height: 20px;
-     width: 20px;
-     border-radius: 3px;
+.checkb {
+     vertical-align: text-top;
+     accent-color: #3bcd84;
 }
 
-.checkmark p {
-     color: white;
-     text-align: center;
-     font-size: 17px;
-     vertical-align: middle;
-}
-
-.terms {
+.term {
      font-size: 12.5px;
+     font-family: "Lato", sans-serif;
+     color: #71727a;
+}
+.terms {
+     color: #3bcd84;
+}
+
+.createAccount:disabled {
+     background-color: #3bcd8450;
+}
+.createAccount {
+     width: 200px;
+     margin-top: 20px;
+     margin-bottom: 40px;
+     align-self: center;
+     height: 50px;
+
+     background-color: #3bcd84;
+     border-radius: 12px;
+     color: #fff;
      border: none;
-     height: 30px;
-     width: fit-content;
 }
-
-hr {
-     width: 90%;
-     margin-left: 5%;
-     background-color: #034c28;
+.liners.one {
+     margin-left: 10vw;
 }
-
-.absolutee {
-     position: absolute;
-     bottom: 20px;
-     width: 100%;
+.liners {
+     width: calc((80vw - 20px) / 2);
+     display: inline-block;
+     vertical-align: middle;
+     height: 0.5px;
+     background-color: #000;
 }
 .or {
-     margin-bottom: 30px;
-     text-align: center;
-     font-size: 20px;
+     display: inline-block;
+     font-size: 20px !important;
      font-family: "Lato", sans-serif;
-     color: #034c28;
+     color: #000 !important;
+     margin-bottom: 10px;
 }
 
-.Third-Parties p {
+.accountExist {
      font-family: "Lato", sans-serif;
      margin-bottom: 10px;
 }
@@ -196,33 +176,33 @@ hr {
      flex-direction: row;
      gap: 10px;
      justify-content: center;
+     margin-bottom: 5px;
 }
 
 .thirdparty {
      display: inline-block;
-     height: 50px;
-     width: 50px;
-     border: solid 0.5px #034c28;
+     height: 40px;
+     width: 40px;
+     background-color: #fff;
+     box-shadow: 1px 3px 20px 0px #00000050;
      border-radius: 25px;
      display: flex;
      align-items: center;
      justify-content: center;
-     margin-bottom: 30px;
 }
 
 .thirdparty img {
-     width: 30px;
-     height: 30px;
+     width: 25px;
+     height: 25px;
 }
 
-.linktoLog {
-     color: #034c28;
+.loginLink {
+     color: #3bcd84;
      text-decoration: none;
 }
 
-.exist {
+.alt p {
      text-align: center;
-     font-size: 17px;
-     font-family: "Lato", sans-serif;
-     color: #71727a;
+     font-size: 12.5px;
+     color: #fa3c6a;
 }

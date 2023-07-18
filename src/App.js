@@ -3,9 +3,11 @@ import "./App.css"; // importing css
 import Login from "./Components/Login Page/Login";
 import Slides from "./Components/SignUp Page/Slides/Slides";
 import SignUp from "./Components/SignUp Page/SignUp";
+import Otp from "./Components/SignUp Page/OTP/Otp";
 import { Routes, Route } from "react-router";
 import Logo from "./Assets/home_logo.svg";
 import { useNavigate } from "react-router"; //Used to navigate to a defined route
+import SignIn from "./Components/Login Page/SignIn/SignIn";
 
 function App() {
      //This is the function that returns the page that shows when the website is loaded. As the name denotes, Opening
@@ -43,8 +45,10 @@ function App() {
           <Routes>
                <Route exact path="/" element={<Opening />} />
                <Route path="/login" element={<Login />} />
+               <Route path="/signIn" element={<SignIn />} />
                <Route path="/getStarted" element={<Slides />} />
                <Route path="/createAccount" element={<SignUp />} />
+               <Route path="/otp" element={<Otp />} />
           </Routes>
           //These are the routes to various parts of the app
      );
