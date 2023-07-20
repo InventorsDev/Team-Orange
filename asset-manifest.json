@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Team-Orange/static/css/main.471c30a6.css",
-    "main.js": "/Team-Orange/static/js/main.2b45559e.js",
+    "main.css": "/Team-Orange/static/css/main.5e72b454.css",
+    "main.js": "/Team-Orange/static/js/main.746792d0.js",
     "static/js/787.aa894972.chunk.js": "/Team-Orange/static/js/787.aa894972.chunk.js",
     "static/media/home.svg": "/Team-Orange/static/media/home.94ea2005eea2f59e2046.svg",
     "static/media/i-pic3.svg": "/Team-Orange/static/media/i-pic3.31550b273d1c67bff282e97915119499.svg",
@@ -12,15 +12,19 @@
     "static/media/i-pic2.svg": "/Team-Orange/static/media/i-pic2.2db0979258211920f2f4cd746bd8d9f2.svg",
     "static/media/brain-icon.svg": "/Team-Orange/static/media/brain-icon.fdbdf0b1981861de41d3ab514261a009.svg",
     "static/media/google.svg": "/Team-Orange/static/media/google.1ff695d218c2e81636435a6c50cb960d.svg",
+    "static/media/resources.svg": "/Team-Orange/static/media/resources.7ac49ed2d84b4a7231b09c00ab6f8efc.svg",
     "static/media/apple.svg": "/Team-Orange/static/media/apple.6c538811cc093329be6e5d057d2fb5f2.svg",
     "index.html": "/Team-Orange/index.html",
+    "static/media/goalSetting.svg": "/Team-Orange/static/media/goalSetting.4a8f4ce672af174b548d95016bc8e6d6.svg",
+    "static/media/journal.svg": "/Team-Orange/static/media/journal.57262ba59d839b75d626d7912dff5ec7.svg",
+    "static/media/assessment.svg": "/Team-Orange/static/media/assessment.2d72e10b8ca0b49c3fb9d26abd178c6e.svg",
     "static/media/ellipse-1.svg": "/Team-Orange/static/media/ellipse-1.8c247a2efc5db710c1bd.svg",
-    "main.471c30a6.css.map": "/Team-Orange/static/css/main.471c30a6.css.map",
-    "main.2b45559e.js.map": "/Team-Orange/static/js/main.2b45559e.js.map",
+    "main.5e72b454.css.map": "/Team-Orange/static/css/main.5e72b454.css.map",
+    "main.746792d0.js.map": "/Team-Orange/static/js/main.746792d0.js.map",
     "787.aa894972.chunk.js.map": "/Team-Orange/static/js/787.aa894972.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.471c30a6.css",
-    "static/js/main.2b45559e.js"
+    "static/css/main.5e72b454.css",
+    "static/js/main.746792d0.js"
   ]
 }
