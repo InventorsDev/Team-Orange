@@ -1,32 +1,53 @@
 import "./Login.css"; // imports css
-import brain from "../../Assets/brain-icon.svg";
+import brain from "../../Assets/brain-icon.svg"; // imports of images, the react way
 import google from "../../Assets/google.svg";
 import apple from "../../Assets/apple.svg";
-import brand from "../../Assets/brand_gold.svg"; // imports of images, the react way
+import brand from "../../Assets/brand_gold.svg";
 import Typewriter from "typewriter-effect"; //This npm package produces the typing effect when you're on the login page
 import { Link } from "react-router-dom"; //React package to create links
-import { useState } from "react"; // A little bit complicated, this is a react hook used to access attributes of a given element
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom"; //react-dom navigation hook
+
 //The function that returns the html for the login page
 function LogIn() {
      const [click, setClick] = useState(false);
+
+     const navigate = useNavigate(); //navigation syntax
+
+     const handleNavigation = (e) => {
+          e.preventDefault();
+          navigate("/signIn");
+     };
+
+     const handleGoogle = () => {
+          var requestOptions = {
+               method: "GET",
+               redirect: "follow",
+          };
+
+          fetch(
+               "https://tranquil.skrind.com/api/v1/auth/login/google",
+               requestOptions
+          )
+               .then((response) => response.json())
+               .then((result) => {
+                    console.log(result);
+                    window.location.href = result.data.link;
+               })
+               .catch((error) => console.log("error", error));
+     };
+
      const appleClicked = () => {
           setClick(true);
           setTimeout(() => {
                setClick(false);
           }, 3000);
      }; //This appears when a user clicks the apple icon because it currently doesn't work
-     const navigate = useNavigate();
 
-     const handleNavigation = (e) => {
-          e.preventDefault();
-          navigate("/signIn");
-     };
      return (
           //The return statement where the html lives
           <div className="Login">
                <div className="Braindiv">
-                    {/*My naming can be funny ikr, this div has the tranquil app logo and the brain background*/}
                     <img src={brain} alt="Brain" loading="lazy" />
                     <img src={brand} className="brand" alt="" loading="lazy" />
                     <h1>Welcome</h1>
@@ -43,10 +64,13 @@ function LogIn() {
                          />
                     </p>
                </div>
-               {/* Forthe various sign in methods, you"ll see the styles in the login.css file*/}
+
                <div className="Authentications">
                     <div className="Auths_SignUP">
-                         <button className="Auths google">
+                         <button
+                              className="Auths google"
+                              onClick={handleGoogle}
+                         >
                               <div className="Auths-Provider">
                                    <img src={google} alt="" loading="lazy" />
                               </div>

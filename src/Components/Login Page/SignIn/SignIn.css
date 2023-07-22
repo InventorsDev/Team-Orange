@@ -43,6 +43,8 @@
 
 .signInForm fieldset {
      border: none;
+     margin-bottom: 10px;
+     position: relative;
 }
 
 .signInForm fieldset input {
@@ -75,12 +77,12 @@
 }
 
 .signInButton {
-     width: 200px;
+     width: 100%;
      margin-top: 30px;
-     margin-bottom: 30px;
+     margin-bottom: 5px;
      align-self: center;
      height: 50px;
-     background-color: #034c28;
+     background-color: #3bcd84;
      border-radius: 12px;
      color: #fff;
      border: none;
@@ -89,6 +91,15 @@
 .signInForm .valids {
      margin-bottom: 10px;
      font-size: 10px;
-     text-align: left;
-     color: #fa3c6a;
+     text-align: center;
+     color: #3bcd84;
+}
+
+.valids.red {
+     color: #9a3258;
+}
+
+.forgot {
+     color: #71727a;
+     text-decoration: none;
 }

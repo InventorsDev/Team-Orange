@@ -1,11 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from "react"; //refer back to app.js
 import "./Slides.css"; //css as usual
-import image1 from "../../../Assets/i-pic1.svg";
+import image1 from "../../../Assets/i-pic1.svg"; //image imports
 import image2 from "../../../Assets/i-pic2.svg";
 import image3 from "../../../Assets/i-pic3.svg";
 import image4 from "../../../Assets/i-pic4.svg";
-import { First, Second, Third, Fourth } from "./SlideTexts"; //these are whar we call react jsx elements. they return html, you,ll find their syntax in the slidesText.jsx file
-import { Link } from "react-router-dom"; //A neccessary import for navigation
+import { First, Second, Third, Fourth } from "./SlideTexts"; //imports from SlideTexts.jsx file
+import { Link } from "react-router-dom"; //A neccessary import for navigation, it's performs the function of the  the link tag in normal html
 
 function Slides() {
      var [slideboxpos, setSlideboxpos] = useState(1);
@@ -42,6 +42,7 @@ function Slides() {
      switch (slideboxpos) {
           case 1:
                content = <First />;
+
                break;
           case 2:
                content = <Second />;
@@ -112,32 +113,40 @@ function Slides() {
                     <div
                          className={`dot ${slideboxpos === 1 ? "active" : ""}`}
                          onClick={() => {
-                              setSlideboxpos(1);
-                              slideRef.current.scrollLeft = 0;
+                              if (window.innerWidth > 770) {
+                                   setSlideboxpos(1);
+                                   slideRef.current.scrollLeft = 0;
+                              }
                          }}
                     ></div>
                     <div
                          className={`dot ${slideboxpos === 2 ? "active" : ""}`}
                          onClick={() => {
-                              setSlideboxpos(2);
-                              slideRef.current.scrollLeft =
-                                   slideRef.current.scrollWidth / 4;
+                              if (window.innerWidth > 770) {
+                                   setSlideboxpos(2);
+                                   slideRef.current.scrollLeft =
+                                        slideRef.current.scrollWidth / 4;
+                              }
                          }}
                     ></div>
                     <div
                          className={`dot ${slideboxpos === 3 ? "active" : ""}`}
                          onClick={() => {
-                              setSlideboxpos(3);
-                              slideRef.current.scrollLeft =
-                                   slideRef.current.scrollWidth / 2;
+                              if (window.innerWidth > 770) {
+                                   setSlideboxpos(3);
+                                   slideRef.current.scrollLeft =
+                                        slideRef.current.scrollWidth / 2;
+                              }
                          }}
                     ></div>
                     <div
                          className={`dot ${slideboxpos === 4 ? "active" : ""}`}
                          onClick={() => {
-                              setSlideboxpos(4);
-                              slideRef.current.scrollLeft =
-                                   slideRef.current.scrollWidth;
+                              if (window.innerWidth > 770) {
+                                   setSlideboxpos(4);
+                                   slideRef.current.scrollLeft =
+                                        slideRef.current.scrollWidth;
+                              }
                          }}
                     ></div>
                </div>
@@ -145,7 +154,7 @@ function Slides() {
                <div className="introsDiv">{content}</div>
 
                <div className={`getStarted ${slideboxpos === 4 && "active"}`}>
-                    <Link to="">
+                    <Link to="/home">
                          <button disabled={slideboxpos === 4 ? false : true}>
                               Let's Get Started
                          </button>

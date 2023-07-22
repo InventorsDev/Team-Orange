@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //using font awesome in react requires the imports, I'd downloaded the packages via npm
@@ -22,9 +22,15 @@ function Credentials() {
      var [emailValidated, setEmailVal] = useState();
      var [passwordValidated, setPasswordVal] = useState();
      var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
+     var [check, setCheck] = useState(false); //for check box
+
+     var fullnameRef = useRef();
+     var emailRef = useRef();
+     var passwordRef = useRef();
+     var fullnameRef = useRef();
 
      const validateFullName = () => {
-          if (state.fullName.length > 1) {
+          if (state.fullName.length >= 1 && state.fullName !== "") {
                setFullNameVal(true);
           } else {
                setFullNameVal(false);
@@ -32,57 +38,80 @@ function Credentials() {
      };
 
      const validateEmail = () => {
-          var emailValidator = String(state.email)
-               .toLowerCase()
-               .match(
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-               );
-          if (emailValidator === null) {
-               setEmailVal(false);
-               return false;
+          const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+          const isEmailValid = !!state.email.match(emailRegex);
+          setEmailVal(isEmailValid);
+     };
+
+     const validatePassword = () => {
+          const regex =
+               /^(?=.*[!@#$%^&*()\-=+{};:,<.>/?[\]\\|`~])(?=.*[A-Z])(?=.*[a-z]).{8,}$/;
+          const isPasswordValid = !!state.password.match(regex);
+          setPasswordVal(isPasswordValid);
+     };
+
+     const validateConfirmPassword = () => {
+          if (state.confirmPassword === state.password) {
+               setConfirmPasswordVal(true);
           } else {
-               setEmailVal(true);
-               return true;
+               setConfirmPasswordVal(false);
           }
      };
 
-     // const validatePassword = () => {
-     //      if (state.password.length < 8) {
-     //           setPasswordVal(false);
-     //      } else {
-     //           setPasswordVal(true);
-     //      }
-     // };
+     var [formValid, setFormValid] = useState();
+     const getFormValidStatus = () => {
+          return (
+               fullNameValidated &&
+               emailValidated &&
+               passwordValidated &&
+               confirmPasswordValidated &&
+               check
+          );
+     };
 
-     // const validateConfirmPassword = () => {
-     //      if (state.confirmPassword === state.password) {
-     //           setConfirmPasswordVal(true);
-     //      } else {
-     //           setConfirmPasswordVal(false);
-     //      }
-     // };
+     function clearForm() {
+          setState({
+               ...state,
+               fullName: "",
+               email: "",
+               password: "",
+               confirmPassword: "",
+          });
+     }
 
      const handleSubmit = (e) => {
           e.preventDefault();
-          var userDetails;
-          userDetails = {
-               full_Name: `${state.fullName}`,
-               email: `${state.email}`,
-               password: `${state.password}`,
+
+          var userDetails = {
+               full_name: state.fullName,
+               email: state.email,
+               password: state.password,
           };
 
-          console.log(userDetails);
-          // var postContent = {
-          //      method: "POST",
-          //      body: JSON.stringify(userDetails),
-          //      redirect: "follow",
-          // };
+          var requestOptions = {
+               method: "POST",
+               headers: {
+                    "Content-Type": "application/json",
+               },
+               body: JSON.stringify(userDetails),
+               redirect: "follow",
+          };
 
-          // fetch("http://127.0.0.1:8000/api/v1/auth/register", postContent)
-          //      .then((response) => response.text())
-          //      .then((result) => console.log(result))
-          //      .catch((error) => console.log("error"));
-          navigate("/otp");
+          if (getFormValidStatus() === true) {
+               fetch(
+                    "https://tranquil.skrind.com/api/v1/auth/register",
+                    requestOptions
+               )
+                    .then((response) => response.text())
+                    .then((result) => console.log(result))
+                    .catch((error) => console.log("error", error));
+
+               clearForm();
+
+               navigate(`/otp/${state.email}`);
+          } else {
+               setFormValid(false);
+          }
      };
 
      var [eyeclick, setEyeclick] = useState(false);
@@ -94,6 +123,26 @@ function Credentials() {
           setTimeout(() => {
                setClick(false);
           }, 1500);
+     };
+
+     const handleGoogle = (e) => {
+          e.preventDefault();
+          var requestOptions = {
+               method: "GET",
+               redirect: "follow",
+          };
+
+          fetch(
+               "https://tranquil.skrind.com/api/v1/auth/login/google",
+               requestOptions
+          )
+               .then((response) => response.json())
+               .then((result) => {
+                    console.log(result);
+
+                    window.location.href = result.data.link;
+               })
+               .catch((error) => console.log("error", error));
      };
 
      return (
@@ -116,7 +165,9 @@ function Credentials() {
                               <input
                                    id="fullName"
                                    type="text"
+                                   autoComplete="off"
                                    placeholder="Enter your full name"
+                                   ref={fullnameRef}
                                    value={state.fullName}
                                    onChange={(e) => {
                                         e.preventDefault();
@@ -124,38 +175,52 @@ function Credentials() {
                                              ...state,
                                              fullName: e.target.value,
                                         });
+                                        if (e.target.value !== "") {
+                                             setFullNameVal(true);
+                                        } else {
+                                             setFullNameVal(false);
+                                        }
                                    }}
-                                   onBlur={(e) => {
-                                        e.preventDefault();
-                                        validateFullName();
-                                   }}
+                                   onBlur={validateFullName}
                               />
                               <p className="fieldCheckers">
                                    {fullNameValidated === false &&
-                                        "*Make sure to input your full name*"}
+                                        "*This field must not be empty*"}
                               </p>
                          </fieldset>
-
-                         {/******************************************/}
 
                          <fieldset>
                               <label htmlFor="email">Email</label>
                               <input
                                    id="email"
                                    type="email"
-                                   placeholder="Enter your email ( e.g abcd@gmail.com )"
                                    autoComplete="off"
+                                   placeholder="Enter your email address"
                                    value={state.email}
+                                   ref={emailRef}
+                                   onFocus={(e) => {
+                                        if (state.fullName === "") {
+                                             fullnameRef.current.focus();
+                                        }
+                                   }}
                                    onChange={(e) => {
                                         e.preventDefault();
                                         setState({
                                              ...state,
                                              email: e.target.value,
                                         });
+                                        if (e.target.value !== "") {
+                                             setEmailVal(true);
+                                        } else {
+                                             setEmailVal(false);
+                                        }
                                    }}
-                                   onBlur={(e) => {
-                                        e.preventDefault();
-                                        validateEmail();
+                                   onBlur={() => {
+                                        if (state.fullName) {
+                                             validateEmail();
+                                        } else {
+                                             return;
+                                        }
                                    }}
                               />
 
@@ -164,8 +229,6 @@ function Credentials() {
                                         "*Enter a valid email address*"}
                               </p>
                          </fieldset>
-
-                         {/******************************************/}
 
                          <fieldset className="passwordField">
                               <label htmlFor="password">Password</label>
@@ -177,19 +240,34 @@ function Credentials() {
                                                   ? "text"
                                                   : "password"
                                         }
+                                        autoComplete="off"
+                                        ref={passwordRef}
                                         placeholder="Create a password"
                                         value={state.password}
+                                        onFocus={(e) => {
+                                             if (state.email === "") {
+                                                  emailRef.current.focus();
+                                             }
+                                        }}
                                         onChange={(e) => {
                                              e.preventDefault();
                                              setState({
                                                   ...state,
                                                   password: e.target.value,
+                                                  confirmPassword: "",
                                              });
-                                             setPasswordVal(true);
+                                             if (e.target.value) {
+                                                  setPasswordVal(true);
+                                             } else {
+                                                  setPasswordVal(false);
+                                             }
                                         }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             // validatePassword();
+                                        onBlur={() => {
+                                             if (state.email) {
+                                                  validatePassword();
+                                             } else {
+                                                  return;
+                                             }
                                         }}
                                    />
                                    <span
@@ -206,7 +284,10 @@ function Credentials() {
                                              />
                                         )}
                                    </span>
-                                   <p className="fieldCheckers">{/****/}</p>
+                                   <p className="fieldCheckers">
+                                        {passwordValidated === false &&
+                                             "*8 or more digit password must contain both lowercase and uppercase letters and atleast one special character*"}
+                                   </p>
                               </div>
                               <div className="spanContainers">
                                    <input
@@ -216,6 +297,12 @@ function Credentials() {
                                                   ? "text"
                                                   : "password"
                                         }
+                                        onFocus={(e) => {
+                                             if (state.password === "") {
+                                                  passwordRef.current.focus();
+                                             }
+                                        }}
+                                        autoComplete="off"
                                         placeholder="Confirm password"
                                         value={state.confirmPassword}
                                         onChange={(e) => {
@@ -226,10 +313,7 @@ function Credentials() {
                                                        e.target.value,
                                              });
                                         }}
-                                        onBlur={(e) => {
-                                             e.preventDefault();
-                                             // validateConfirmPassword();
-                                        }}
+                                        onBlur={validateConfirmPassword}
                                    />
                                    <span
                                         onClick={() => {
@@ -252,9 +336,14 @@ function Credentials() {
                               </div>
                          </fieldset>
 
-                         {/*******************************************/}
                          <fieldset className="check">
-                              <input type="checkbox" className="checkb" />
+                              <input
+                                   type="checkbox"
+                                   onChange={() => {
+                                        setCheck(!check);
+                                   }}
+                                   className="checkb"
+                              />
 
                               <p className="term">
                                    I have read and agreed to the{" "}
@@ -266,17 +355,28 @@ function Credentials() {
                               </p>
                          </fieldset>
 
-                         <button type="submit" className="createAccount">
+                         <button
+                              type="submit"
+                              disabled={!getFormValidStatus()}
+                              className="createAccount"
+                         >
                               Create Account
                          </button>
                     </form>
+                    <p className="fieldCheckers last">
+                         {formValid === false &&
+                              "*Make sure to input all your details correctly*"}
+                    </p>
                     <div className="alt">
                          <div className="liners one"></div>{" "}
                          <p className="or">or</p>
                          <div className="liners"></div>
                          <div className="Third-Parties">
                               <div>
-                                   <div className="thirdparty google">
+                                   <div
+                                        className="thirdparty google"
+                                        onClick={handleGoogle}
+                                   >
                                         <img src={google} alt="" />
                                    </div>
 
