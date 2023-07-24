@@ -48,10 +48,10 @@ function LogIn() {
           //The return statement where the html lives
           <div className="Login">
                <div className="Braindiv">
-                    <img src={brain} alt="Brain" loading="lazy" />
-                    <img src={brand} className="brand" alt="" loading="lazy" />
+                    <img src={brain} alt="Brain" />
+                    <img src={brand} className="brand" alt="" />
                     <h1>Welcome</h1>
-                    <p>
+                    <div>
                          <Typewriter
                               onInit={(typewriter) => {
                                    typewriter
@@ -62,7 +62,7 @@ function LogIn() {
                                         .start(); //So this is how i implement the typewriter effect
                               }}
                          />
-                    </p>
+                    </div>
                </div>
 
                <div className="Authentications">
@@ -72,16 +72,16 @@ function LogIn() {
                               onClick={handleGoogle}
                          >
                               <div className="Auths-Provider">
-                                   <img src={google} alt="" loading="lazy" />
+                                   <img src={google} alt="" />
                               </div>
-                              <div className="google-apple" loading="lazy">
+                              <div className="google-apple">
                                    <p>Login with Google</p>
                               </div>
                          </button>
 
                          <button className="Auths apple" onClick={appleClicked}>
                               <div className="Auths-Provider">
-                                   <img src={apple} alt="" loading="lazy" />
+                                   <img src={apple} alt="" />
                               </div>
                               <div className="google-apple">
                                    <p>Login with Apple</p>

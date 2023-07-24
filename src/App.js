@@ -7,10 +7,13 @@ import Login from "./Components/Login Page/Login"; //importing pages/components
 import Slides from "./Components/SignUp Page/Slides/Slides";
 import SignUp from "./Components/SignUp Page/SignUp";
 import Otp from "./Components/SignUp Page/OTP/Otp";
-import Home from "./Components/Tranquil App/Home";
 import SignIn from "./Components/Login Page/SignIn/SignIn";
 import Forgot from "./Components/ForgotPassword/Forgot";
-
+import Home from "./Components/Tranquil App/Home/Home";
+import Resources from "./Components/Tranquil App/Resources/Resources";
+import Goals from "./Components/Tranquil App/Goals/Goals";
+import Community from "./Components/Tranquil App/Community/Community";
+import Profile from "./Components/Tranquil App/Profile/Profile";
 function App() {
      //Opening Page
      function Opening() {
@@ -30,7 +33,7 @@ function App() {
                setTimeout(() => {
                     navigate("/login");
                }, 4500);
-          }, []); //This timeout here navigates to the login page automatically after 4500s}
+          }); //This timeout here navigates to the login page automatically after 4500s}
 
           return (
                <div className="Opening">
@@ -56,6 +59,10 @@ function App() {
                <Route path="/getStarted" element={<Slides />} />
                <Route path="/otp/:email" element={<Otp />} />
                <Route path="/home/:token" element={<Home />} />
+               <Route path="/resources" element={<Resources />} />
+               <Route path="/goals" element={<Goals />} />
+               <Route path="/community" element={<Community />} />
+               <Route path="/profile" element={<Profile />} />
           </Routes>
           //These are the routes to various pages of the app
      );

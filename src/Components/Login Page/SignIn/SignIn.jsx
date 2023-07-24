@@ -18,6 +18,7 @@ function SignIn() {
           const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
           const isEmailValid = !!state.email.match(emailRegex);
           setEmailVal(isEmailValid);
+          console.log(emailValidated);
      };
 
      function Clearform() {
@@ -29,9 +30,12 @@ function SignIn() {
      }
 
      var [message, setMessage] = useState(" ");
+     var [formStatus, setFormStatus] = useState(true);
      const handleSubmit = (e) => {
           e.preventDefault();
+          setFormStatus(true);
           setMessage("Hang on a sec");
+
           var userDetails = {
                email: state.email,
                password: state.password,
@@ -52,6 +56,7 @@ function SignIn() {
 
                     setMessage(result.message);
                     if (result.statusText === "success") {
+                         setFormStatus(true);
                          setTimeout(() => {
                               setMessage(
                                    "Will navigate you to home page shortly"
@@ -62,12 +67,15 @@ function SignIn() {
                               navigate(`/home/${result.data.token}`);
                          }, 1000);
                     } else {
-                         return false;
+                         setFormStatus(false);
                     }
                })
                .catch((error) => console.log("error", error.message));
      };
 
+     function getIsFormValid() {
+          return emailValidated && state.password;
+     }
      var [eyeclick, setEyeclick] = useState(false);
      var emailRef = useRef();
      return (
@@ -106,7 +114,10 @@ function SignIn() {
                                         onBlur={validateEmail}
                                    />
                               </fieldset>
-
+                              <p className="emailVal">
+                                   {emailValidated === false &&
+                                        " *Check your email field*"}
+                              </p>
                               <fieldset>
                                    <input
                                         type={
@@ -117,7 +128,10 @@ function SignIn() {
                                         placeholder="Enter your password"
                                         value={state.password}
                                         onFocus={() => {
-                                             if (state.email === "") {
+                                             if (
+                                                  state.email === "" ||
+                                                  emailValidated === false
+                                             ) {
                                                   emailRef.current.focus();
                                              }
                                         }}
@@ -147,14 +161,16 @@ function SignIn() {
                                    </span>
                               </fieldset>
 
-                              <button type="submit" className="signInButton">
+                              <button
+                                   type="submit"
+                                   className="signInButton"
+                                   disabled={!getIsFormValid()}
+                              >
                                    Sign In
                               </button>
                               <p
                                    className={`valids ${
-                                        message ===
-                                             "The provided credentials are incorrect." &&
-                                        "red"
+                                        formStatus === false ? "red" : ""
                                    }`}
                               >
                                    {message}
