@@ -1,18 +1,24 @@
 import "./Otp.css";
-import { useState } from "react"; //refer back to app.js file
+import { useReducer, useState } from "react"; //refer back to app.js file
 import tranquil from "../../../Assets/brand_gold.svg";
 import { useNavigate } from "react-router"; //refer back to login.jsx file
-import { useParams } from "react-router";
+import { FormDetails } from "../../FormContext";
+import { useEffect } from "react";
 
 function Otp() {
-     var { email } = useParams();
+     var { email } = FormDetails();
      const navigate = useNavigate();
-
      var [otp, setOtp] = useState({
           token: "",
      });
-     var [message, setMessage] = useState("");
-     const handleSubmitOTP = () => {
+
+     var [message, setMessage] = useState({
+          string: "",
+          state: false,
+     });
+
+     const handleSubmitOTP = (e) => {
+          e.preventDefault();
           var otpDetails = {
                token: otp,
                email: email,
@@ -26,7 +32,11 @@ function Otp() {
                redirect: "follow",
           };
 
-          setMessage("Hang on a sec");
+          setMessage({
+               ...message,
+               string: "Hang on a sec",
+               state: true,
+          });
           fetch(
                "https://tranquil.skrind.com/api/v1/auth/verify-otp",
                requestOptions
@@ -35,21 +45,41 @@ function Otp() {
                .then((result) => {
                     console.log(result);
                     if (result.statusCode === 200) {
-                         setMessage(
-                              "Email verified, you will be redirected shortly"
-                         );
+                         setMessage({
+                              ...message,
+                              string: "Email verified, redirecting you shortly. . .",
+                              state: true,
+                         });
+                         setOtp({ ...otp, token: "" });
                          setTimeout(() => {
-                              navigate(`/signIn`);
+                              navigate("/signIn");
                          }, 2000);
                     } else {
-                         setMessage("Invalid otp token");
+                         setMessage({
+                              ...message,
+                              string: "Invalid Token",
+                              state: false,
+                         });
                     }
                })
                .catch((error) => console.log("error", error));
-          setOtp({ ...otp, token: "" });
      };
-
-     const handleResend = () => {
+     var [resendMessage, setResendMessage] = useState({
+          string: "",
+          state: true,
+     });
+     const handleResend = (e) => {
+          e.preventDefault();
+          setInitialTimeCount(30 + initialTimeCount);
+          setResendMessage({
+               ...resendMessage,
+               string: "A new token has been sent to you",
+               state: true,
+          });
+          dispatch({
+               type: "resetCountDown",
+               initialTime: initialTimeCount,
+          });
           var emailToResend = {
                email: email,
           };
@@ -69,15 +99,42 @@ function Otp() {
                .then((response) => response.json())
                .then((result) => console.log(result))
                .catch((error) => console.log("error", error));
-          setTimeCount(60);
+
+          const resetTimer = setTimeout(() => {
+               setResendMessage({
+                    ...resendMessage,
+                    string: "",
+                    state: true,
+               });
+          }, 3000);
+
+          return () => {
+               clearTimeout(resetTimer);
+          };
      };
 
-     var [timeCount, setTimeCount] = useState(30);
-     setTimeout(() => {
-          if (timeCount > 0) {
-               setTimeCount((timeCount -= 1));
+     const timerReducer = (state, action) => {
+          switch (action.type) {
+               case "countDown":
+                    return state > 0 ? state - 1 : state;
+               case "resetCountDown":
+                    return action.initialTime;
+               default:
+                    return state;
           }
-     }, 1000);
+     };
+
+     var [initialTimeCount, setInitialTimeCount] = useState(30);
+
+     const [timeCount, dispatch] = useReducer(timerReducer, initialTimeCount);
+
+     useEffect(() => {
+          const timer = setTimeout(() => {
+               dispatch({ type: "countDown" });
+          }, 1000);
+
+          return () => clearTimeout(timer);
+     }, [timeCount]);
 
      const resend = (
           <span className="resend" onClick={handleResend}>
@@ -86,50 +143,66 @@ function Otp() {
      );
 
      return (
-          <div className="OTP">
-               <div className="OtpContainer">
-                    <header className="Hello">
-                         <img className="brand" src={tranquil} alt="" />
+          <div className="Otp">
+               <header>
+                    <img className="brand" src={tranquil} alt="" />
 
-                         <p>A 4 digit otp has been sent to your email</p>
-                    </header>
-                    <form onSubmit={handleSubmitOTP}>
-                         <fieldset className="otp">
-                              <input
-                                   type="text"
-                                   placeholder="****"
-                                   inputMode="numeric"
-                                   className="otps"
-                                   maxLength={4}
-                                   value={otp.token}
-                                   onChange={(e) => {
-                                        setOtp({
-                                             ...otp,
-                                             token: e.target.value,
-                                        });
-                                   }}
-                              />
-                         </fieldset>
+                    <p>A 4 digit otp has been sent to your email</p>
+               </header>
+               <form onSubmit={handleSubmitOTP} className="otpForm">
+                    <fieldset>
+                         <input
+                              type="text"
+                              placeholder="****"
+                              inputMode="numeric"
+                              maxLength={4}
+                              value={otp.token}
+                              onChange={(e) => {
+                                   setOtp({
+                                        ...otp,
+                                        token: e.target.value,
+                                   });
+                              }}
+                              onFocus={() => {
+                                   setMessage({
+                                        ...message,
+                                        string: "",
+                                        state: true,
+                                   });
+                              }}
+                         />
+                    </fieldset>
 
-                         <p>{message}</p>
-                         <button className="verify" type="submit">
-                              {" "}
-                              Verify
-                         </button>
-                    </form>
-                    <p className="resendOTP">
-                         Didn't receive otp ?{" "}
-                         {timeCount === 0 ? (
-                              <>{resend}</>
-                         ) : (
-                              <>
-                                   Resend in{" "}
-                                   <span className="secs">{timeCount}</span>{" "}
-                                   secs
-                              </>
-                         )}
-                    </p>
-               </div>
+                    {message.string ? (
+                         <p
+                              className={
+                                   message.state === true
+                                        ? "validotp"
+                                        : "invalidotp"
+                              }
+                         >
+                              {message.string}
+                         </p>
+                    ) : null}
+                    <button className="verify" type="submit">
+                         {" "}
+                         Verify
+                    </button>
+               </form>
+               <p className="resendOTP">
+                    Didn't receive otp ?{" "}
+                    {timeCount === 0 ? (
+                         <>{resend}</>
+                    ) : (
+                         <>
+                              Resend in{" "}
+                              <span className="secs">{timeCount}</span> secs
+                         </>
+                    )}
+               </p>
+               {resendMessage.string ? (
+                    <p className="resendMessage">{resendMessage.string}</p>
+               ) : null}
           </div>
      );
 }

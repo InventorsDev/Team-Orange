@@ -3,16 +3,17 @@
      height: 100vh;
      background: linear-gradient(#fdf2bf, #fff, #e7f6e6);
      display: flex;
+     flex-direction: column;
+     justify-content: center;
      align-items: center;
      overflow-x: hidden;
 }
 
-.user {
+.SignIn header {
      width: 80vw;
-     margin-left: 10vw;
 }
 
-.hiThere {
+.SignIn header {
      display: flex;
      flex-direction: column;
      align-items: center;
@@ -21,14 +22,14 @@
      animation: slide 0.4s;
 }
 
-.hiThere h1 {
+.SignIn header h1 {
      font-family: "Lato", sans-serif;
      font-size: 24px;
      color: #1f2024;
      margin: 10px;
 }
 
-.hiThere p {
+.SignIn header p {
      font-family: "Lato", sans-serif;
      font-size: 14px;
      color: #71727a;
@@ -38,7 +39,6 @@
 .signInForm {
      display: flex;
      flex-direction: column;
-     animation: opa 1s;
 }
 
 .signInForm fieldset {
@@ -48,19 +48,19 @@
 }
 
 .signInForm fieldset input {
-     min-width: 70vw;
+     width: 80vw;
+     max-width: 300px;
      height: 50px;
      border: none;
      border: solid 0.5px #71727a;
      border-radius: 12px;
-     padding-right: 5vw;
-     padding-left: 5vw;
+     padding-right: 20px;
+     padding-left: 20px;
      background: transparent;
 }
 
 .signInForm input:focus {
      border: solid 0.5px #9a3258;
-
      background: transparent;
      font-size: 12px;
      caret-color: #9a3258;
@@ -68,24 +68,29 @@
      outline: none;
 }
 
-.signInForm p {
-     font-size: 15px;
-     width: 100%;
-     text-align: center;
+.signInForm fieldset .eyeIcon {
+     position: absolute;
+     width: 30px;
+     height: 30px;
+     right: 10px;
+     top: 12px;
+     font-size: 16px;
      color: #71727a;
-     margin-top: 5px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }
 
-.emailVal {
+.signInForm .emailValidated {
      color: #9a3258 !important;
      font-size: 10px !important;
      text-align: left !important;
-     margin-top: -10px;
+     margin-top: 5px;
 }
 
-.signInButton {
+.signInForm button {
      width: 100%;
-     margin-top: 30px;
+     margin-top: 10px;
      margin-bottom: 5px;
      align-self: center;
      height: 50px;
@@ -95,7 +100,7 @@
      border: none;
 }
 
-.signInButton:disabled {
+.signInForm button:disabled {
      background-color: #3bcd8450;
 }
 
@@ -106,11 +111,15 @@
      color: #3bcd84;
 }
 
-.valids.red {
+.signInForm .valids.red {
      color: #9a3258;
 }
 
-.forgot {
+.signInForm .forgot {
+     font-size: 15px;
+     width: 100%;
+     text-align: center;
      color: #71727a;
+     margin-top: 5px;
      text-decoration: none;
 }

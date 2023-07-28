@@ -1,5 +1,5 @@
-import "./footer.css";
-import { useNavigate } from "react-router";
+import "./User.css";
+import { useNavigate, Route, Routes } from "react-router";
 import homeBlack from "./Assets/homeBlack.svg";
 import homeGreen from "./Assets/homeGreen.svg";
 import resourcesBlack from "./Assets/resourcesBlack.svg";
@@ -10,18 +10,64 @@ import communityBlack from "./Assets/communityBlack.svg";
 import communityGreen from "./Assets/communityGreen.svg";
 import profileBlack from "./Assets/profileBlack.svg";
 import profileGreen from "./Assets/profileGreen.svg";
+import Home from "./Home/Home.jsx";
+import Resources from "./Resources/Resources.jsx";
+import Goals from "./Goals/Goals.jsx";
+import Community from "./Community/Community.jsx";
+import Profile from "./Profile/Profile.jsx";
+import { UserDetails } from "./UserContext";
+import { useEffect, useState } from "react";
 
-function Footer(props) {
+function User() {
      var navigate = useNavigate();
-     var component = props.component;
-     var token = props.token;
-     return (
+     var { component, setComponent } = UserDetails();
+
+     var [isImagesLoading, setImagesLoaded] = useState(false);
+     useEffect(() => {
+          const images = [
+               homeBlack,
+               homeGreen,
+               resourcesGreen,
+               resourcesBlack,
+               goalsBlack,
+               goalsGreen,
+               communityBlack,
+               communityGreen,
+               profileBlack,
+               profileGreen,
+          ];
+          const preloadImages = (imageArray) => {
+               const promises = imageArray.map((images) => {
+                    return new Promise((resolve, reject) => {
+                         const image = new Image();
+                         image.src = images;
+                         image.onload = resolve;
+                         image.onerror = reject;
+                    });
+               });
+               return Promise.all(promises);
+          };
+
+          preloadImages(images)
+               .then(() => {
+                    setImagesLoaded(true);
+               })
+               .catch((error) => {
+                    console.log("Error Loading Images", error);
+               });
+     }, []);
+
+     if (!isImagesLoading) {
+          return <div>Loading . . .</div>;
+     }
+     const Footer = (
           <footer>
                <div className="flexes">
                     <div
                          className="currentFlex"
                          onClick={() => {
-                              navigate(`/home/${token}`);
+                              setComponent("home");
+                              navigate("");
                          }}
                     >
                          <img
@@ -44,7 +90,8 @@ function Footer(props) {
                     <div
                          className="currentFlex"
                          onClick={() => {
-                              navigate("/resources");
+                              setComponent("resources");
+                              navigate("resources");
                          }}
                     >
                          <img
@@ -71,7 +118,8 @@ function Footer(props) {
                     <div
                          className="currentFlex"
                          onClick={() => {
-                              navigate("/goals");
+                              setComponent("goals");
+                              navigate("goals");
                          }}
                     >
                          <img
@@ -98,7 +146,8 @@ function Footer(props) {
                     <div
                          className="currentFlex"
                          onClick={() => {
-                              navigate("/community");
+                              setComponent("community");
+                              navigate("community");
                          }}
                     >
                          <img
@@ -125,7 +174,8 @@ function Footer(props) {
                     <div
                          className="currentFlex"
                          onClick={() => {
-                              navigate("/profile");
+                              setComponent("profile");
+                              navigate("profile");
                          }}
                     >
                          <img
@@ -151,6 +201,20 @@ function Footer(props) {
                </div>
           </footer>
      );
+
+     return (
+          <div>
+               <Routes>
+                    <Route path="" element={<Home />} />
+                    <Route path="resources" element={<Resources />} />
+                    <Route path="goals" element={<Goals />} />
+                    <Route path="community" element={<Community />} />
+                    <Route path="profile" element={<Profile />} />
+               </Routes>
+
+               {Footer}
+          </div>
+     );
 }
 
-export default Footer;
+export default User;

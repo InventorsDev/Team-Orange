@@ -1,9 +1,14 @@
 import "./Forgot.css";
 import { useRef, useState } from "react";
-import tranquil from "../../Assets/brand_gold.svg";
+import tranquilLogo from "../../Assets/brand_gold.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
+import {
+     globalValidateEmail,
+     globalValidatePassword,
+} from "../globalFormValidators";
+
 function Forgot() {
      const navigate = useNavigate();
      var [step, setStep] = useState(1);
@@ -14,29 +19,31 @@ function Forgot() {
           confirmPassword: "",
      });
 
-     var [emailVal, setEmailVal] = useState();
+     const getIsEmailValid = () => {
+          return globalValidateEmail(state.email);
+     };
 
-     var [message, setMessage] = useState({
+     var [emailSentMessage, setEmailMessage] = useState({
           string: "",
           state: false,
      });
-     function handleNext(e) {
-          e.preventDefault();
 
-          setMessage({
-               ...message,
+     const fetchNewOtp = (e) => {
+          e.preventDefault();
+          setEmailMessage({
+               ...emailSentMessage,
                string: "Hang on a sec",
                state: true,
           });
-          var userDetails = {
-               email: state.email,
+          var userEmailAddress = {
+               email: state.email.trim(),
           };
           var requestOptions = {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify(userDetails),
+               body: JSON.stringify(userEmailAddress),
                redirect: "follow",
           };
           fetch(
@@ -47,8 +54,8 @@ function Forgot() {
                .then((result) => {
                     console.log(result);
                     if (result.statusCode === 200) {
-                         setMessage({
-                              ...message,
+                         setEmailMessage({
+                              ...emailSentMessage,
                               string: result.message,
                               state: true,
                          });
@@ -60,65 +67,62 @@ function Forgot() {
                               setStep(2);
                          }, 1000);
                     } else {
-                         setMessage({
-                              ...message,
+                         setEmailMessage({
+                              ...emailSentMessage,
                               string: result.message,
                               state: false,
                          });
                     }
                })
                .catch((error) => console.log("error", error));
-     }
+     };
      const Email = (
-          <div className="emailInput">
-               <form onSubmit={handleNext}>
-                    <fieldset>
-                         <input
-                              type="email"
-                              className="emailForgot"
-                              placeholder="Enter your email address"
-                              value={state.email}
-                              onChange={(e) => {
-                                   e.preventDefault();
-                                   setState({
-                                        ...state,
-                                        email: e.target.value,
-                                   });
-                                   setEmailVal(true);
-                                   setMessage({
-                                        ...message,
-                                        string: "",
-                                   });
-                              }}
-                         />
-                    </fieldset>
+          <form onSubmit={fetchNewOtp}>
+               <fieldset>
+                    <input
+                         type="text"
+                         name="emailToSendForgotOtpTo"
+                         placeholder="Enter your email address"
+                         value={state.email}
+                         onChange={(e) => {
+                              e.preventDefault();
+                              setState({
+                                   ...state,
+                                   email: e.target.value.trim(),
+                              });
 
+                              setEmailMessage({
+                                   ...emailSentMessage,
+                                   string: "",
+                              });
+                         }}
+                    />
+               </fieldset>
+
+               {emailSentMessage.string ? (
                     <p
                          className={
-                              message.state === false
-                                   ? "fieldCheckers"
+                              emailSentMessage.state === false
+                                   ? "errorReceived"
                                    : "accountFound"
                          }
                     >
-                         {message.string}
+                         {emailSentMessage.string}
                     </p>
+               ) : null}
 
-                    <button
-                         className="resetButtons"
-                         disabled={!emailVal}
-                         type="submit"
-                    >
-                         Next
-                    </button>
-               </form>
-          </div>
+               <button disabled={!getIsEmailValid()} type="submit">
+                    Next
+               </button>
+          </form>
      );
 
      var [tokenResetMessage, setToken] = useState({
           string: "",
           state: true,
      });
-     function handleVerify(e) {
+
+     const handleSetNewPassword = (e) => {
           e.preventDefault();
           setToken({
                ...tokenResetMessage,
@@ -169,59 +173,58 @@ function Forgot() {
                     }
                })
                .catch((error) => console.log("error", error));
-     }
+     };
+
      var newPasswordRef = useRef();
      var confirmPasswordRef = useRef();
      var newTokenRef = useRef();
-     var [confirmPasswordVal, setConfirmPasswordVal] = useState();
-     function ValidateFields() {
-          if (
+
+     var [passwordValidated, setPasswordVal] = useState();
+     var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
+     const validateFields = () => {
+          return (
                state.token.length === 4 &&
-               state.newPassword !== "" &&
-               state.confirmPassword === state.newPassword
-          ) {
-               return true;
-          } else {
-               return false;
-          }
-     }
+               globalValidatePassword(state.newPassword) &&
+               state.confirmPassword.trim() === state.newPassword.trim()
+          );
+     };
+
      var [eyeclick, setEyeclick] = useState(false);
      var [eyeclick2, setEyeclick2] = useState(false);
-     var [passwordVal, setPasswordVal] = useState();
+
      const validatePassword = () => {
-          const regex =
-               /^(?=.*[!@#$%^&*()\-=+{};:,<.>/?[\]\\|`~])(?=.*[A-Z])(?=.*[a-z]).{8,}$/;
-          const isPasswordValid = !!state.newPassword.match(regex);
+          const isPasswordValid = globalValidatePassword(state.newPassword);
           setPasswordVal(isPasswordValid);
      };
      const Token = (
-          <div className="tokenInput">
-               <form onSubmit={handleVerify}>
-                    <fieldset className="otpField">
-                         <input
-                              type="text"
-                              placeholder="****"
-                              ref={newTokenRef}
-                              inputMode="numeric"
-                              autoComplete="off"
-                              className="otpToken"
-                              maxLength={4}
-                              value={state.token}
-                              onChange={(e) => {
-                                   setState({
-                                        ...state,
-                                        token: e.target.value,
-                                   });
-                              }}
-                              onFocus={() => {
-                                   setToken({
-                                        ...tokenResetMessage,
-                                        string: "",
-                                   });
-                              }}
-                         />
-                    </fieldset>
-                    <fieldset>
+          <form onSubmit={handleSetNewPassword}>
+               <fieldset>
+                    <input
+                         type="text"
+                         placeholder="****"
+                         ref={newTokenRef}
+                         inputMode="numeric"
+                         autoComplete="off"
+                         className="otpToken"
+                         maxLength={4}
+                         value={state.token}
+                         onChange={(e) => {
+                              setState({
+                                   ...state,
+                                   token: e.target.value.trim(),
+                              });
+                         }}
+                         onFocus={() => {
+                              setToken({
+                                   ...tokenResetMessage,
+                                   string: "",
+                              });
+                              setPasswordVal(true);
+                         }}
+                    />
+               </fieldset>
+               <fieldset>
+                    <div className="eyeIconsRelativeDivs">
                          <input
                               type={eyeclick === false ? "password" : "text"}
                               className="passwordForgot"
@@ -241,25 +244,20 @@ function Forgot() {
                                         ...tokenResetMessage,
                                         string: "",
                                    });
+                                   setConfirmPasswordVal(true);
                               }}
                               onChange={(e) => {
                                    e.preventDefault();
                                    setState({
                                         ...state,
-                                        newPassword: e.target.value,
+                                        newPassword: e.target.value.trimStart(),
                                         confirmPassword: "",
                                    });
                                    setPasswordVal(true);
                               }}
-                              onBlur={() => {
-                                   if (state.token.length === 4) {
-                                        validatePassword();
-                                   } else {
-                                        return;
-                                   }
-                              }}
+                              onBlur={validatePassword}
                          />
-                         <span
+                         <div
                               onClick={() => {
                                    setEyeclick(!eyeclick);
                               }}
@@ -270,13 +268,23 @@ function Forgot() {
                               ) : (
                                    <FontAwesomeIcon icon={faEyeSlash} />
                               )}
-                         </span>
-                    </fieldset>
-                    <p className="validateMessage">
-                         {passwordVal === false &&
-                              "*8 or more digit password must contain both lowercase and uppercase letters and atleast one special character*"}
-                    </p>
-                    <fieldset>
+                         </div>
+                    </div>
+
+                    {passwordValidated === false ? (
+                         <p className="fieldCheckers">
+                              *Password must be 8 digits or more*
+                              <br />
+                              *Contain both lowercase and uppercase letters*{" "}
+                              <br />
+                              *Have atleast one special character e.g (#, %, $,
+                              . . .) *
+                         </p>
+                    ) : null}
+               </fieldset>
+
+               <fieldset>
+                    <div className="eyeIconsRelativeDivs">
                          <input
                               type={eyeclick2 === false ? "password" : "text"}
                               className="passwordForgot"
@@ -286,7 +294,7 @@ function Forgot() {
                               value={state.confirmPassword}
                               onFocus={() => {
                                    if (
-                                        passwordVal === false ||
+                                        passwordValidated === false ||
                                         state.newPassword === ""
                                    ) {
                                         newPasswordRef.current.focus();
@@ -309,7 +317,7 @@ function Forgot() {
                                    }
                               }}
                          />
-                         <span
+                         <div
                               onClick={() => {
                                    setEyeclick2(!eyeclick2);
                               }}
@@ -320,71 +328,69 @@ function Forgot() {
                               ) : (
                                    <FontAwesomeIcon icon={faEyeSlash} />
                               )}
-                         </span>
-                    </fieldset>
-                    <p className="validateMessage">
-                         {confirmPasswordVal === false &&
-                              "*Passwords must be identical*"}
-                    </p>
+                         </div>
+                    </div>
 
-                    <button
-                         className="resetButtons"
-                         disabled={!ValidateFields()}
-                         type="submit"
-                    >
-                         Reset Password
-                    </button>
-                    <button
-                         className="resetButtons goBack"
-                         onClick={(e) => {
-                              e.preventDefault();
-                              setMessage({
-                                   ...message,
-                                   string: "",
-                              });
-                              setEmailVal(false);
-                              setStep(1);
-                              setState({
-                                   ...state,
-                                   email: "",
-                                   token: "",
-                                   newPassword: "",
-                                   confirmPassword: "",
-                              });
-                         }}
-                    >
-                         Previous
-                    </button>
+                    {confirmPasswordValidated === false ? (
+                         <p className="fieldCheckers">
+                              *Passwords must be identical*
+                         </p>
+                    ) : null}
+               </fieldset>
 
-                    <p
-                         className={
-                              tokenResetMessage.state === true
-                                   ? "accountFound"
-                                   : "fieldCheckers"
-                         }
-                    >
-                         {tokenResetMessage.string}
-                    </p>
-               </form>
-          </div>
+               <button
+                    className="resetButtons"
+                    disabled={!validateFields()}
+                    type="submit"
+               >
+                    Reset Password
+               </button>
+               <button
+                    className="goBack"
+                    onClick={(e) => {
+                         e.preventDefault();
+
+                         setState({
+                              ...state,
+                              email: "",
+                              token: "",
+                              newPassword: "",
+                              confirmPassword: "",
+                         });
+                         setEmailMessage({
+                              ...emailSentMessage,
+                              string: "",
+                              state: true,
+                         });
+                         setStep(1);
+                    }}
+               >
+                    Previous
+               </button>
+
+               <p
+                    className={
+                         tokenResetMessage.state === true
+                              ? "accountFound"
+                              : "fieldCheckers"
+                    }
+               >
+                    {tokenResetMessage.string}
+               </p>
+          </form>
      );
 
      return (
           <div className="ForgotPassword">
-               <div className="ResetPassword">
-                    <header className="Hello">
-                         <img className="brand" src={tranquil} alt="" />
-                         {step === 1 && (
-                              <p>Reset your password with a few steps</p>
-                         )}
-                         {step === 2 && (
-                              <p>
-                                   Enter new password with otp sent to your mail
-                              </p>
-                         )}
-                    </header>
-                    {step === 1 ? Email : Token}
-               </div>
+               <header>
+                    <img className="brand" src={tranquilLogo} alt="" />
+                    {step === 1 && <p>Reset your password with a few steps</p>}
+                    {step === 2 && (
+                         <p>Enter new password with otp sent to your mail</p>
+                    )}
+               </header>
+
+               {step === 1 ? Email : Token}
           </div>
      );
 }

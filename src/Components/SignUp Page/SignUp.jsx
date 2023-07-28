@@ -1,15 +1,21 @@
+import "./SignUp.css";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SignUp.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //using font awesome in react requires the imports, I'd downloaded the packages via npm
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import google from "./../../Assets/google.svg";
-import apple from "./../../Assets/apple.svg";
-import tranquil from "./../../Assets/brand_gold.svg";
+import tranquilLogo from "./../../Assets/brand_gold.svg";
 import { Link } from "react-router-dom";
+import { FormDetails } from "../FormContext";
+import {
+     globalValidateName,
+     globalValidateEmail,
+     globalValidatePassword,
+} from "../globalFormValidators";
 
-function Credentials() {
+function SignUp() {
      const navigate = useNavigate();
+     var { setEmail } = FormDetails();
+
      //contains all the states to be managed by the form
      var [state, setState] = useState({
           fullName: "",
@@ -18,53 +24,48 @@ function Credentials() {
           confirmPassword: "",
      });
 
+     //states to hold input Validation Status
      var [fullNameValidated, setFullNameVal] = useState();
      var [emailValidated, setEmailVal] = useState();
      var [passwordValidated, setPasswordVal] = useState();
      var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
      var [check, setCheck] = useState(false); //for check box
 
+     //refs to handle refocusing incase previous field is invalid
      var fullnameRef = useRef();
      var emailRef = useRef();
      var passwordRef = useRef();
-     var fullnameRef = useRef();
+     var confirmPasswordRef = useRef();
 
      const validateFullName = () => {
-          if (state.fullName.length >= 1 && state.fullName !== "") {
-               setFullNameVal(true);
-          } else {
-               setFullNameVal(false);
-          }
+          var isFullNameValid = globalValidateName(state.fullName);
+          setFullNameVal(isFullNameValid);
      };
 
      const validateEmail = () => {
-          const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-          const isEmailValid = !!state.email.match(emailRegex);
+          const isEmailValid = globalValidateEmail(state.email);
           setEmailVal(isEmailValid);
      };
 
      const validatePassword = () => {
-          const regex =
-               /^(?=.*[!@#$%^&*()\-=+{};:,<.>/?[\]\\|`~])(?=.*[A-Z])(?=.*[a-z]).{8,}$/;
-          const isPasswordValid = !!state.password.match(regex);
+          const isPasswordValid = globalValidatePassword(state.password);
           setPasswordVal(isPasswordValid);
      };
 
      const validateConfirmPassword = () => {
-          if (state.confirmPassword === state.password) {
+          if (state.confirmPassword.trim() === state.password.trim()) {
                setConfirmPasswordVal(true);
           } else {
                setConfirmPasswordVal(false);
           }
      };
 
-     var [formValid, setFormValid] = useState();
      const getFormValidStatus = () => {
           return (
                fullNameValidated &&
                emailValidated &&
                passwordValidated &&
-               confirmPasswordValidated &&
+               state.confirmPassword.trim() === state.password.trim() &&
                check
           );
      };
@@ -83,11 +84,11 @@ function Credentials() {
           e.preventDefault();
 
           var userDetails = {
-               full_name: state.fullName,
-               email: state.email,
-               password: state.password,
+               full_name: state.fullName.trim(),
+               email: state.email.trim(),
+               password: state.password.trim(),
           };
-
+          console.log(userDetails);
           var requestOptions = {
                method: "POST",
                headers: {
@@ -97,305 +98,253 @@ function Credentials() {
                redirect: "follow",
           };
 
-          if (getFormValidStatus() === true) {
-               fetch(
-                    "https://tranquil.skrind.com/api/v1/auth/register",
-                    requestOptions
-               )
-                    .then((response) => response.text())
-                    .then((result) => console.log(result))
-                    .catch((error) => console.log("error", error));
-
-               clearForm();
-
-               navigate(`/otp/${state.email}`);
-          } else {
-               setFormValid(false);
-          }
+          setEmail(state.email);
+          fetch(
+               "https://tranquil.skrind.com/api/v1/auth/register",
+               requestOptions
+          )
+               .then((response) => response.text())
+               .then((result) => {
+                    console.log(result);
+               })
+               .catch((error) => console.log("error", error));
+          clearForm();
+          navigate("/otp");
      };
 
      var [eyeclick, setEyeclick] = useState(false);
      var [eyeclick2, setEyeclick2] = useState(false);
-     var [click, setClick] = useState(false);
-
-     const handleClick = () => {
-          setClick(true);
-          setTimeout(() => {
-               setClick(false);
-          }, 1500);
-     };
-
-     const handleGoogle = (e) => {
-          e.preventDefault();
-          var requestOptions = {
-               method: "GET",
-               redirect: "follow",
-          };
-
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/login/google",
-               requestOptions
-          )
-               .then((response) => response.json())
-               .then((result) => {
-                    console.log(result);
-
-                    window.location.href = result.data.link;
-               })
-               .catch((error) => console.log("error", error));
-     };
 
      return (
           <div className="SignUP">
-               <div className="pageContainer">
-                    <header className="Hello">
-                         <img className="brand" src={tranquil} alt="" />
-                         <h1>Hello!</h1>
-                         <p>Create an account to get Started</p>
-                         <p>
-                              Already have an account?{" "}
-                              <Link to="/login" className="loginLink">
-                                   Sign in
-                              </Link>
-                         </p>
-                    </header>
-                    <form onSubmit={handleSubmit} className="signUpForm">
-                         <fieldset>
-                              <label htmlFor="fullName">Name</label>
-                              <input
-                                   id="fullName"
-                                   type="text"
-                                   autoComplete="off"
-                                   placeholder="Enter your full name"
-                                   ref={fullnameRef}
-                                   value={state.fullName}
-                                   onChange={(e) => {
-                                        e.preventDefault();
-                                        setState({
-                                             ...state,
-                                             fullName: e.target.value,
-                                        });
-                                        if (e.target.value !== "") {
-                                             setFullNameVal(true);
-                                        } else {
-                                             setFullNameVal(false);
-                                        }
-                                   }}
-                                   onBlur={validateFullName}
-                              />
-                              <p className="fieldCheckers">
-                                   {fullNameValidated === false &&
-                                        "*This field must not be empty*"}
-                              </p>
-                         </fieldset>
+               <header className="signUpHeader">
+                    <img className="brand" src={tranquilLogo} alt="" />
+                    <h1>Hello!</h1>
+                    <p>Create an account to get Started</p>
+               </header>
+               <form onSubmit={handleSubmit} className="signUpForm">
+                    <fieldset>
+                         <label htmlFor="fullName">Name</label>
+                         <input
+                              type="text"
+                              autoComplete="off"
+                              name="fullName"
+                              placeholder="Enter your full name"
+                              ref={fullnameRef}
+                              value={state.fullName}
+                              onFocus={() => {
+                                   setEmailVal(true);
+                              }}
+                              onChange={(e) => {
+                                   e.preventDefault();
+                                   setState({
+                                        ...state,
+                                        fullName: e.target.value.trimStart(),
+                                   });
+                                   if (e.target.value.trimStart()) {
+                                        setFullNameVal(true);
+                                   } else {
+                                        setFullNameVal(false);
+                                   }
+                              }}
+                              onBlur={validateFullName}
+                         />
 
-                         <fieldset>
-                              <label htmlFor="email">Email</label>
+                         {fullNameValidated === false ? (
+                              <p className="fieldCheckers">
+                                   *This field must not be empty*
+                              </p>
+                         ) : null}
+                    </fieldset>
+
+                    <fieldset>
+                         <label htmlFor="email">Email</label>
+                         <input
+                              type="text"
+                              autoComplete="off"
+                              name="email"
+                              placeholder="Enter your email address"
+                              value={state.email}
+                              ref={emailRef}
+                              onFocus={() => {
+                                   if (state.fullName.length < 1) {
+                                        setFullNameVal(false);
+                                        fullnameRef.current.focus();
+                                   }
+
+                                   setPasswordVal(true);
+                              }}
+                              onChange={(e) => {
+                                   e.preventDefault();
+                                   setState({
+                                        ...state,
+                                        email: e.target.value.trim(),
+                                   });
+                                   if (e.target.value.trim()) {
+                                        setEmailVal(true);
+                                   } else {
+                                        setEmailVal(false);
+                                   }
+                              }}
+                              onBlur={validateEmail}
+                         />
+
+                         {emailValidated === false ? (
+                              <p className="fieldCheckers">
+                                   *Enter a valid email address*
+                              </p>
+                         ) : null}
+                    </fieldset>
+
+                    <fieldset>
+                         <label htmlFor="password">Password</label>
+                         <div className="eyeIconsRelativeDivs">
                               <input
-                                   id="email"
-                                   type="email"
+                                   type={
+                                        eyeclick === true ? "text" : "password"
+                                   }
                                    autoComplete="off"
-                                   placeholder="Enter your email address"
-                                   value={state.email}
-                                   ref={emailRef}
-                                   onFocus={(e) => {
-                                        if (state.fullName === "") {
-                                             fullnameRef.current.focus();
-                                        }
-                                   }}
-                                   onChange={(e) => {
-                                        e.preventDefault();
-                                        setState({
-                                             ...state,
-                                             email: e.target.value,
-                                        });
-                                        if (e.target.value !== "") {
-                                             setEmailVal(true);
-                                        } else {
+                                   name="newPassword"
+                                   ref={passwordRef}
+                                   placeholder="Create a password"
+                                   value={state.password}
+                                   onFocus={() => {
+                                        if (
+                                             state.email === "" ||
+                                             emailValidated === false
+                                        ) {
                                              setEmailVal(false);
+                                             emailRef.current.focus();
                                         }
+
+                                        setConfirmPasswordVal(true);
                                    }}
-                                   onBlur={() => {
-                                        if (state.fullName) {
-                                             validateEmail();
+                                   onChange={(e) => {
+                                        e.preventDefault();
+                                        setState({
+                                             ...state,
+                                             password:
+                                                  e.target.value.trimStart(),
+                                             confirmPassword: "",
+                                        });
+
+                                        if (e.target.value.trimStart()) {
+                                             setPasswordVal(true);
                                         } else {
-                                             return;
+                                             setPasswordVal(false);
                                         }
                                    }}
+                                   onBlur={validatePassword}
                               />
-
-                              <p className="fieldCheckers">
-                                   {emailValidated === false &&
-                                        "*Enter a valid email address*"}
-                              </p>
-                         </fieldset>
-
-                         <fieldset className="passwordField">
-                              <label htmlFor="password">Password</label>
-                              <div className="spanContainers">
-                                   <input
-                                        id="password"
-                                        type={
-                                             eyeclick === true
-                                                  ? "text"
-                                                  : "password"
-                                        }
-                                        autoComplete="off"
-                                        ref={passwordRef}
-                                        placeholder="Create a password"
-                                        value={state.password}
-                                        onFocus={(e) => {
-                                             if (state.email === "") {
-                                                  emailRef.current.focus();
-                                             }
-                                        }}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  password: e.target.value,
-                                                  confirmPassword: "",
-                                             });
-                                             if (e.target.value) {
-                                                  setPasswordVal(true);
-                                             } else {
-                                                  setPasswordVal(false);
-                                             }
-                                        }}
-                                        onBlur={() => {
-                                             if (state.email) {
-                                                  validatePassword();
-                                             } else {
-                                                  return;
-                                             }
-                                        }}
-                                   />
-                                   <span
-                                        onClick={() => {
-                                             setEyeclick(!eyeclick);
-                                        }}
-                                        className="eyeIcon"
-                                   >
-                                        {eyeclick === true ? (
-                                             <FontAwesomeIcon icon={faEye} />
-                                        ) : (
-                                             <FontAwesomeIcon
-                                                  icon={faEyeSlash}
-                                             />
-                                        )}
-                                   </span>
-                                   <p className="fieldCheckers">
-                                        {passwordValidated === false &&
-                                             "*8 or more digit password must contain both lowercase and uppercase letters and atleast one special character*"}
-                                   </p>
-                              </div>
-                              <div className="spanContainers">
-                                   <input
-                                        id="confirmPassword"
-                                        type={
-                                             eyeclick2 === true
-                                                  ? "text"
-                                                  : "password"
-                                        }
-                                        onFocus={(e) => {
-                                             if (state.password === "") {
-                                                  passwordRef.current.focus();
-                                             }
-                                        }}
-                                        autoComplete="off"
-                                        placeholder="Confirm password"
-                                        value={state.confirmPassword}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  confirmPassword:
-                                                       e.target.value,
-                                             });
-                                        }}
-                                        onBlur={validateConfirmPassword}
-                                   />
-                                   <span
-                                        onClick={() => {
-                                             setEyeclick2(!eyeclick2);
-                                        }}
-                                        className="eyeIcon2"
-                                   >
-                                        {eyeclick2 === true ? (
-                                             <FontAwesomeIcon icon={faEye} />
-                                        ) : (
-                                             <FontAwesomeIcon
-                                                  icon={faEyeSlash}
-                                             />
-                                        )}
-                                   </span>
-                                   <p className="fieldCheckers">
-                                        {confirmPasswordValidated === false &&
-                                             "*Passwords must be identical*"}
-                                   </p>
-                              </div>
-                         </fieldset>
-
-                         <fieldset className="check">
-                              <input
-                                   type="checkbox"
-                                   onChange={() => {
-                                        setCheck(!check);
+                              <div
+                                   onClick={(e) => {
+                                        e.preventDefault();
+                                        setEyeclick(!eyeclick);
                                    }}
-                                   className="checkb"
-                              />
-
-                              <p className="term">
-                                   I have read and agreed to the{" "}
-                                   <span className="terms">
-                                        Terms and Conditions
-                                   </span>{" "}
-                                   and{" "}
-                                   <span className="terms">Privacy Policy</span>
-                              </p>
-                         </fieldset>
-
-                         <button
-                              type="submit"
-                              disabled={!getFormValidStatus()}
-                              className="createAccount"
-                         >
-                              Create Account
-                         </button>
-                    </form>
-                    <p className="fieldCheckers last">
-                         {formValid === false &&
-                              "*Make sure to input all your details correctly*"}
-                    </p>
-                    <div className="alt">
-                         <div className="liners one"></div>{" "}
-                         <p className="or">or</p>
-                         <div className="liners"></div>
-                         <div className="Third-Parties">
-                              <div>
-                                   <div
-                                        className="thirdparty google"
-                                        onClick={handleGoogle}
-                                   >
-                                        <img src={google} alt="" />
-                                   </div>
-
-                                   <div
-                                        className="thirdparty apple"
-                                        onClick={handleClick}
-                                   >
-                                        <img src={apple} alt="" />
-                                   </div>
+                                   className="eyeIcon"
+                              >
+                                   {eyeclick === true ? (
+                                        <FontAwesomeIcon icon={faEye} />
+                                   ) : (
+                                        <FontAwesomeIcon icon={faEyeSlash} />
+                                   )}
                               </div>
                          </div>
+
+                         {passwordValidated === false ? (
+                              <p className="fieldCheckers">
+                                   *Password must be 8 digits or more*
+                                   <br />
+                                   *Contain both lowercase and uppercase
+                                   letters* <br />
+                                   *Have atleast one special character e.g (#,
+                                   %, $, . . .) *
+                              </p>
+                         ) : null}
+
+                         <div className="eyeIconsRelativeDivs">
+                              <input
+                                   type={
+                                        eyeclick2 === true ? "text" : "password"
+                                   }
+                                   autoComplete="off"
+                                   name="confirmPassword"
+                                   onFocus={() => {
+                                        if (
+                                             state.password === "" ||
+                                             passwordValidated === false
+                                        ) {
+                                             passwordRef.current.focus();
+                                        }
+                                   }}
+                                   ref={confirmPasswordRef}
+                                   placeholder="Confirm password"
+                                   value={state.confirmPassword}
+                                   onChange={(e) => {
+                                        e.preventDefault();
+                                        setState({
+                                             ...state,
+                                             confirmPassword:
+                                                  e.target.value.trimStart(),
+                                        });
+                                        if (e.target.value === state.password) {
+                                             setConfirmPasswordVal(true);
+                                        } else {
+                                             setConfirmPasswordVal(false);
+                                        }
+                                   }}
+                                   onBlur={validateConfirmPassword}
+                              />
+                              <div
+                                   onClick={() => {
+                                        setEyeclick2(!eyeclick2);
+                                   }}
+                                   className="eyeIcon"
+                              >
+                                   {eyeclick2 === true ? (
+                                        <FontAwesomeIcon icon={faEye} />
+                                   ) : (
+                                        <FontAwesomeIcon icon={faEyeSlash} />
+                                   )}
+                              </div>
+                         </div>
+
+                         {confirmPasswordValidated === false ? (
+                              <p className="fieldCheckers">
+                                   *Passwords must be identical*
+                              </p>
+                         ) : null}
+                    </fieldset>
+
+                    <fieldset className="check">
+                         <input
+                              type="checkbox"
+                              onChange={() => {
+                                   setCheck(!check);
+                              }}
+                         />
+
                          <p>
-                              {click === true &&
-                                   "This feature is currently unavailable !"}
+                              I have read and agreed to the{" "}
+                              <span className="terms">
+                                   Terms and Conditions
+                              </span>{" "}
+                              and <span className="terms">Privacy Policy</span>
                          </p>
-                    </div>
+                    </fieldset>
+
+                    <button type="submit" disabled={!getFormValidStatus()}>
+                         Create Account
+                    </button>
+               </form>
+               <div className="signUpAlreadyExisted">
+                    <p>Already have an account?</p>
+                    <Link to="/login" className="loginLink">
+                         Sign in
+                    </Link>
                </div>
           </div>
      );
 }
 
-export default Credentials;
+export default SignUp;

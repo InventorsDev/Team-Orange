@@ -8,7 +8,6 @@ import { Link } from "react-router-dom"; //React package to create links
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; //react-dom navigation hook
 
-//The function that returns the html for the login page
 function LogIn() {
      const [click, setClick] = useState(false);
 
@@ -39,18 +38,21 @@ function LogIn() {
 
      const appleClicked = () => {
           setClick(true);
-          setTimeout(() => {
+          const clickTimer = setTimeout(() => {
                setClick(false);
           }, 3000);
+          return () => {
+               clearTimeout(clickTimer);
+          };
      }; //This appears when a user clicks the apple icon because it currently doesn't work
 
      return (
           //The return statement where the html lives
           <div className="Login">
-               <div className="Braindiv">
-                    <img src={brain} alt="Brain" />
-                    <img src={brand} className="brand" alt="" />
-                    <h1>Welcome</h1>
+               <img src={brain} alt="" className="brain" />
+               <div className="head">
+                    <img src={brand} alt="" />
+                    <h1>Welcome !</h1>
                     <div>
                          <Typewriter
                               onInit={(typewriter) => {
@@ -65,47 +67,43 @@ function LogIn() {
                     </div>
                </div>
 
-               <div className="Authentications">
-                    <div className="Auths_SignUP">
-                         <button
-                              className="Auths google"
-                              onClick={handleGoogle}
-                         >
-                              <div className="Auths-Provider">
-                                   <img src={google} alt="" />
-                              </div>
-                              <div className="google-apple">
-                                   <p>Login with Google</p>
-                              </div>
-                         </button>
+               <div className="loginOptions">
+                    <button className="auths google" onClick={handleGoogle}>
+                         <div className="authImageDiv">
+                              <img src={google} alt="" />
+                         </div>
+                         <div className="textDiv">
+                              <p>Continue with Google</p>
+                         </div>
+                    </button>
 
-                         <button className="Auths apple" onClick={appleClicked}>
-                              <div className="Auths-Provider">
-                                   <img src={apple} alt="" />
-                              </div>
-                              <div className="google-apple">
-                                   <p>Login with Apple</p>
-                              </div>
-                         </button>
-                         <p className="unavailable">
-                              {click === true &&
-                                   "This feature is currently unavailable !"}
+                    <button className="auths apple" onClick={appleClicked}>
+                         <div className="authImageDiv">
+                              <img src={apple} alt="" />
+                         </div>
+                         <div className="textDiv">
+                              <p>Continue with Apple</p>
+                         </div>
+                    </button>
+
+                    {click === true && (
+                         <p className="appleUnavailable">
+                              This feature is currently unavailable !
                          </p>
+                    )}
+                    <button
+                         className="auths tranquil"
+                         onClick={handleNavigation}
+                    >
+                         Sign in
+                    </button>
+               </div>
 
-                         <button
-                              className="Auths manual"
-                              onClick={handleNavigation}
-                         >
-                              Sign in
-                         </button>
-
-                         <p className="neg-accnt">
-                              Don't have an account ? <br />
-                              <Link to="/createAccount" className="span">
-                                   Sign Up
-                              </Link>
-                         </p>
-                    </div>
+               <div className="newAccount">
+                    <p>Don't have an account ?</p>
+                    <Link to="/signUp" className="span">
+                         Sign Up
+                    </Link>
                </div>
           </div>
      );

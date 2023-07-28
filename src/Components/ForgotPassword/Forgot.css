@@ -2,6 +2,7 @@
      width: 100vw;
      height: 100vh;
      display: flex;
+     flex-direction: column;
      align-items: center;
      justify-content: center;
      background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
@@ -9,26 +10,41 @@
      font-family: "Lato";
 }
 
-.ResetPassword fieldset {
-     border: none;
-     margin-bottom: 10px;
-     position: relative;
+.ForgotPassword header {
+     display: flex;
+     flex-direction: column;
 }
 
-.ResetPassword fieldset input {
-     width: 70vw;
+.ForgotPassword header img {
+     height: 60px;
+}
+.ForgotPassword header p {
+     font-size: 15px;
+     color: #71727a;
+     font-family: "Lato", sans-serif;
+}
+
+.ForgotPassword fieldset {
+     border: none;
+     width: 80vw;
+     max-width: 300px;
+}
+
+.ForgotPassword fieldset input {
+     width: 80vw;
+     max-width: 300px;
      height: 50px;
      border: none;
+     margin-top: 10px;
      border: solid 0.5px #71727a;
      border-radius: 12px;
-     padding-right: 5vw;
-     padding-left: 5vw;
+     padding-right: 20px;
+     padding-left: 20px;
      background: transparent;
 }
 
-.ResetPassword input:focus {
+.ForgotPassword input:focus {
      border: solid 0.5px #9a3258;
-
      background: transparent;
      font-size: 12px;
      caret-color: #9a3258;
@@ -36,46 +52,53 @@
      outline: none;
 }
 
-.emailInput,
-.tokenInput {
-     animation: opa 1s;
-}
-
-.resetButtons {
-     width: 100%;
-     margin-top: 5px;
+.ForgotPassword button {
+     width: 80vw;
+     max-width: 300px;
+     margin-top: 10px;
      margin-bottom: 5px;
-     align-self: center;
      height: 50px;
      background-color: #3bcd84;
      border-radius: 12px;
      color: #fff;
      border: none;
      font-family: "Lato";
+     display: block;
 }
 
-.goBack {
-     background-color: transparent;
-     font-family: "Lato";
-     color: #71727a;
+.ForgotPassword .errorReceived {
+     margin-top: 10px;
+     color: #fa3c6a;
+     font-size: 10px;
+     text-align: center;
+     width: 80vw;
+     max-width: 300px;
 }
 
-.emailInput .fieldCheckers,
-.tokenInput .fieldCheckers {
+.ForgotPassword .accountFound {
+     margin-top: 10px;
+     color: #3bcd84;
+     font-size: 10px;
+     width: 80vw;
+     max-width: 300px;
      text-align: center;
 }
 
-.resetButtons:disabled {
+.ForgotPassword button:disabled {
      background-color: #3bcd8450;
 }
 
-.accountFound {
-     display: block;
-     margin-top: 5px;
-     margin-bottom: 10px;
-     color: #3bcd84;
-     font-size: 10px;
-     text-align: center;
+.ForgotPassword .goBack {
+     font-family: "Lato";
+     color: #71727a;
+     width: 80vw;
+     max-width: 300px;
+     margin-top: 10px;
+     margin-bottom: 0px;
+     height: 50px;
+     background-color: transparent;
+     border-radius: 12px;
+     border: none;
 }
 
 .passwordForgot,
@@ -87,11 +110,25 @@
      letter-spacing: 10px;
 }
 
-.validateMessage {
-     display: block;
+.ForgotPassword fieldset .eyeIconsRelativeDivs {
+     width: fit-content;
+     position: relative;
+}
+.ForgotPassword fieldset .eyeIcon {
+     position: absolute;
+     width: 30px;
+     height: 30px;
+     right: 10px;
+     top: 17px;
+     font-size: 16px;
+     color: #71727a;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.ForgotPassword fieldset .fieldCheckers {
      margin-top: 5px;
-     margin-bottom: 10px;
      color: #fa3c6a;
      font-size: 10px;
-     width: 70vw;
 }

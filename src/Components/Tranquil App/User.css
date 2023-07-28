@@ -4,6 +4,7 @@ footer {
      bottom: 0px;
      width: 100%;
      background-color: #fff;
+     height: 60px;
 }
 .flexes {
      display: flex;

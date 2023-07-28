@@ -13,9 +13,15 @@ import writingSun from "../Assets/writingSun.svg";
 import selfCareLove from "../Assets/selfCareLove.svg";
 import selfCareStar from "../Assets/selfCareStar.svg";
 import goalsFlower from "../Assets/goalsFlowers.svg";
-import { useParams } from "react-router";
-import Footer from "../footer";
+import { UserDetails } from "../UserContext";
+import { useEffect } from "react";
 function Home() {
+     var { userDetails } = UserDetails();
+     useEffect(() => {
+          if (userDetails) {
+               console.log(userDetails);
+          }
+     });
      var date = new Date();
      var day = date.getDate();
      var month = date.getMonth() + 1;
@@ -83,70 +89,15 @@ function Home() {
           },
      ];
 
-     var { token } = useParams();
-
-     function RequestUserDetails() {
-          var userDetails = {
-               method: "GET",
-               headers: {
-                    Authorization: `Bearer ${token}`,
-               },
-               redirect: "follow",
-          };
-
-          fetch("https://tranquil.skrind.com/api/v1/user", userDetails)
-               .then((response) => response.json())
-               .then((result) => console.log(result))
-               .catch((error) => console.log("error", error));
-     }
-
-     function GetDailyQuestions() {
-          var dailyQuestions = {
-               method: "GET",
-               redirect: "follow",
-          };
-
-          fetch(
-               "http://tranquil.skrind.com/api/v1/daily-assessment-questions",
-               dailyQuestions
-          )
-               .then((response) => response.json())
-               .then((result) => console.log(result))
-               .catch((error) => console.log("error", error));
-     }
-
-     function GetAssessmentQuestions() {
-          var assessmentQuestions = {
-               method: "GET",
-               redirect: "follow",
-          };
-
-          fetch(
-               "http://tranquil.skrind.com/api/v1/assessment-questions",
-               assessmentQuestions
-          )
-               .then((response) => response.json())
-               .then((result) => console.log(result))
-               .catch((error) => console.log("error", error));
-     }
-
-     function FetchAllData() {
-          RequestUserDetails();
-          GetDailyQuestions();
-          GetAssessmentQuestions();
-     }
-
-     FetchAllData();
      return (
           <div className="Home">
                <div className="AppContainer">
                     <div className="hiUser">
-                         <h1>Hi, Daniel!</h1>
+                         <h1>Hi </h1>
                          <p>
                               {monthString} {day}, {year}
                          </p>
                     </div>
-
                     <div className="Quote">
                          <p className="quote first">
                               "There's only one of you in the entire world,{" "}
@@ -314,7 +265,6 @@ function Home() {
                          </div>
                     </div>
                </div>
-               <Footer component={"home"} token={token} />
           </div>
      );
 }

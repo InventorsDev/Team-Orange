@@ -5,8 +5,12 @@ import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { FormDetails } from "../../FormContext";
+import { globalValidateEmail } from "../../globalFormValidators";
+
 function SignIn() {
      const navigate = useNavigate();
+     var { setToken } = FormDetails();
 
      const [state, setState] = useState({
           email: "",
@@ -15,173 +19,187 @@ function SignIn() {
 
      var [emailValidated, setEmailVal] = useState();
      const validateEmail = () => {
-          const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-          const isEmailValid = !!state.email.match(emailRegex);
+          const isEmailValid = globalValidateEmail(state.email);
           setEmailVal(isEmailValid);
-          console.log(emailValidated);
      };
 
-     function Clearform() {
+     const clearForm = () => {
           setState({
                ...state,
                email: "",
                password: "",
           });
-     }
+     };
 
-     var [message, setMessage] = useState(" ");
-     var [formStatus, setFormStatus] = useState(true);
+     var [message, setMessage] = useState({
+          string: "",
+          state: false,
+     });
+
      const handleSubmit = (e) => {
           e.preventDefault();
-          setFormStatus(true);
-          setMessage("Hang on a sec");
+          setMessage({
+               ...message,
+               string: "Hang on a sec",
+               state: true,
+          });
 
-          var userDetails = {
+          var signIn = {
                email: state.email,
                password: state.password,
           };
 
-          var requestOptions = {
+          var request = {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify(userDetails),
+               body: JSON.stringify(signIn),
                redirect: "follow",
           };
-          fetch("https://tranquil.skrind.com/api/v1/auth/login", requestOptions)
+          fetch("https://tranquil.skrind.com/api/v1/auth/login", request)
                .then((response) => response.json())
                .then((result) => {
                     console.log(result);
 
-                    setMessage(result.message);
-                    if (result.statusText === "success") {
-                         setFormStatus(true);
+                    if (result.data.token) {
+                         setToken(result.data.token);
+                    }
+
+                    if (result.statusCode === 200) {
+                         setMessage({
+                              ...message,
+                              string: result.message,
+                              state: true,
+                         });
+
+                         clearForm();
                          setTimeout(() => {
-                              setMessage(
-                                   "Will navigate you to home page shortly"
-                              );
-                              Clearform();
-                         }, 500);
-                         setTimeout(() => {
-                              navigate(`/home/${result.data.token}`);
+                              navigate(`/user`);
                          }, 1000);
                     } else {
-                         setFormStatus(false);
+                         setMessage({
+                              ...message,
+                              string: result.message,
+                              state: false,
+                         });
                     }
                })
-               .catch((error) => console.log("error", error.message));
+               .catch((error) => {
+                    console.log("error", error);
+               });
      };
 
      function getIsFormValid() {
           return emailValidated && state.password;
      }
+
      var [eyeclick, setEyeclick] = useState(false);
      var emailRef = useRef();
      return (
           <>
                <div className="SignIn">
-                    <div className="user">
-                         <div className="hiThere">
-                              <img
-                                   className="brand"
-                                   src={tranquil}
-                                   alt="Tranquil Logo"
-                              />
-                              <h1>Welcome Back</h1>
-                              <p>Input your details to continue</p>
-                         </div>
-                         <form className="signInForm" onSubmit={handleSubmit}>
-                              <fieldset>
-                                   <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={state.email}
-                                        ref={emailRef}
-                                        onChange={(e) => {
-                                             e.preventDefault();
-                                             setState({
-                                                  ...state,
-                                                  email: e.target.value,
-                                             });
-                                             if (e.target.value !== "") {
-                                                  setEmailVal(true);
-                                             } else {
-                                                  setEmailVal(false);
-                                             }
-                                             setMessage("");
-                                        }}
-                                        onBlur={validateEmail}
-                                   />
-                              </fieldset>
-                              <p className="emailVal">
-                                   {emailValidated === false &&
-                                        " *Check your email field*"}
-                              </p>
-                              <fieldset>
-                                   <input
-                                        type={
-                                             eyeclick === false
-                                                  ? "password"
-                                                  : "text"
+                    <header>
+                         <img
+                              className="brand"
+                              src={tranquil}
+                              alt="Tranquil Logo"
+                         />
+                         <h1>Welcome Back</h1>
+                         <p>Input your details to continue</p>
+                    </header>
+                    <form className="signInForm" onSubmit={handleSubmit}>
+                         <fieldset>
+                              <input
+                                   type="text"
+                                   placeholder="Enter your email"
+                                   value={state.email}
+                                   ref={emailRef}
+                                   onChange={(e) => {
+                                        e.preventDefault();
+                                        setState({
+                                             ...state,
+                                             email: e.target.value.trim(),
+                                        });
+                                        if (e.target.value.trim()) {
+                                             setEmailVal(true);
+                                        } else {
+                                             setEmailVal(false);
                                         }
-                                        placeholder="Enter your password"
-                                        value={state.password}
-                                        onFocus={() => {
-                                             if (
-                                                  state.email === "" ||
-                                                  emailValidated === false
-                                             ) {
-                                                  emailRef.current.focus();
-                                             }
-                                        }}
-                                        onChange={(e) => {
-                                             e.preventDefault();
+                                        setMessage({
+                                             ...message,
+                                             string: "",
+                                             state: true,
+                                        });
+                                   }}
+                                   onBlur={validateEmail}
+                              />
+                         </fieldset>
 
-                                             setState({
-                                                  ...state,
-                                                  password: e.target.value,
-                                             });
-                                             setMessage("");
-                                        }}
-                                   />
-                                   <span
-                                        onClick={() => {
-                                             setEyeclick(!eyeclick);
-                                        }}
-                                        className="eyeIcon"
-                                   >
-                                        {eyeclick === true ? (
-                                             <FontAwesomeIcon icon={faEye} />
-                                        ) : (
-                                             <FontAwesomeIcon
-                                                  icon={faEyeSlash}
-                                             />
-                                        )}
-                                   </span>
-                              </fieldset>
+                         {emailValidated === false ? (
+                              <p className="emailValidated">
+                                   *Enter a valid email address*
+                              </p>
+                         ) : null}
 
-                              <button
-                                   type="submit"
-                                   className="signInButton"
-                                   disabled={!getIsFormValid()}
+                         <fieldset>
+                              <input
+                                   type={
+                                        eyeclick === false ? "password" : "text"
+                                   }
+                                   placeholder="Enter your password"
+                                   value={state.password}
+                                   onFocus={() => {
+                                        if (
+                                             state.email === "" ||
+                                             emailValidated === false
+                                        ) {
+                                             emailRef.current.focus();
+                                        }
+                                   }}
+                                   onChange={(e) => {
+                                        e.preventDefault();
+
+                                        setState({
+                                             ...state,
+                                             password:
+                                                  e.target.value.trimStart(),
+                                        });
+                                        setMessage("");
+                                   }}
+                                   onBlur={validateEmail}
+                              />
+                              <div
+                                   onClick={() => {
+                                        setEyeclick(!eyeclick);
+                                   }}
+                                   className="eyeIcon"
                               >
-                                   Sign In
-                              </button>
+                                   {eyeclick === true ? (
+                                        <FontAwesomeIcon icon={faEye} />
+                                   ) : (
+                                        <FontAwesomeIcon icon={faEyeSlash} />
+                                   )}
+                              </div>
+                         </fieldset>
+
+                         <button type="submit" disabled={!getIsFormValid()}>
+                              Sign In
+                         </button>
+                         {message.string ? (
                               <p
                                    className={`valids ${
-                                        formStatus === false ? "red" : ""
+                                        message.state === false ? "red" : ""
                                    }`}
                               >
-                                   {message}
+                                   {message.string}
                               </p>
-                              <p>
-                                   <Link to="forgotPassword" className="forgot">
-                                        Forgot password ?
-                                   </Link>
-                              </p>
-                         </form>
-                    </div>
+                         ) : null}
+
+                         <Link to="forgotPassword" className="forgot">
+                              Forgot password ?
+                         </Link>
+                    </form>
                </div>
           </>
      );
