@@ -7,9 +7,11 @@ import calendar from "../Assets/calendar.svg";
 import email from "../Assets/mail.svg";
 import dropdown from "../Assets/dropDown.svg";
 import { api } from "../../Globals";
+// import { useNavigate } from "react-router";
 
 function EditProfile() {
      var { token } = FormDetails();
+
      var [message, setMessage] = useState({
           string: "",
           status: true,
@@ -110,17 +112,19 @@ function EditProfile() {
           if (retrievedValues) {
                return (
                     state.fullName !== retrievedValues.full_name ||
-                    state.DOB !==
-                         (retrievedValues.date_of_birth ||
-                              `${year}-${month}-${day}`) ||
-                    state.gender !== retrievedValues.gender ||
-                    state.phone !== (retrievedValues.phone_number || "234")
+                    (state.gender !== retrievedValues.gender &&
+                         state.gender !== "") ||
+                    (state.phone !== retrievedValues.phone_number &&
+                         state.phone !== "234") ||
+                    (state.DOB !== retrievedValues.date_of_birth &&
+                         state.DOB !== `${year}-${month}-${day}`)
                );
           } else {
                return false;
           }
      };
 
+     var [isUserNotYetUpdated, setUpdatedState] = useState(true);
      return (
           <div className="EditProfile">
                <header>
@@ -256,7 +260,7 @@ function EditProfile() {
 
                     <fieldset>
                          <select
-                              value={state.gender}
+                              value={state.gender || ""}
                               onChange={(e) => {
                                    setState({
                                         ...state,
@@ -264,6 +268,9 @@ function EditProfile() {
                                    });
                               }}
                          >
+                              <option value="" disabled>
+                                   Select your gender . . .
+                              </option>
                               <option value="Male">Male</option>
                               <option value="Female">Female</option>
                               <option value="Rather not say">
@@ -274,9 +281,11 @@ function EditProfile() {
                               <img src={dropdown} alt="" />
                          </div>
                     </fieldset>
-                    <button type="submit" disabled={!getIsformChanged()}>
-                         Update
-                    </button>
+                    {isUserNotYetUpdated ? (
+                         <button type="submit" disabled={!getIsformChanged()}>
+                              Update
+                         </button>
+                    ) : null}
                </form>
                {message.string ? (
                     <p className={message.status ? "success" : "fail"}>
@@ -293,6 +302,7 @@ function EditProfile() {
                                    onClick={(e) => {
                                         e.preventDefault();
                                         setSubmissionStatus(false);
+                                        setUpdatedState(false);
                                    }}
                               >
                                    OK

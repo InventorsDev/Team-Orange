@@ -100,11 +100,8 @@ function SignUp() {
           };
 
           setEmail(state.email);
-          fetch(`${api}/register`, requestOptions)
-               .then((response) => response.text())
-               .then((result) => {
-                    console.log(result);
-               })
+          fetch(`${api}/auth/register`, requestOptions)
+               .then((response) => response.json())
                .catch((error) => console.log("error", error));
           clearForm();
           navigate("/otp");
