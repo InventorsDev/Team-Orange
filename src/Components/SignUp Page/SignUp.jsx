@@ -10,7 +10,8 @@ import {
      globalValidateName,
      globalValidateEmail,
      globalValidatePassword,
-} from "../globalFormValidators";
+     api,
+} from "../Globals";
 
 function SignUp() {
      const navigate = useNavigate();
@@ -99,10 +100,7 @@ function SignUp() {
           };
 
           setEmail(state.email);
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/register",
-               requestOptions
-          )
+          fetch(`${api}/register`, requestOptions)
                .then((response) => response.text())
                .then((result) => {
                     console.log(result);

@@ -4,9 +4,8 @@ import "./App.css";
 import { useEffect, useState } from "react";
 //React Hook used for defining routes to pages
 import { Routes, Route, useNavigate } from "react-router";
-//These are the contexts that handle data passed throught the different pages
+//context
 import { FormProvider } from "./Components/FormContext";
-import { UserProvider } from "./Components/Tranquil App/UserContext";
 //logo import
 import tranquilLogo from "./Assets/home_logo.svg";
 //importing pages/components
@@ -16,8 +15,13 @@ import SignUp from "./Components/SignUp Page/SignUp";
 import Otp from "./Components/SignUp Page/OTP/Otp";
 import SignIn from "./Components/Login Page/SignIn/SignIn";
 import Forgot from "./Components/ForgotPassword/Forgot";
-import User from "./Components/Tranquil App/User";
 import Redirector from "./Components/redirector";
+import Home from "./Components/Tranquil App/Home/Home.jsx";
+import Resources from "./Components/Tranquil App/Resources/Resources.jsx";
+import Goals from "./Components/Tranquil App/Goals/Goals.jsx";
+import Community from "./Components/Tranquil App/Community/Community.jsx";
+import Profile from "./Components/Tranquil App/Profile/Profile.jsx";
+import EditProfile from "./Components/Tranquil App/Profile/EditProfile.jsx";
 
 function App() {
      var navigate = useNavigate();
@@ -67,25 +71,29 @@ function App() {
 
      return (
           <FormProvider>
-               <UserProvider>
-                    <Routes>
-                         <Route index element={<Opening />} />
-                         <Route path="/login" element={<Login />} />
-                         <Route path="/signIn" element={<SignIn />} />
-                         <Route
-                              path="/signIn/forgotPassword"
-                              element={<Forgot />}
-                         />
-                         <Route path="/signUp" element={<SignUp />} />
-                         <Route path="/getStarted" element={<Slides />} />
-                         <Route path="/otp/" element={<Otp />} />
-                         <Route path="/user/*" element={<User />} />
-                         <Route
-                              path="/redirectPage/:token"
-                              element={<Redirector />}
-                         />
-                    </Routes>
-               </UserProvider>
+               <Routes>
+                    <Route index element={<Opening />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signIn" element={<SignIn />} />
+                    <Route path="/signIn/forgotPassword" element={<Forgot />} />
+                    <Route path="/signUp" element={<SignUp />} />
+                    <Route path="/getStarted" element={<Slides />} />
+                    <Route path="/otp/" element={<Otp />} />
+
+                    <Route
+                         path="/redirectPage/:token"
+                         element={<Redirector />}
+                    />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/resources" element={<Resources />} />
+                    <Route path="/goals" element={<Goals />} />
+                    <Route path="/community" element={<Community />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route
+                         path="/profile/editProfile"
+                         element={<EditProfile />}
+                    />
+               </Routes>
           </FormProvider>
           //These are the routes to various pages of the app
      );

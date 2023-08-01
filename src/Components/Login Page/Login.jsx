@@ -1,36 +1,35 @@
-import "./Login.css"; // imports css
-import brain from "../../Assets/brain-icon.svg"; // imports of images, the react way
+// imports css
+import "./Login.css";
+// imports of images
+import brain from "../../Assets/brain-icon.svg";
 import google from "../../Assets/google.svg";
 import apple from "../../Assets/apple.svg";
 import brand from "../../Assets/brand_gold.svg";
-import Typewriter from "typewriter-effect"; //This npm package produces the typing effect when you're on the login page
-import { Link } from "react-router-dom"; //React package to create links
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; //react-dom navigation hook
+//Typing Effect
+import Typewriter from "typewriter-effect";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+//context
 
+import { preloadImages, api } from "../Globals";
+import Spinner from "../Spinner";
 function LogIn() {
      const [click, setClick] = useState(false);
 
-     const navigate = useNavigate(); //navigation syntax
-
+     const navigate = useNavigate();
      const handleNavigation = (e) => {
           e.preventDefault();
           navigate("/signIn");
      };
-
      const handleGoogle = () => {
           var requestOptions = {
                method: "GET",
                redirect: "follow",
           };
 
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/login/google",
-               requestOptions
-          )
+          fetch(`${api}/auth/login/google`, requestOptions)
                .then((response) => response.json())
                .then((result) => {
-                    console.log(result);
                     window.location.href = result.data.link;
                })
                .catch((error) => console.log("error", error));
@@ -45,10 +44,27 @@ function LogIn() {
                clearTimeout(clickTimer);
           };
      }; //This appears when a user clicks the apple icon because it currently doesn't work
+     var [isImagesLoading, setImagesLoaded] = useState(false);
+     useEffect(() => {
+          const imagesToPreload = [brain, google, apple, brand];
+          preloadImages(imagesToPreload)
+               .then(() => {
+                    const imageTimer = setTimeout(() => {
+                         setImagesLoaded(true);
+                    }, 1000);
 
+                    return () => {
+                         clearTimeout(imageTimer);
+                    };
+               })
+               .catch((error) => {
+                    console.log("Error Loading Images", error);
+               });
+     }, []);
      return (
           //The return statement where the html lives
           <div className="Login">
+               {isImagesLoading === false ? <Spinner /> : null}
                <img src={brain} alt="" className="brain" />
                <div className="head">
                     <img src={brand} alt="" />

@@ -1,41 +1,312 @@
 .Profile {
      height: 100vh;
-     width: 100vw;
+     width: 100%;
+     overflow-y: auto;
 }
 
-.profileImage {
+.Profile header {
      height: 50vh;
      display: flex;
      flex-direction: column;
      position: relative;
 }
 
-.profileImage h1 {
-     position: absolute;
-     padding-top: 50px;
+.Profile header h1 {
+     margin-top: 50px;
      margin-left: 30px;
      font-size: 18px;
      font-family: "Montserrat";
 }
 
-.profileImage .greener {
+.Profile header div {
      align-self: center;
      margin: auto;
-     height: 200px;
-     width: 200px;
-     background-color: #e7e7e7;
+     height: 50vmin;
+     width: 50vmin;
+     max-height: 200px;
+     max-width: 200px;
+     background-color: #fff;
      border-radius: 100px;
-     border: solid 2px #3bcd84;
+     border: solid 0.1px #3bcd84;
      display: flex;
      align-items: center;
      justify-content: center;
 }
 
-.greener img {
+.Profile header div img {
      height: 100px;
      width: 100px;
 }
-.profileEdits {
-     height: 50vh;
+
+.Profile header p {
+     align-self: center;
+     margin-bottom: 20px;
+     font-size: 18px;
+     font-family: "Montserrat";
+     font-weight: 900;
+}
+.Profile .profileOptions {
+     height: 48vh;
+     padding-top: 2vh;
      box-shadow: 0px -3px 5px -1px #00000010;
+     position: relative;
+     width: 100%;
+}
+
+.Profile .profileOptions div {
+     display: flex;
+     flex-direction: row;
+     height: 40px;
+     padding-top: 0px;
+     margin-top: 10px;
+     align-items: center;
+}
+
+.Profile .profileOptions div img:nth-child(1) {
+     margin-left: 20px;
+     height: 20px;
+     width: 20px;
+}
+
+.Profile .profileOptions div img:nth-child(3) {
+     margin-left: auto;
+     margin-right: 20px;
+}
+
+.Profile .profileOptions p {
+     flex: 0 1 70%;
+     font-family: "Lato", sans-serif;
+     font-size: 15px;
+     padding-left: 10px;
+}
+
+.Profile .profileOptions .logOut {
+     margin-top: 30px;
+     color: #eb001b;
+}
+
+.Profile .UserExit {
+     position: fixed;
+     background-color: #00000090;
+     height: 100vh;
+     width: 100vw;
+     top: 0px;
+     display: flex;
+     flex-direction: column;
+}
+
+.Profile .UserExit .container {
+     background-color: #ffffff;
+     align-self: center;
+     margin-top: auto;
+     width: 100%;
+     max-width: 500px;
+     border-radius: 20px 20px 0px 0px;
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+     font-family: "Poppins", sans-serif;
+}
+
+.Profile .UserExit .container .logout {
+     display: flex;
+     margin-top: 30px;
+     gap: 10px;
+     color: #eb001b;
+}
+
+.Profile .UserExit .container .par {
+     font-size: 13px;
+     margin-top: 10px;
+}
+
+.Profile .UserExit .container .buttons {
+     margin-top: 30px;
+     display: flex;
+     width: 80%;
+     justify-content: space-between;
+     margin-bottom: 50px;
+}
+
+.Profile .UserExit .container .buttons button {
+     height: 50px;
+     width: 110px;
+     border: none;
+     border-radius: 20px;
+     background-color: #1e621e20;
+     font-family: "Poppins", sans-serif;
+     color: #ffffff;
+}
+
+.Profile .UserExit .container .buttons button:nth-child(1) {
+     color: #000;
+}
+
+.Profile .UserExit .container .buttons button:nth-child(2) {
+     background-color: #1e621e;
+}
+
+.EditProfile {
+     height: 100vh;
+     width: 100%;
+     overflow: auto;
+     display: flex;
+     flex-direction: column;
+     background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
+}
+
+.EditProfile header {
+     display: flex;
+     flex-direction: column;
+     justify-content: left;
+     height: 10vh;
+     align-self: center;
+     width: 90vw;
+     max-width: 500px;
+}
+
+.EditProfile header h1 {
+     margin-top: 7vh;
+     font-size: 18px;
+     font-family: "Montserrat";
+}
+
+.EditProfile form {
+     gap: 15px;
+     padding-top: 40px;
+     align-self: center;
+     display: flex;
+     flex-direction: column;
+}
+
+.EditProfile fieldset {
+     border: none;
+     position: relative;
+}
+
+.EditProfile fieldset input,
+.EditProfile fieldset select {
+     font-size: 15px;
+     width: 90vw;
+     max-width: 500px;
+     height: 50px;
+     border: none;
+     background-color: #fff4da;
+     padding-left: 20px;
+     padding-right: 20px;
+     border-radius: 12px;
+     appearance: none;
+     font-family: "Lato", sans-serif;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+     opacity: 0;
+     width: 200px;
+}
+
+.EditProfile fieldset input:focus,
+.EditProfile fieldset select:focus {
+     border: none;
+     outline: none;
+}
+
+.EditProfile form button {
+     height: 50px;
+     width: 80vw;
+     max-width: 300px;
+     background-color: #3bcd84;
+     color: #fff;
+     border: none;
+     border-radius: 12px;
+     margin-top: 80px;
+     margin-bottom: 10px;
+     align-self: center;
+}
+
+.EditProfile form button:disabled {
+     background-color: #3bcd8450;
+}
+
+.EditProfile form fieldset .sideImages {
+     position: absolute;
+     right: 20px;
+     height: 50px;
+     top: 0px;
+     display: flex;
+     align-items: center;
+}
+
+.EditProfile fieldset .containerClass {
+     font-size: 15px;
+     width: 90vw;
+     max-width: 500px;
+     height: 50px;
+     border: none;
+     background-color: #fff4da;
+     border-radius: 12px;
+     font-family: "Lato", sans-serif;
+}
+
+.EditProfile .profileUpdateSuccess {
+     width: 100vw;
+     height: 100vh;
+     top: 0px;
+     position: fixed;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     background-color: #00000090;
+}
+
+.EditProfile .profileUpdateSuccess div {
+     background-color: #fff;
+     height: 280px;
+     width: 200px;
+     border-radius: 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+
+.EditProfile .profileUpdateSuccess div img {
+     width: 100px;
+     height: 100px;
+}
+
+.EditProfile .profileUpdateSuccess div h1 {
+     font-size: 20px;
+     font-family: "Poppins", sans-serif;
+     color: #1e621e;
+}
+
+.EditProfile .profileUpdateSuccess div p {
+     text-align: center;
+     width: 60%;
+     font-size: 12px;
+     font-family: "Lato", sans-serif;
+     font-weight: 100;
+}
+
+.EditProfile .profileUpdateSuccess div button {
+     width: 60%;
+     height: 40px;
+     margin-top: 20px;
+     color: #fff;
+     border: none;
+     font-family: "Lato";
+     border-radius: 20px;
+     background-color: #1e621e;
+}
+
+.EditProfile .success,
+.EditProfile .fail {
+     align-self: center;
+     font-size: 12px;
+     color: #3bcd84;
+}
+
+.EditProfile .fail {
+     color: #fa3c6a;
 }

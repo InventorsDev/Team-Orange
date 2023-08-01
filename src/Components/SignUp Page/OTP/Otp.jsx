@@ -1,9 +1,9 @@
 import "./Otp.css";
-import { useReducer, useState } from "react"; //refer back to app.js file
+import { useReducer, useState, useEffect } from "react"; //refer back to app.js file
 import tranquil from "../../../Assets/brand_gold.svg";
 import { useNavigate } from "react-router"; //refer back to login.jsx file
 import { FormDetails } from "../../FormContext";
-import { useEffect } from "react";
+import { api } from "../../Globals";
 
 function Otp() {
      var { email } = FormDetails();
@@ -37,10 +37,7 @@ function Otp() {
                string: "Hang on a sec",
                state: true,
           });
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/verify-otp",
-               requestOptions
-          )
+          fetch(`${api}/verify-otp`, requestOptions)
                .then((response) => response.json())
                .then((result) => {
                     console.log(result);
@@ -64,10 +61,12 @@ function Otp() {
                })
                .catch((error) => console.log("error", error));
      };
+
      var [resendMessage, setResendMessage] = useState({
           string: "",
           state: true,
      });
+
      const handleResend = (e) => {
           e.preventDefault();
           setInitialTimeCount(30 + initialTimeCount);
@@ -92,10 +91,7 @@ function Otp() {
                body: JSON.stringify(emailToResend),
                redirect: "follow",
           };
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/resend-otp",
-               requestOptions
-          )
+          fetch(`${api}/auth/resend-otp`, requestOptions)
                .then((response) => response.json())
                .then((result) => console.log(result))
                .catch((error) => console.log("error", error));

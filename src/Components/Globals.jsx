@@ -18,3 +18,17 @@ export const globalValidatePassword = (password) => {
      const isPasswordValid = !!password.match(passwordRegex);
      return isPasswordValid;
 };
+
+export const preloadImages = (imageArray) => {
+     const promises = imageArray.map((images) => {
+          return new Promise((resolve, reject) => {
+               const image = new Image();
+               image.src = images;
+               image.onload = resolve;
+               image.onerror = reject;
+          });
+     });
+     return Promise.all(promises);
+};
+
+export const api = "https://tranquil.skrind.com/api/v1";

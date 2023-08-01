@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FormDetails } from "../../FormContext";
-import { globalValidateEmail } from "../../globalFormValidators";
+import { globalValidateEmail, api } from "../../Globals";
 
 function SignIn() {
      const navigate = useNavigate();
@@ -57,26 +57,24 @@ function SignIn() {
                body: JSON.stringify(signIn),
                redirect: "follow",
           };
-          fetch("https://tranquil.skrind.com/api/v1/auth/login", request)
+          fetch(`${api}/auth/login`, request)
                .then((response) => response.json())
                .then((result) => {
-                    console.log(result);
-
-                    if (result.data.token) {
-                         setToken(result.data.token);
-                    }
-
                     if (result.statusCode === 200) {
                          setMessage({
                               ...message,
                               string: result.message,
                               state: true,
                          });
-
+                         setToken(result.data.token);
                          clearForm();
-                         setTimeout(() => {
-                              navigate(`/user`);
+                         const navigateTimeOut = setTimeout(() => {
+                              navigate(`/home/`);
                          }, 1000);
+
+                         return () => {
+                              clearTimeout(navigateTimeOut);
+                         };
                     } else {
                          setMessage({
                               ...message,

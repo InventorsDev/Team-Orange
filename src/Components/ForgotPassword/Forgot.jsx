@@ -4,10 +4,7 @@ import tranquilLogo from "../../Assets/brand_gold.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
-import {
-     globalValidateEmail,
-     globalValidatePassword,
-} from "../globalFormValidators";
+import { globalValidateEmail, globalValidatePassword, api } from "../Globals";
 
 function Forgot() {
      const navigate = useNavigate();
@@ -46,10 +43,7 @@ function Forgot() {
                body: JSON.stringify(userEmailAddress),
                redirect: "follow",
           };
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/forgot-password",
-               requestOptions
-          )
+          fetch(`${api}/auth/forgot-password`, requestOptions)
                .then((response) => response.json())
                .then((result) => {
                     console.log(result);
@@ -76,6 +70,7 @@ function Forgot() {
                })
                .catch((error) => console.log("error", error));
      };
+
      const Email = (
           <form onSubmit={fetchNewOtp}>
                <fieldset>
@@ -141,10 +136,7 @@ function Forgot() {
                body: JSON.stringify(userDetails),
                redirect: "follow",
           };
-          fetch(
-               "https://tranquil.skrind.com/api/v1/auth/reset-password",
-               requestOptions
-          )
+          fetch(`${api}/auth/reset-password`, requestOptions)
                .then((response) => response.json())
                .then((result) => {
                     console.log(result);
@@ -181,6 +173,7 @@ function Forgot() {
 
      var [passwordValidated, setPasswordVal] = useState();
      var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
+
      const validateFields = () => {
           return (
                state.token.length === 4 &&
@@ -196,6 +189,7 @@ function Forgot() {
           const isPasswordValid = globalValidatePassword(state.newPassword);
           setPasswordVal(isPasswordValid);
      };
+
      const Token = (
           <form onSubmit={handleSetNewPassword}>
                <fieldset>

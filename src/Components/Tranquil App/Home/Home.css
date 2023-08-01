@@ -6,6 +6,9 @@
      overflow: hidden;
      height: fit-content;
 }
+.Home.noScroll {
+     height: 100vh;
+}
 .AppContainer {
      width: 90vw;
      margin-left: 5vw;

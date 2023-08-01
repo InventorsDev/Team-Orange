@@ -1,4 +1,5 @@
 import "./Home.css";
+import { useEffect, useState } from "react";
 import resources from "../Assets/resourcesQuick.svg";
 import goalSetting from "../Assets/goalSetting.svg";
 import assessment from "../Assets/assessmentQuick.svg";
@@ -13,61 +14,36 @@ import writingSun from "../Assets/writingSun.svg";
 import selfCareLove from "../Assets/selfCareLove.svg";
 import selfCareStar from "../Assets/selfCareStar.svg";
 import goalsFlower from "../Assets/goalsFlowers.svg";
-import { UserDetails } from "../UserContext";
-import { useEffect } from "react";
+import homeGreen from "../Assets/homeGreen.svg";
+import resourcesBlack from "../Assets/resourcesBlack.svg";
+import goalsBlack from "../Assets/goalsBlack.svg";
+import communityBlack from "../Assets/communityBlack.svg";
+import profileBlack from "../Assets/profileBlack.svg";
+import { preloadImages } from "../../Globals";
+import Footer from "../Footer";
+import Spinner from "../../Spinner";
+// import { FormDetails } from "../../FormContext";
+
 function Home() {
-     var { userDetails } = UserDetails();
-     useEffect(() => {
-          if (userDetails) {
-               console.log(userDetails);
-          }
-     });
      var date = new Date();
      var day = date.getDate();
-     var month = date.getMonth() + 1;
+     var month = date.getMonth();
      var year = date.getFullYear();
-     var monthString;
-     switch (month) {
-          case 1:
-               monthString = "Jan";
-               break;
-          case 2:
-               monthString = "Feb";
-               break;
-          case 3:
-               monthString = "March";
-               break;
-          case 4:
-               monthString = "April";
-               break;
-          case 5:
-               monthString = "May";
-               break;
-          case 6:
-               monthString = "June";
-               break;
-          case 7:
-               monthString = "July";
-               break;
-          case 8:
-               monthString = "Aug";
-               break;
-          case 9:
-               monthString = "Sept";
-               break;
-          case 10:
-               monthString = "Oct";
-               break;
-          case 11:
-               monthString = "Nov";
-               break;
-          case 12:
-               monthString = "Dec";
-               break;
-          default:
-               monthString = "";
-               break;
-     }
+     var months = [
+          "Jan",
+          "Feb",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "Aug",
+          "Sept",
+          "Oct",
+          "Nov",
+          "Dec",
+     ];
+     var monthString = months[month];
 
      var tests = [
           {
@@ -89,11 +65,77 @@ function Home() {
           },
      ];
 
+     var image = {
+          home: homeGreen,
+          resources: resourcesBlack,
+          goals: goalsBlack,
+          community: communityBlack,
+          profile: profileBlack,
+     };
+
+     var [isImagesLoading, setImagesLoaded] = useState(false);
+     useEffect(() => {
+          const imagesToPreload = [
+               resources,
+               goalSetting,
+               assessment,
+               journal,
+               happy,
+               anxious,
+               stressed,
+               angry,
+               exclamation,
+               writingHand,
+               writingSun,
+               selfCareLove,
+               selfCareStar,
+               goalsFlower,
+               homeGreen,
+               resourcesBlack,
+               goalsBlack,
+               communityBlack,
+               profileBlack,
+          ];
+
+          preloadImages(imagesToPreload)
+               .then(() => {
+                    const imageTimer = setTimeout(() => {
+                         setImagesLoaded(true);
+                    }, 1000);
+
+                    return () => {
+                         clearTimeout(imageTimer);
+                    };
+               })
+               .catch((error) => {
+                    console.log("Error Loading Images", error);
+               });
+     }, []);
+
+     // var { token } = FormDetails();
+
+     // useEffect(() => {
+     //      if (token) {
+     //           var requests = {
+     //                method: "GET",
+     //                headers: {
+     //                     Authorization: `Bearer ${token}`,
+     //                },
+     //                redirect: "follow",
+     //           };
+     //           fetch(`${api}/user`, requests)
+     //                .then((response) => response.json())
+     //                .then((result) => console.log(result));
+     //      }
+     // }, [token]);
      return (
-          <div className="Home">
+          <div
+               className={`Home ${isImagesLoading === false ? "noScroll" : ""}`}
+          >
+               {isImagesLoading === false ? <Spinner /> : null}
                <div className="AppContainer">
                     <div className="hiUser">
-                         <h1>Hi </h1>
+                         <h1>Hi</h1>
                          <p>
                               {monthString} {day}, {year}
                          </p>
@@ -265,6 +307,7 @@ function Home() {
                          </div>
                     </div>
                </div>
+               <Footer currentPage="home" image={image} />
           </div>
      );
 }
