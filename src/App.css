@@ -1,9 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?&family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Epilogue:wght@300&family=Lato&family=Montserrat:wght@100;400&family=Poppins:wght@200&family=The+Nautigal:wght@700&family=Ubuntu+Mono&display=swap");
 
 * {
      padding: 0;
      margin: 0;
-     box-sizing: 0;
+     box-sizing: border-box;
+}
+
+input[type="password"]::-ms-reveal {
+     display: none;
 }
 
 .Opening {
@@ -11,58 +15,64 @@
      height: 100vh;
 }
 
-.Content {
+.Opening header {
      background-image: url(./Assets/home.svg);
      background-repeat: no-repeat;
      background-size: cover;
-     background-position: center;
      background-color: transparent;
+     background-position: center;
      height: 100%;
      display: flex;
      align-items: center;
      justify-content: center;
 }
-.LogoText {
+
+.Opening .imgText {
      display: flex;
      flex-direction: column;
      align-items: center;
      justify-content: center;
 }
 
-.Text-box {
-     color: #3bcd84;
-}
-
-.Text-box img {
+.logo img {
      width: 100px;
 }
 
-.text {
+.imgText p {
      font-family: "Poppins" sans-serif;
      text-align: center;
      color: #d7b31b;
      font-weight: 300;
-     animation: opacity 4s;
 }
 
-@keyframes opacity {
+.imgText .firstText {
+     animation: textOpacityChangeForOpeningPage1 2s;
+}
+
+.imgText .secondText {
+     animation: textOpacityChangeForOpeningPage2 2s;
+}
+
+@keyframes textOpacityChangeForOpeningPage1 {
      0% {
           opacity: 0;
      }
-     40% {
+
+     80% {
           opacity: 1;
      }
-     50% {
-          opacity: 0;
-     }
+
      100% {
-          opacity: 1;
+          opacity: 0;
      }
 }
 
-.pointer {
-     display: inline-block;
-     height: 10px;
-     width: 2px;
-     background-color: #3bcd84;
+@keyframes textOpacityChangeForOpeningPage2 {
+     0% {
+          opacity: 0;
+     }
+
+     100% {
+          opacity: 1;
+     }
 }

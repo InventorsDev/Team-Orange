@@ -1,36 +1,75 @@
-import "./Login.css"; // imports css
+// imports css
+import "./Login.css";
+// imports of images
 import brain from "../../Assets/brain-icon.svg";
 import google from "../../Assets/google.svg";
 import apple from "../../Assets/apple.svg";
-import brand from "../../Assets/brand_gold.svg"; // imports of images, the react way
-import Typewriter from "typewriter-effect"; //This npm package produces the typing effect when you're on the login page
-import { Link } from "react-router-dom"; //React package to create links
-import { useState } from "react"; // A little bit complicated, this is a react hook used to access attributes of a given element
-import { useNavigate } from "react-router-dom";
-//The function that returns the html for the login page
+import brand from "../../Assets/brand_gold.svg";
+//Typing Effect
+import Typewriter from "typewriter-effect";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+//context
+
+import { preloadImages, api } from "../Globals";
+import Spinner from "../Spinner";
 function LogIn() {
      const [click, setClick] = useState(false);
-     const appleClicked = () => {
-          setClick(true);
-          setTimeout(() => {
-               setClick(false);
-          }, 3000);
-     }; //This appears when a user clicks the apple icon because it currently doesn't work
-     const navigate = useNavigate();
 
+     const navigate = useNavigate();
      const handleNavigation = (e) => {
           e.preventDefault();
           navigate("/signIn");
      };
+     const handleGoogle = () => {
+          var requestOptions = {
+               method: "GET",
+               redirect: "follow",
+          };
+
+          fetch(`${api}/auth/login/google`, requestOptions)
+               .then((response) => response.json())
+               .then((result) => {
+                    window.location.href = result.data.link;
+               })
+               .catch((error) => console.log("error", error));
+     };
+
+     const appleClicked = () => {
+          setClick(true);
+          const clickTimer = setTimeout(() => {
+               setClick(false);
+          }, 3000);
+          return () => {
+               clearTimeout(clickTimer);
+          };
+     }; //This appears when a user clicks the apple icon because it currently doesn't work
+     var [isImagesLoading, setImagesLoaded] = useState(false);
+     useEffect(() => {
+          const imagesToPreload = [brain, google, apple, brand];
+          preloadImages(imagesToPreload)
+               .then(() => {
+                    const imageTimer = setTimeout(() => {
+                         setImagesLoaded(true);
+                    }, 1000);
+
+                    return () => {
+                         clearTimeout(imageTimer);
+                    };
+               })
+               .catch((error) => {
+                    console.log("Error Loading Images", error);
+               });
+     }, []);
      return (
           //The return statement where the html lives
           <div className="Login">
-               <div className="Braindiv">
-                    {/*My naming can be funny ikr, this div has the tranquil app logo and the brain background*/}
-                    <img src={brain} alt="Brain" loading="lazy" />
-                    <img src={brand} className="brand" alt="" loading="lazy" />
-                    <h1>Welcome</h1>
-                    <p>
+               {isImagesLoading === false ? <Spinner /> : null}
+               <img src={brain} alt="" className="brain" />
+               <div className="head">
+                    <img src={brand} alt="" />
+                    <h1>Welcome !</h1>
+                    <div>
                          <Typewriter
                               onInit={(typewriter) => {
                                    typewriter
@@ -41,47 +80,46 @@ function LogIn() {
                                         .start(); //So this is how i implement the typewriter effect
                               }}
                          />
-                    </p>
-               </div>
-               {/* Forthe various sign in methods, you"ll see the styles in the login.css file*/}
-               <div className="Authentications">
-                    <div className="Auths_SignUP">
-                         <button className="Auths google">
-                              <div className="Auths-Provider">
-                                   <img src={google} alt="" loading="lazy" />
-                              </div>
-                              <div className="google-apple" loading="lazy">
-                                   <p>Login with Google</p>
-                              </div>
-                         </button>
-
-                         <button className="Auths apple" onClick={appleClicked}>
-                              <div className="Auths-Provider">
-                                   <img src={apple} alt="" loading="lazy" />
-                              </div>
-                              <div className="google-apple">
-                                   <p>Login with Apple</p>
-                              </div>
-                         </button>
-                         <p className="unavailable">
-                              {click === true &&
-                                   "This feature is currently unavailable !"}
-                         </p>
-
-                         <button
-                              className="Auths manual"
-                              onClick={handleNavigation}
-                         >
-                              Sign in
-                         </button>
-
-                         <p className="neg-accnt">
-                              Don't have an account ? <br />
-                              <Link to="/createAccount" className="span">
-                                   Sign Up
-                              </Link>
-                         </p>
                     </div>
+               </div>
+
+               <div className="loginOptions">
+                    <button className="auths google" onClick={handleGoogle}>
+                         <div className="authImageDiv">
+                              <img src={google} alt="" />
+                         </div>
+                         <div className="textDiv">
+                              <p>Continue with Google</p>
+                         </div>
+                    </button>
+
+                    <button className="auths apple" onClick={appleClicked}>
+                         <div className="authImageDiv">
+                              <img src={apple} alt="" />
+                         </div>
+                         <div className="textDiv">
+                              <p>Continue with Apple</p>
+                         </div>
+                    </button>
+
+                    {click === true && (
+                         <p className="appleUnavailable">
+                              This feature is currently unavailable !
+                         </p>
+                    )}
+                    <button
+                         className="auths tranquil"
+                         onClick={handleNavigation}
+                    >
+                         Sign in
+                    </button>
+               </div>
+
+               <div className="newAccount">
+                    <p>Don't have an account ?</p>
+                    <Link to="/signUp" className="span">
+                         Sign Up
+                    </Link>
                </div>
           </div>
      );

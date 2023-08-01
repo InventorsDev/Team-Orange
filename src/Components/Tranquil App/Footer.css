@@ -1,0 +1,33 @@
+footer {
+     box-shadow: 0px -1px 5px #d3d3d350;
+     position: fixed;
+     bottom: 0px;
+     width: 100%;
+     background-color: #fff;
+     height: 60px;
+}
+.flexes {
+     display: flex;
+
+     width: 100vw;
+     margin-bottom: 10px;
+}
+
+.currentFlex {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     width: 25vw;
+}
+.currentFlex img {
+     margin-top: 10px;
+     width: 25px;
+     height: 25px;
+}
+
+.currentFlex p {
+     font-size: 10px;
+     font-family: "Lato";
+     padding-top: 5px;
+}
