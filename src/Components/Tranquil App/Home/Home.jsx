@@ -133,44 +133,42 @@ function Home() {
                className={`Home ${isImagesLoading === false ? "noScroll" : ""}`}
           >
                {isImagesLoading === false ? <Spinner /> : null}
-               <div className="AppContainer">
-                    <div className="hiUser">
+               <div className="homePageContainer">
+                    <header>
                          <h1>Hi</h1>
                          <p>
                               {monthString} {day}, {year}
                          </p>
-                    </div>
+                    </header>
                     <div className="Quote">
-                         <p className="quote first">
-                              "There's only one of you in the entire world,{" "}
-                         </p>
-                         <p className="quote">Live it. Love it!"</p>
-                         <p className="today">Today's Quote</p>
+                         <p>"There's only one of you in the entire world, </p>
+                         <p>Live it. Love it!"</p>
+                         <p>Today's Quote</p>
                     </div>
 
-                    <div className="howAreYou">
+                    <div className="UserState">
                          <h2>How are you feeling today ?</h2>
-                         <div className="emojiFlex">
-                              <div className="emojiGroup">
-                                   <div className="greenBag">
+                         <div className="EmojiGroup">
+                              <div className="emoji">
+                                   <div>
                                         <img src={happy} alt="" />
                                    </div>
                                    <p>Happy</p>
                               </div>
-                              <div className="emojiGroup">
-                                   <div className="greenBag">
+                              <div className="emoji">
+                                   <div>
                                         <img src={anxious} alt="" />
                                    </div>
                                    <p>Anxious</p>
                               </div>
-                              <div className="emojiGroup">
-                                   <div className="greenBag">
+                              <div className="emoji">
+                                   <div>
                                         <img src={stressed} alt="" />
                                    </div>
                                    <p>Stressed</p>
                               </div>
-                              <div className="emojiGroup">
-                                   <div className="greenBag">
+                              <div className="emoji">
+                                   <div>
                                         <img src={angry} alt="" />
                                    </div>
                                    <p>Angry</p>
@@ -184,41 +182,40 @@ function Home() {
                               Get some insights and increase your mental
                               awareness.
                          </p>
-                         <p className="second">
+                         <p>
                               Based on the assessments results, you will get
                               personalized results and insights.
                          </p>
-                         <button className="startTest">Start</button>
-                         <div className="exclaim">
+                         <button>Start</button>
+                         <div>
                               <img src={exclamation} alt="" className="mark" />
                          </div>
                     </div>
 
-                    <div className="recommended">
+                    <div className="Recommended">
                          <h2>Recommended</h2>
                          <p>
                               Deep dive into your mental health with our finely
                               set questionnaires
                          </p>
 
-                         <div className="asde">
+                         <div className="ASDE">
                               <div className="asdeContainer">
                                    {tests.map((test, index) => (
-                                        <div key={index} className="asdeBox">
+                                        <div key={index}>
                                              <h3>{test.name}</h3>
-                                             <p className="test">{test.text}</p>
-                                             <p className="test2">
-                                                  Take this test!
-                                             </p>
+                                             <p>{test.text}</p>
+                                             <p>Take this test!</p>
                                         </div>
                                    ))}
                               </div>
                          </div>
                     </div>
-                    <div className="quickAccess">
+
+                    <div className="QuickAccess">
                          <h2>Quick Access</h2>
-                         <div className="mrFlex">
-                              <div className="resources">
+                         <section className="rgaj">
+                              <div className="group">
                                    <div>
                                         <section>
                                              <img alt="" src={resources} />
@@ -227,7 +224,7 @@ function Home() {
                                    </div>
                               </div>
 
-                              <div className="goalSetting">
+                              <div className="group">
                                    <div>
                                         <section>
                                              <img alt="" src={goalSetting} />
@@ -236,7 +233,7 @@ function Home() {
                                    </div>
                               </div>
 
-                              <div className="assessment">
+                              <div className="group">
                                    <div>
                                         <section>
                                              <img alt="" src={assessment} />
@@ -245,7 +242,7 @@ function Home() {
                                    </div>
                               </div>
 
-                              <div className="journal">
+                              <div className="group">
                                    <div>
                                         <section>
                                              <img alt="" src={journal} />
@@ -253,12 +250,13 @@ function Home() {
                                         </section>
                                    </div>
                               </div>
-                         </div>
+                         </section>
                     </div>
+
                     <div className="Resources">
                          <h2>Resources</h2>
                          <div className="resource">
-                              <div className="benefits">
+                              <div className="group">
                                    <div>
                                         <p>Benefits of writing</p>
                                         <img
@@ -274,7 +272,7 @@ function Home() {
                                    </div>
                               </div>
 
-                              <div className="selfCare">
+                              <div className="group">
                                    <div>
                                         <p>Self-Care Routine</p>
                                         <img
@@ -289,7 +287,7 @@ function Home() {
                                         />
                                    </div>
                               </div>
-                              <div className="setGoals">
+                              <div className="group">
                                    <div>
                                         <p>Setting up your Goals</p>
                                         <img
@@ -299,7 +297,7 @@ function Home() {
                                         />
                                    </div>
                               </div>
-                              <div className="journals">
+                              <div className="group">
                                    <div>
                                         <p>How to journal well</p>
                                    </div>

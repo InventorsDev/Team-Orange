@@ -22,6 +22,7 @@ import Goals from "./Components/Tranquil App/Goals/Goals.jsx";
 import Community from "./Components/Tranquil App/Community/Community.jsx";
 import Profile from "./Components/Tranquil App/Profile/Profile.jsx";
 import EditProfile from "./Components/Tranquil App/Profile/EditProfile.jsx";
+import Journal from "./Components/Tranquil App/Home/Journal/Journal";
 
 function App() {
      var navigate = useNavigate();
@@ -93,6 +94,7 @@ function App() {
                          path="/profile/editProfile"
                          element={<EditProfile />}
                     />
+                    <Route path="/journal" element={<Journal />} />
                </Routes>
           </FormProvider>
           //These are the routes to various pages of the app
