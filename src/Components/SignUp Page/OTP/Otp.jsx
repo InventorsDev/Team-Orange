@@ -37,29 +37,30 @@ function Otp() {
                string: "Hang on a sec",
                state: true,
           });
-          fetch(`${api}/verify-otp`, requestOptions)
-               .then((response) => response.json())
-               .then((result) => {
-                    console.log(result);
-                    if (result.statusCode === 200) {
-                         setMessage({
-                              ...message,
-                              string: "Email verified, redirecting you shortly. . .",
-                              state: true,
-                         });
-                         setOtp({ ...otp, token: "" });
-                         setTimeout(() => {
-                              navigate("/signIn");
-                         }, 2000);
-                    } else {
-                         setMessage({
-                              ...message,
-                              string: "Invalid Token",
-                              state: false,
-                         });
-                    }
-               })
-               .catch((error) => console.log("error", error));
+          if (email) {
+               fetch(`${api}/auth/verify-otp`, requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                         if (result.statusCode === 200) {
+                              setMessage({
+                                   ...message,
+                                   string: "Email verified, redirecting you shortly. . .",
+                                   state: true,
+                              });
+                              setOtp({ ...otp, token: "" });
+                              setTimeout(() => {
+                                   navigate("/signIn");
+                              }, 2000);
+                         } else {
+                              setMessage({
+                                   ...message,
+                                   string: "Invalid Token",
+                                   state: false,
+                              });
+                         }
+                    })
+                    .catch((error) => console.log("error", error));
+          }
      };
 
      var [resendMessage, setResendMessage] = useState({

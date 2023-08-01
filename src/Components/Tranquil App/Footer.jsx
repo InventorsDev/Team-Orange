@@ -1,11 +1,10 @@
 import "./Footer.css";
 import { useNavigate } from "react-router";
-import { FormDetails } from "../FormContext";
 
 const Footer = (props) => {
      var navigate = useNavigate();
      var { currentPage, image } = props;
-     var { token } = FormDetails();
+
      return (
           <footer>
                <div className="flexes">
