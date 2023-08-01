@@ -7,7 +7,7 @@ import calendar from "../Assets/calendar.svg";
 import email from "../Assets/mail.svg";
 import dropdown from "../Assets/dropDown.svg";
 import { api } from "../../Globals";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 function EditProfile() {
      var { token } = FormDetails();
