@@ -19,7 +19,7 @@ import resourcesBlack from "../Assets/resourcesBlack.svg";
 import goalsBlack from "../Assets/goalsBlack.svg";
 import communityBlack from "../Assets/communityBlack.svg";
 import profileBlack from "../Assets/profileBlack.svg";
-import { preloadImages } from "../../Globals";
+import { preloadImages, api } from "../../Globals";
 import Footer from "../Footer";
 import Spinner from "../../Spinner";
 // import { FormDetails } from "../../FormContext";
@@ -128,6 +128,7 @@ function Home() {
      //                .then((result) => console.log(result));
      //      }
      // }, [token]);
+
      return (
           <div
                className={`Home ${isImagesLoading === false ? "noScroll" : ""}`}

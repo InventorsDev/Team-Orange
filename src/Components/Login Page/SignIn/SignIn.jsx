@@ -69,7 +69,7 @@ function SignIn() {
                          setToken(result.data.token);
                          clearForm();
                          const navigateTimeOut = setTimeout(() => {
-                              navigate(`/home/`);
+                              navigate(`/home`);
                          }, 1000);
 
                          return () => {

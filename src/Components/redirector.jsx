@@ -3,11 +3,12 @@ import { FormDetails } from "./FormContext";
 import { useEffect } from "react";
 
 function Redirector() {
-     var { tokenFromBackEnd } = useParams();
+     var { token } = useParams();
      var { setToken } = FormDetails();
      var navigate = useNavigate();
+
      useEffect(() => {
-          setToken(tokenFromBackEnd);
+          setToken(token);
           setTimeout(() => {
                navigate("/home");
           }, 2000);

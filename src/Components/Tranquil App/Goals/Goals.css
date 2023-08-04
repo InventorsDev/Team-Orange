@@ -1,0 +1,53 @@
+.Goals {
+     width: 100%;
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     overflow-y: auto;
+}
+
+.Goals header h1 {
+     font-family: "Lato";
+     font-size: 20px;
+     margin-top: 80px;
+     font-weight: 700;
+}
+
+.Goals .Image {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.Goals .Image img {
+     margin-top: 40px;
+}
+
+.Goals .Paragraph {
+     width: 90vw;
+     max-width: 500px;
+}
+
+.Goals .Paragraph p {
+     margin-top: 70px;
+     font-family: "Lato";
+     font-size: 14px;
+     text-align: center;
+}
+
+.Goals button {
+     appearance: none;
+     margin-top: 70px;
+     margin-bottom: 100px;
+     width: 60vw;
+     max-width: 500px;
+     border: none;
+     height: 50px;
+     border-radius: 12px;
+     background-color: #3bcd8450;
+     font-family: "Montserrat";
+     font-size: 14px;
+     color: #fa3c6a;
+     font-weight: 700;
+}

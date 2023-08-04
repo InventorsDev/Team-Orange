@@ -47,25 +47,24 @@ function Profile() {
           fullName: "",
      });
      useEffect(() => {
-          if (token) {
-               var requests = {
-                    method: "GET",
-                    headers: {
-                         Authorization: `Bearer ${token}`,
-                    },
-                    redirect: "follow",
-               };
-               fetch(`${api}/user`, requests)
-                    .then((response) => response.json())
-                    .then((result) => {
-                         var data = result.data;
-                         setState((prevState) => ({
-                              ...prevState,
-                              fullName: data.full_name,
-                         }));
-                    });
-          }
-     }, [token]);
+          var requests = {
+               method: "GET",
+               headers: {
+                    Authorization: `Bearer ${token}`,
+               },
+               redirect: "follow",
+          };
+          fetch(`${api}/user`, requests)
+               .then((response) => response.json())
+               .then((result) => {
+                    console.log(result);
+                    var data = result.data;
+                    setState((prevState) => ({
+                         ...prevState,
+                         fullName: data.full_name,
+                    }));
+               });
+     });
 
      var [isUserLogggingOut, setLogstatus] = useState(false);
      return (

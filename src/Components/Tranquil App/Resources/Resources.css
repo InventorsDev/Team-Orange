@@ -1,0 +1,144 @@
+.Resources {
+     width: 100%;
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     overflow-y: auto;
+}
+
+.Resources .nav {
+     display: flex;
+     flex-direction: row;
+     width: 80vw;
+     max-width: 500px;
+     justify-content: space-between;
+     margin-top: 20px;
+}
+
+.Resources .alert {
+     width: 80vw;
+     max-width: 500px;
+     height: 100px;
+     background-color: #fff;
+     border-radius: 0px 0px 20px 20px;
+     position: fixed;
+     color: #fa3c6a;
+     font-family: "Montserrat";
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     box-shadow: 0px 2px 2px 1px #00000020;
+     animation: dropdown 1s;
+     margin-top: -100px;
+     opacity: 0;
+}
+
+@keyframes dropdown {
+     0% {
+          opacity: 1;
+          margin-top: -50px;
+     }
+     50% {
+          opacity: 1;
+          margin-top: 0px;
+     }
+
+     60% {
+          opacity: 1;
+          margin-top: 0px;
+     }
+
+     100% {
+          opacity: 0;
+          margin-top: -100px;
+     }
+}
+
+.Resources .nav div {
+     border: solid 1px #3bcd84;
+     height: 30px;
+     width: 30px;
+     border-radius: 30px;
+}
+
+.Resources header {
+     margin-top: 40px;
+}
+
+.Resources header h1 {
+     font-size: 20px;
+     font-family: "Lato";
+     font-weight: 700;
+}
+
+.Resources .sections {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     width: 80vw;
+     max-width: 500px;
+     gap: 10px;
+     margin-top: 60px;
+     padding-bottom: 5px;
+     margin-bottom: 70px;
+}
+
+.Resources .sections .group {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     width: 100%;
+     height: 110px;
+     border-radius: 20px;
+     font-size: 15px;
+     font-family: "Lato";
+     font-weight: 400;
+     box-shadow: 0px 5px 5px -3px #00000020;
+     transition: transform 0.2s ease-in-out;
+}
+
+.Resources .sections .group p {
+     margin-top: 10px;
+}
+
+.Resources .sections .group:nth-child(1) {
+     background-color: #f2fffc;
+     color: #3bcd84;
+}
+
+.Resources .sections .group:nth-child(1):hover {
+     border: solid 1px #327153;
+     transform: scale(1.01);
+}
+
+.Resources .sections .group:nth-child(2) {
+     background-color: #fcf2ff;
+     color: #b72ace;
+}
+
+.Resources .sections .group:nth-child(2):hover {
+     border: solid 1px #7d3a88;
+     transform: scale(1.01);
+}
+
+.Resources .sections .group:nth-child(3) {
+     background-color: #fffdf8;
+     color: #ffad00;
+}
+
+.Resources .sections .group:nth-child(3):hover {
+     border: solid 1px #d0a449;
+     transform: scale(1.01);
+}
+
+.Resources .sections .group:nth-child(4) {
+     background-color: #fff6f1;
+     color: #f25600;
+}
+
+.Resources .sections .group:nth-child(4):hover {
+     border: solid 1px #c84e0b;
+     transform: scale(1.01);
+}
