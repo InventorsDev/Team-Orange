@@ -23,6 +23,7 @@ import Community from "./Components/Tranquil App/Community/Community.jsx";
 import Profile from "./Components/Tranquil App/Profile/Profile.jsx";
 import EditProfile from "./Components/Tranquil App/Profile/EditProfile.jsx";
 import Journal from "./Components/Tranquil App/Home/Journal/Journal";
+import Intro from "./Components/Tranquil App/Introduction/Intro";
 
 function App() {
      var navigate = useNavigate();
@@ -79,8 +80,7 @@ function App() {
                     <Route path="/signIn/forgotPassword" element={<Forgot />} />
                     <Route path="/signUp" element={<SignUp />} />
                     <Route path="/getStarted" element={<Slides />} />
-                    <Route path="/otp/" element={<Otp />} />
-
+                    <Route path="/otp" element={<Otp />} />
                     <Route
                          path="/redirectPage/:token"
                          element={<Redirector />}
@@ -95,6 +95,7 @@ function App() {
                          element={<EditProfile />}
                     />
                     <Route path="/journal" element={<Journal />} />
+                    <Route path="/intro" element={<Intro />} />
                </Routes>
           </FormProvider>
           //These are the routes to various pages of the app

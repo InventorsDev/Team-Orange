@@ -377,10 +377,12 @@ function Forgot() {
      return (
           <div className="ForgotPassword">
                <header>
-                    <img className="brand" src={tranquilLogo} alt="" />
-                    {step === 1 && <p>Reset your password with a few steps</p>}
+                    {step === 1 && <p>We'll be done in a jiffy</p>}
                     {step === 2 && (
-                         <p>Enter new password with otp sent to your mail</p>
+                         <p>
+                              A password reset token has been sent to your email
+                              address
+                         </p>
                     )}
                </header>
 

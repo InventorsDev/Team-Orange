@@ -1,17 +1,32 @@
 import { useNavigate, useParams } from "react-router";
 import { FormDetails } from "./FormContext";
 import { useEffect } from "react";
+import { api } from "./Globals";
 
 function Redirector() {
      var { token } = useParams();
-     var { setToken } = FormDetails();
+     var { setToken, setEmail } = FormDetails();
      var navigate = useNavigate();
 
      useEffect(() => {
           setToken(token);
-          setTimeout(() => {
-               navigate("/home");
-          }, 2000);
+          var requests = {
+               method: "GET",
+               headers: {
+                    Authorization: `Bearer ${token}`,
+               },
+               redirect: "follow",
+          };
+          fetch(`${api}/user`, requests)
+               .then((response) => response.json())
+               .then((result) => {
+                    setEmail(result.data.email);
+                    if (result.data.username) {
+                         navigate("/home");
+                    } else if (!result.data.username) {
+                         navigate("/intro");
+                    }
+               });
      });
 
      return <div>You will be redirected shortly. . .</div>;

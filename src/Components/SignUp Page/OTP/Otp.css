@@ -1,11 +1,11 @@
 .Otp {
-     height: 100vh;
+     margin-top: 30vh;
      display: flex;
      overflow-x: hidden;
      flex-direction: column;
      align-items: center;
      justify-content: center;
-     background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
+     background-color: #fff;
 }
 
 .Otp header {
@@ -16,13 +16,13 @@
 }
 
 .Otp header img {
-     height: 60px;
+     height: 40px;
 }
 
 .Otp header p {
      font-family: "Lato", sans-serif;
      color: #71727a;
-     font-size: 15px;
+     font-size: 12px;
      margin-bottom: 20px;
 }
 .Otp .otpForm fieldset {
@@ -78,7 +78,7 @@
 
 .Otp .resendOTP {
      text-align: center;
-     font-size: 14px;
+     font-size: 12px;
      font-family: "Lato", sans-serif;
      color: #71727a;
      margin-top: 10px;
@@ -88,7 +88,7 @@
 .Otp .resendOTP .secs {
      color: #3bcd84;
      text-decoration: none;
-     font-size: 15px;
+     font-size: 12px;
 }
 
 .Otp .resendMessage {

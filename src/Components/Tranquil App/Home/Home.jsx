@@ -22,7 +22,7 @@ import profileBlack from "../Assets/profileBlack.svg";
 import { preloadImages, api } from "../../Globals";
 import Footer from "../Footer";
 import Spinner from "../../Spinner";
-// import { FormDetails } from "../../FormContext";
+import { FormDetails } from "../../FormContext";
 
 function Home() {
      var date = new Date();
@@ -112,22 +112,26 @@ function Home() {
                });
      }, []);
 
-     // var { token } = FormDetails();
-
-     // useEffect(() => {
-     //      if (token) {
-     //           var requests = {
-     //                method: "GET",
-     //                headers: {
-     //                     Authorization: `Bearer ${token}`,
-     //                },
-     //                redirect: "follow",
-     //           };
-     //           fetch(`${api}/user`, requests)
-     //                .then((response) => response.json())
-     //                .then((result) => console.log(result));
-     //      }
-     // }, [token]);
+     var { token } = FormDetails();
+     var [username, setUsername] = useState("");
+     useEffect(() => {
+          if (token) {
+               var requests = {
+                    method: "GET",
+                    headers: {
+                         Authorization: `Bearer ${token}`,
+                    },
+                    redirect: "follow",
+               };
+               fetch(`${api}/user`, requests)
+                    .then((response) => response.json())
+                    .then((result) => {
+                         if (result.data.username) {
+                              setUsername(result.data.username);
+                         }
+                    });
+          }
+     }, [token]);
 
      return (
           <div
@@ -136,7 +140,7 @@ function Home() {
                {isImagesLoading === false ? <Spinner /> : null}
                <div className="homePageContainer">
                     <header>
-                         <h1>Hi</h1>
+                         <h1>Hi {username}</h1>
                          <p>
                               {monthString} {day}, {year}
                          </p>

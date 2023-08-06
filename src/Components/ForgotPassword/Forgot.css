@@ -5,23 +5,21 @@
      flex-direction: column;
      align-items: center;
      justify-content: center;
-     background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
      overflow: hidden;
      font-family: "Lato";
 }
 
 .ForgotPassword header {
-     display: flex;
-     flex-direction: column;
+     width: 80vw;
+     max-width: 300px;
 }
 
-.ForgotPassword header img {
-     height: 60px;
-}
 .ForgotPassword header p {
      font-size: 15px;
-     color: #71727a;
+     text-align: center;
      font-family: "Lato", sans-serif;
+     margin-bottom: 5px;
+     font-weight: 100;
 }
 
 .ForgotPassword fieldset {
@@ -30,6 +28,9 @@
      max-width: 300px;
 }
 
+.ForgotPassword fieldset input::placeholder {
+     font-family: "Lato";
+}
 .ForgotPassword fieldset input {
      width: 80vw;
      max-width: 300px;
@@ -41,6 +42,7 @@
      padding-right: 20px;
      padding-left: 20px;
      background: transparent;
+     font-family: "Lato";
 }
 
 .ForgotPassword input:focus {

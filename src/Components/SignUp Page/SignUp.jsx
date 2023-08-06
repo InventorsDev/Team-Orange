@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //using font awesome in react requires the imports, I'd downloaded the packages via npm
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import tranquilLogo from "./../../Assets/brand_gold.svg";
 import { Link } from "react-router-dom";
 import { FormDetails } from "../FormContext";
 import {
@@ -113,7 +112,6 @@ function SignUp() {
      return (
           <div className="SignUP">
                <header className="signUpHeader">
-                    <img className="brand" src={tranquilLogo} alt="" />
                     <h1>Hello!</h1>
                     <p>Create an account to get Started</p>
                </header>

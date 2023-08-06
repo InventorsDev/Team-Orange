@@ -1,16 +1,13 @@
 import "./SignIn.css";
-import tranquil from "../../../Assets/brand_gold.svg";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { FormDetails } from "../../FormContext";
 import { globalValidateEmail, api } from "../../Globals";
 
 function SignIn() {
      const navigate = useNavigate();
-     var { setToken } = FormDetails();
 
      const [state, setState] = useState({
           email: "",
@@ -66,10 +63,10 @@ function SignIn() {
                               string: result.message,
                               state: true,
                          });
-                         setToken(result.data.token);
+
                          clearForm();
                          const navigateTimeOut = setTimeout(() => {
-                              navigate(`/home`);
+                              navigate(`/redirectPage/${result.data.token}`);
                          }, 1000);
 
                          return () => {
@@ -98,12 +95,7 @@ function SignIn() {
           <>
                <div className="SignIn">
                     <header>
-                         <img
-                              className="brand"
-                              src={tranquil}
-                              alt="Tranquil Logo"
-                         />
-                         <h1>Welcome Back</h1>
+                         <h1>Welcome !</h1>
                          <p>Input your details to continue</p>
                     </header>
                     <form className="signInForm" onSubmit={handleSubmit}>

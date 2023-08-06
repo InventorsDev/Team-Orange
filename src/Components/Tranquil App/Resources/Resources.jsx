@@ -53,7 +53,7 @@ function Resources() {
 
      var [showAlert, setShowAlert] = useState(false);
      return (
-          <div className="Resources">
+          <div className="ResourcesPage">
                {isImagesLoading === false ? <Spinner /> : null}
                {showAlert ? (
                     <div className="alert">
