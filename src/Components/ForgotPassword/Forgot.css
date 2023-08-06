@@ -7,6 +7,7 @@
      justify-content: center;
      overflow: hidden;
      font-family: "Lato";
+     background: linear-gradient(90deg, #dae9da, #fff);
 }
 
 .ForgotPassword header {
@@ -19,7 +20,6 @@
      text-align: center;
      font-family: "Lato", sans-serif;
      margin-bottom: 5px;
-     font-weight: 100;
 }
 
 .ForgotPassword fieldset {
@@ -60,7 +60,7 @@
      margin-top: 10px;
      margin-bottom: 5px;
      height: 50px;
-     background-color: #3bcd84;
+     background-color: #6c7777;
      border-radius: 12px;
      color: #fff;
      border: none;
@@ -87,20 +87,7 @@
 }
 
 .ForgotPassword button:disabled {
-     background-color: #3bcd8450;
-}
-
-.ForgotPassword .goBack {
-     font-family: "Lato";
-     color: #71727a;
-     width: 80vw;
-     max-width: 300px;
-     margin-top: 10px;
-     margin-bottom: 0px;
-     height: 50px;
-     background-color: transparent;
-     border-radius: 12px;
-     border: none;
+     background-color: #6c777750;
 }
 
 .passwordForgot,

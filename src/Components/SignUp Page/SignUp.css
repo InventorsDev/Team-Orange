@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?&family=Lato&display=swap");
 .SignUP {
-     background-color: white;
+     background: linear-gradient(270deg, #dae9da, #fff);
      scroll-behavior: smooth;
      width: 100vw;
+     height: 100vh;
      overflow-x: hidden;
      display: flex;
      flex-direction: column;
@@ -132,14 +133,14 @@
 }
 
 .signUpForm button:disabled {
-     background-color: #3bcd8450;
+     background-color: #6c777750;
 }
 .signUpForm button {
      width: 80vw;
      max-width: 300px;
      margin-top: 20px;
      height: 50px;
-     background-color: #3bcd84;
+     background-color: #6c7777;
      border-radius: 12px;
      color: #fff;
      border: none;

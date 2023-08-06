@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Epilogue:wght@300&family=Lato:wght@400;700&family=Montserrat:wght@100;400&family=Poppins:wght@200&family=The+Nautigal:wght@700&family=Ubuntu+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Epilogue:wght@300&family=Lato:wght@300;400;700&family=Montserrat:wght@100;400&family=Poppins:wght@200&family=The+Nautigal:wght@700&family=Ubuntu+Mono&display=swap");
 
 * {
      padding: 0;
@@ -10,7 +10,7 @@ input[type="password"]::-ms-reveal {
 }
 
 .Opening {
-     background: linear-gradient(#e7f6e6, #fff, #fdf2bf);
+     background: linear-gradient(#182625, #dae9da);
      height: 100vh;
 }
 
@@ -34,11 +34,11 @@ input[type="password"]::-ms-reveal {
 }
 
 .logo img {
-     width: 100px;
+     height: 60px;
 }
 
 .imgText p {
-     font-family: "Poppins" sans-serif;
+     font-family: "Lato";
      text-align: center;
      color: #d7b31b;
      font-weight: 300;

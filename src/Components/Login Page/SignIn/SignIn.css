@@ -1,10 +1,12 @@
 .SignIn {
      width: 100vw;
-     margin-top: 30vh;
+     height: 100vh;
      display: flex;
      flex-direction: column;
      overflow-x: hidden;
      align-items: center;
+     justify-content: center;
+     background: linear-gradient(90deg, #dae9da, #fff);
 }
 
 .SignIn header {
@@ -94,14 +96,14 @@
      margin-bottom: 5px;
      align-self: center;
      height: 50px;
-     background-color: #3bcd84;
+     background-color: #6c7777;
      border-radius: 12px;
      color: #fff;
      border: none;
 }
 
 .signInForm button:disabled {
-     background-color: #3bcd8450;
+     background-color: #6c777750;
 }
 
 .signInForm .valids {

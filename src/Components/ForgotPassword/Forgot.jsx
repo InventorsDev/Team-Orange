@@ -339,28 +339,6 @@ function Forgot() {
                >
                     Reset Password
                </button>
-               <button
-                    className="goBack"
-                    onClick={(e) => {
-                         e.preventDefault();
-
-                         setState({
-                              ...state,
-                              email: "",
-                              token: "",
-                              newPassword: "",
-                              confirmPassword: "",
-                         });
-                         setEmailMessage({
-                              ...emailSentMessage,
-                              string: "",
-                              state: true,
-                         });
-                         setStep(1);
-                    }}
-               >
-                    Previous
-               </button>
 
                <p
                     className={
@@ -380,8 +358,7 @@ function Forgot() {
                     {step === 1 && <p>We'll be done in a jiffy</p>}
                     {step === 2 && (
                          <p>
-                              A password reset token has been sent to your email
-                              address
+                              Reset Token was sent to the provided email address
                          </p>
                     )}
                </header>

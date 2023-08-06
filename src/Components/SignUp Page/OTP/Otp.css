@@ -1,11 +1,11 @@
 .Otp {
-     margin-top: 30vh;
+     height: 100vh;
      display: flex;
      overflow-x: hidden;
      flex-direction: column;
      align-items: center;
      justify-content: center;
-     background-color: #fff;
+     background: linear-gradient(270deg, #dae9da, #fff);
 }
 
 .Otp header {
@@ -22,7 +22,7 @@
 .Otp header p {
      font-family: "Lato", sans-serif;
      color: #71727a;
-     font-size: 12px;
+     font-size: 13.5px;
      margin-bottom: 20px;
 }
 .Otp .otpForm fieldset {
@@ -41,6 +41,7 @@
      text-align: center;
      border: none;
      border-bottom: solid 2px #71727a;
+     background-color: transparent;
 }
 
 .Otp .otpForm fieldset input::-webkit-inner-spin-button,
