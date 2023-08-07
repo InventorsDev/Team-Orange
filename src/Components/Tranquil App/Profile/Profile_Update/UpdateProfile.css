@@ -1,0 +1,167 @@
+.EditProfile {
+     height: 100vh;
+     width: 100%;
+     max-width: 550px;
+     margin: auto;
+     scroll-behavior: smooth;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background: linear-gradient(270deg, #dae9da, #fff);
+     overflow-y: auto;
+     box-shadow: 0px 0px 2px #00000020;
+}
+
+.EditProfile::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
+}
+
+.EditProfile header {
+     width: 90%;
+}
+
+.EditProfile header h1 {
+     margin-top: 50px;
+     font-size: 18px;
+     font-family: "Montserrat";
+}
+
+.EditProfile form {
+     gap: 10px;
+     padding-top: 20px;
+     align-self: center;
+     display: flex;
+     flex-direction: column;
+}
+
+.EditProfile fieldset {
+     border: none;
+     position: relative;
+}
+
+.EditProfile fieldset input,
+.EditProfile fieldset select {
+     font-size: 15px;
+     width: 100%;
+     height: 50px;
+     border: none;
+     background-color: #fff4da;
+     padding-left: 20px;
+     padding-right: 20px;
+     border-radius: 12px;
+     appearance: none;
+     font-family: "Lato", sans-serif;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+     opacity: 0;
+     width: 200px;
+}
+
+.EditProfile fieldset input:focus,
+.EditProfile fieldset select:focus {
+     border: none;
+     outline: none;
+}
+
+.EditProfile form button {
+     height: 50px;
+     width: 80%;
+     background-color: #3bcd84;
+     color: #fff;
+     border: none;
+     border-radius: 12px;
+     margin-top: 30px;
+     margin-bottom: 10px;
+     align-self: center;
+     font-family: "Montserrat";
+}
+
+.EditProfile form button:disabled {
+     background-color: #3bcd8450;
+}
+
+.EditProfile form fieldset .sideImages {
+     position: absolute;
+     right: 20px;
+     height: 50px;
+     top: 0px;
+     display: flex;
+     align-items: center;
+}
+
+.EditProfile fieldset .containerClass {
+     font-size: 15px;
+     width: 90vw;
+     max-width: 500px;
+     height: 50px;
+     border: none;
+     background-color: #fff4da;
+     border-radius: 12px;
+     font-family: "Lato", sans-serif;
+}
+
+.EditProfile .profileUpdateSuccess {
+     width: 100vw;
+     height: 100vh;
+     top: 0px;
+     position: fixed;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     background-color: #00000090;
+}
+
+.EditProfile .profileUpdateSuccess div {
+     background-color: #fff;
+     height: 280px;
+     width: 200px;
+     border-radius: 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+}
+
+.EditProfile .profileUpdateSuccess div img {
+     width: 100px;
+     height: 100px;
+}
+
+.EditProfile .profileUpdateSuccess div h1 {
+     font-size: 20px;
+     font-family: "Poppins", sans-serif;
+     color: #1e621e;
+}
+
+.EditProfile .profileUpdateSuccess div p {
+     text-align: center;
+     width: 60%;
+     font-size: 12px;
+     font-family: "Lato", sans-serif;
+     font-weight: 100;
+}
+
+.EditProfile .profileUpdateSuccess div button {
+     width: 60%;
+     height: 40px;
+     margin-top: 20px;
+     color: #fff;
+     border: none;
+     font-family: "Lato";
+     border-radius: 20px;
+     background-color: #1e621e;
+}
+
+.EditProfile .success,
+.EditProfile .fail {
+     align-self: center;
+     font-size: 12px;
+     color: #3bcd84;
+}
+
+.EditProfile .fail {
+     color: #fa3c6a;
+}

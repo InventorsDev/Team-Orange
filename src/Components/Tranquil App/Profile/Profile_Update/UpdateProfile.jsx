@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { FormDetails } from "../../FormContext";
+import { FormDetails } from "../../../FormContext";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import profileUpdateSucess from "../Assets/profileUpdateSuccess.svg";
-import calendar from "../Assets/calendar.svg";
-import email from "../Assets/mail.svg";
-import dropdown from "../Assets/dropDown.svg";
-import { api } from "../../Globals";
+import profileUpdateSucess from "../../Assets/profileUpdateSuccess.svg";
+import calendar from "../../Assets/calendar.svg";
+import email from "../../Assets/mail.svg";
+import dropdown from "../../Assets/dropDown.svg";
+import { api } from "../../../Globals";
+import "./UpdateProfile.css";
 // import { useNavigate } from "react-router";
 
 function EditProfile() {
@@ -124,7 +125,6 @@ function EditProfile() {
           }
      };
 
-     var [isUserNotYetUpdated, setUpdatedState] = useState(true);
      return (
           <div className="EditProfile">
                <header>
@@ -150,7 +150,7 @@ function EditProfile() {
                          <input
                               type="text"
                               placeholder="Username"
-                              // value={state.userName}
+                              value={state.userName || ""}
                               disabled
                          />
                     </fieldset>
@@ -281,11 +281,10 @@ function EditProfile() {
                               <img src={dropdown} alt="" />
                          </div>
                     </fieldset>
-                    {isUserNotYetUpdated ? (
-                         <button type="submit" disabled={!getIsformChanged()}>
-                              Update
-                         </button>
-                    ) : null}
+
+                    <button type="submit" disabled={!getIsformChanged()}>
+                         Update
+                    </button>
                </form>
                {message.string ? (
                     <p className={message.status ? "success" : "fail"}>
@@ -302,7 +301,6 @@ function EditProfile() {
                                    onClick={(e) => {
                                         e.preventDefault();
                                         setSubmissionStatus(false);
-                                        setUpdatedState(false);
                                    }}
                               >
                                    OK

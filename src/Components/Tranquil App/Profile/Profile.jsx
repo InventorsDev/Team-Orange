@@ -12,10 +12,11 @@ import { useState, useEffect } from "react";
 import { FormDetails } from "../../FormContext";
 import Spinner from "../../Spinner";
 import { preloadImages, api } from "../../Globals";
+
 function Profile() {
      var navigate = useNavigate();
      const handleEditProfile = () => {
-          navigate("/profile/editProfile");
+          navigate("editProfile");
      };
      var [isImagesLoading, setImagesLoaded] = useState(false);
      useEffect(() => {
@@ -46,6 +47,7 @@ function Profile() {
      var [state, setState] = useState({
           fullName: "",
      });
+
      useEffect(() => {
           var requests = {
                method: "GET",
@@ -58,17 +60,19 @@ function Profile() {
                fetch(`${api}/user`, requests)
                     .then((response) => response.json())
                     .then((result) => {
-                         console.log(result);
                          var { data } = result;
-                         setState((prevState) => ({
-                              ...prevState,
-                              fullName: data.full_name,
-                         }));
+                         if (result.statusCode === 200) {
+                              setState((prevState) => ({
+                                   ...prevState,
+                                   fullName: data.full_name,
+                              }));
+                         }
                     });
           }
-     });
+     }, [token]);
 
      var [isUserLogggingOut, setLogstatus] = useState(false);
+
      return (
           <div className="Profile">
                {isImagesLoading === false ? <Spinner /> : null}

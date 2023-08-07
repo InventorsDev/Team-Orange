@@ -14,7 +14,7 @@ import communityGreen from "./Assets/communityGreen.svg";
 import communityBlack from "./Assets/communityBlack.svg";
 import profileGreen from "./Assets/profileGreen.svg";
 import profileBlack from "./Assets/profileBlack.svg";
-import { useNavigate } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 
 function Tranquil() {
      var navigate = useNavigate();

@@ -7,11 +7,11 @@ import read from "../Assets/Read.svg";
 import listen from "../Assets/Listen.svg";
 import health from "../Assets/Health.svg";
 import backwards from "../Assets/back.svg";
-import { FormDetails } from "../../FormContext";
-import { preloadImages, api } from "../../Globals";
+import { FormDetails } from "../FormContext";
+import { preloadImages, api } from "../Globals";
 import { useNavigate } from "react-router";
 import logo from "../../../Assets/brand_gold.svg";
-import Spinner from "../../Spinner";
+import Spinner from "../Spinner";
 
 function Intro() {
      var [currentPage, setCurrentPage] = useState(1);

@@ -18,6 +18,7 @@ import Forgot from "./Components/ForgotPassword/Forgot";
 import Redirector from "./Components/redirector";
 import Tranquil from "./Components/Tranquil App/Tranquil";
 import Profile from "./Components/Tranquil App/Profile/Profile";
+import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/UpdateProfile";
 
 function App() {
      var navigate = useNavigate();
@@ -80,7 +81,12 @@ function App() {
                          element={<Redirector />}
                     />
                     <Route path="/tranquil" element={<Tranquil />} />
-                    <Route path="/tranquil/profile" element={<Profile />} />
+                    <Route path="/tranquil/profile/" element={<Profile />} />
+
+                    <Route
+                         path="/tranquil/profile/editProfile"
+                         element={<EditProfile />}
+                    />
                </Routes>
           </FormProvider>
           //These are the routes to various pages of the app
