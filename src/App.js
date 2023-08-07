@@ -16,14 +16,8 @@ import Otp from "./Components/SignUp Page/OTP/Otp";
 import SignIn from "./Components/Login Page/SignIn/SignIn";
 import Forgot from "./Components/ForgotPassword/Forgot";
 import Redirector from "./Components/redirector";
-import Home from "./Components/Tranquil App/Home/Home.jsx";
-import Resources from "./Components/Tranquil App/Resources/Resources.jsx";
-import Goals from "./Components/Tranquil App/Goals/Goals.jsx";
-import Community from "./Components/Tranquil App/Community/Community.jsx";
-import Profile from "./Components/Tranquil App/Profile/Profile.jsx";
-import EditProfile from "./Components/Tranquil App/Profile/EditProfile.jsx";
-import Journal from "./Components/Tranquil App/Home/Journal/Journal";
-import Intro from "./Components/Tranquil App/Introduction/Intro";
+import Tranquil from "./Components/Tranquil App/Tranquil";
+import Profile from "./Components/Tranquil App/Profile/Profile";
 
 function App() {
      var navigate = useNavigate();
@@ -85,17 +79,8 @@ function App() {
                          path="/redirectPage/:token"
                          element={<Redirector />}
                     />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/resources" element={<Resources />} />
-                    <Route path="/goals" element={<Goals />} />
-                    <Route path="/community" element={<Community />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route
-                         path="/profile/editProfile"
-                         element={<EditProfile />}
-                    />
-                    <Route path="/journal" element={<Journal />} />
-                    <Route path="/intro" element={<Intro />} />
+                    <Route path="/tranquil" element={<Tranquil />} />
+                    <Route path="/tranquil/profile" element={<Profile />} />
                </Routes>
           </FormProvider>
           //These are the routes to various pages of the app

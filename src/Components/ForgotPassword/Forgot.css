@@ -37,7 +37,7 @@
      height: 50px;
      border: none;
      margin-top: 10px;
-     border: solid 0.5px #71727a;
+     border: solid 1px #71727a;
      border-radius: 12px;
      padding-right: 20px;
      padding-left: 20px;
@@ -46,7 +46,7 @@
 }
 
 .ForgotPassword input:focus {
-     border: solid 0.5px #9a3258;
+     border: solid 1px #9a3258;
      background: transparent;
      font-size: 12px;
      caret-color: #9a3258;

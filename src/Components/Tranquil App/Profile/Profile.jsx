@@ -54,16 +54,18 @@ function Profile() {
                },
                redirect: "follow",
           };
-          fetch(`${api}/user`, requests)
-               .then((response) => response.json())
-               .then((result) => {
-                    console.log(result);
-                    var data = result.data;
-                    setState((prevState) => ({
-                         ...prevState,
-                         fullName: data.full_name,
-                    }));
-               });
+          if (token) {
+               fetch(`${api}/user`, requests)
+                    .then((response) => response.json())
+                    .then((result) => {
+                         console.log(result);
+                         var { data } = result;
+                         setState((prevState) => ({
+                              ...prevState,
+                              fullName: data.full_name,
+                         }));
+                    });
+          }
      });
 
      var [isUserLogggingOut, setLogstatus] = useState(false);

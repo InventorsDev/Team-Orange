@@ -1,58 +1,25 @@
 .ResourcesPage {
-     width: 100%;
-     height: fit-content;
+     width: 100vw;
+     height: 100vh;
      display: flex;
      flex-direction: column;
      align-items: center;
      overflow-y: auto;
+     max-width: 550px;
+     background: linear-gradient(270deg, #dae9da, #fff);
+     box-shadow: 0px 0px 2px #00000020;
+}
+.ResourcesPage::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
 }
 
 .ResourcesPage .nav {
      display: flex;
      flex-direction: row;
-     width: 80vw;
-     max-width: 500px;
+     width: 90%;
      justify-content: space-between;
      margin-top: 20px;
-}
-
-.ResourcesPage .alert {
-     width: 80vw;
-     max-width: 500px;
-     height: 100px;
-     background-color: #fff;
-     border-radius: 0px 0px 20px 20px;
-     position: fixed;
-     color: #fa3c6a;
-     font-family: "Montserrat";
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     box-shadow: 0px 2px 2px 1px #00000020;
-     animation: dropdown 1s;
-     margin-top: -100px;
-     opacity: 0;
-}
-
-@keyframes dropdown {
-     0% {
-          opacity: 1;
-          margin-top: -50px;
-     }
-     50% {
-          opacity: 1;
-          margin-top: 0px;
-     }
-
-     60% {
-          opacity: 1;
-          margin-top: 0px;
-     }
-
-     100% {
-          opacity: 0;
-          margin-top: -100px;
-     }
 }
 
 .ResourcesPage .nav div {
@@ -63,7 +30,7 @@
 }
 
 .ResourcesPage header {
-     margin-top: 40px;
+     margin-top: 30px;
 }
 
 .ResourcesPage header h1 {
@@ -76,10 +43,10 @@
      display: flex;
      flex-direction: column;
      justify-content: space-between;
-     width: 80vw;
+     width: 85%;
      max-width: 500px;
-     gap: 10px;
-     margin-top: 60px;
+     gap: 20px;
+     margin-top: 50px;
      padding-bottom: 5px;
      margin-bottom: 70px;
 }

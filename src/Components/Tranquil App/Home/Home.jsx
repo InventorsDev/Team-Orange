@@ -14,13 +14,13 @@ import writingSun from "../Assets/writingSun.svg";
 import selfCareLove from "../Assets/selfCareLove.svg";
 import selfCareStar from "../Assets/selfCareStar.svg";
 import goalsFlower from "../Assets/goalsFlowers.svg";
-import homeGreen from "../Assets/homeGreen.svg";
-import resourcesBlack from "../Assets/resourcesBlack.svg";
-import goalsBlack from "../Assets/goalsBlack.svg";
-import communityBlack from "../Assets/communityBlack.svg";
-import profileBlack from "../Assets/profileBlack.svg";
+// import homeGreen from "../Assets/homeGreen.svg";
+// import resourcesBlack from "../Assets/resourcesBlack.svg";
+// import goalsBlack from "../Assets/goalsBlack.svg";
+// import communityBlack from "../Assets/communityBlack.svg";
+// import profileBlack from "../Assets/profileBlack.svg";
 import { preloadImages, api } from "../../Globals";
-import Footer from "../Footer";
+// import Footer from "../Footer";
 import Spinner from "../../Spinner";
 import { FormDetails } from "../../FormContext";
 
@@ -65,14 +65,6 @@ function Home() {
           },
      ];
 
-     var image = {
-          home: homeGreen,
-          resources: resourcesBlack,
-          goals: goalsBlack,
-          community: communityBlack,
-          profile: profileBlack,
-     };
-
      var [isImagesLoading, setImagesLoaded] = useState(false);
      useEffect(() => {
           const imagesToPreload = [
@@ -90,11 +82,6 @@ function Home() {
                selfCareLove,
                selfCareStar,
                goalsFlower,
-               homeGreen,
-               resourcesBlack,
-               goalsBlack,
-               communityBlack,
-               profileBlack,
           ];
 
           preloadImages(imagesToPreload)
@@ -134,9 +121,7 @@ function Home() {
      }, [token]);
 
      return (
-          <div
-               className={`Home ${isImagesLoading === false ? "noScroll" : ""}`}
-          >
+          <div className="Home">
                {isImagesLoading === false ? <Spinner /> : null}
                <div className="homePageContainer">
                     <header>
@@ -310,7 +295,6 @@ function Home() {
                          </div>
                     </div>
                </div>
-               <Footer currentPage="home" image={image} />
           </div>
      );
 }

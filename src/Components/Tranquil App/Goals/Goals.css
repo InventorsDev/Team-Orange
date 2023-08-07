@@ -1,10 +1,18 @@
 .Goals {
-     width: 100%;
-     height: fit-content;
+     width: 100vw;
+     max-width: 550px;
+     height: 100vh;
+     background: linear-gradient(270deg, #dae9da, #fff);
      display: flex;
      flex-direction: column;
      align-items: center;
      overflow-y: auto;
+     box-shadow: 0px 0px 2px #00000020;
+}
+
+.Goals::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
 }
 
 .Goals header h1 {
@@ -18,6 +26,8 @@
      display: flex;
      align-items: center;
      justify-content: center;
+     height: 300px;
+     width: 100vh;
 }
 
 .Goals .Image img {
@@ -25,8 +35,9 @@
 }
 
 .Goals .Paragraph {
-     width: 90vw;
-     max-width: 500px;
+     width: 90%;
+     display: flex;
+     flex-direction: column;
 }
 
 .Goals .Paragraph p {
@@ -40,14 +51,15 @@
      appearance: none;
      margin-top: 70px;
      margin-bottom: 100px;
-     width: 60vw;
-     max-width: 500px;
+     width: 60%;
+     justify-self: center;
      border: none;
      height: 50px;
      border-radius: 12px;
-     background-color: #3bcd8450;
+     background-color: #fff;
      font-family: "Montserrat";
      font-size: 14px;
-     color: #fa3c6a;
+     margin-left: 20%;
      font-weight: 700;
+     box-shadow: 0px 5px 3px -3px #000000;
 }
