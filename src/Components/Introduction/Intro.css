@@ -1,10 +1,18 @@
 .Intro {
-     width: 100%;
-     height: fit-content;
+     width: 100vw;
+     max-width: 550px;
+     height: 100vh;
      display: flex;
+     margin: auto;
      flex-direction: column;
      align-items: center;
      overflow-y: auto;
+     box-shadow: 0px 0px 2px #00000020;
+     background: linear-gradient(270deg, #dae9da, #fff);
+}
+.Intro::-webkit-scrollbar {
+     height: 0px;
+     width: 0px;
 }
 
 .Intro .waysToHelp {
@@ -15,7 +23,7 @@
 
 .Intro .waysToHelp header {
      margin-top: 70px;
-     width: 90vw;
+     width: 90%;
      max-width: 320px;
 }
 
@@ -35,12 +43,13 @@
 .Intro .waysToHelp .questions {
      display: flex;
      flex-direction: column;
-     gap: 15px;
-     padding-top: 30px;
+     gap: 10px;
+     padding-top: 20px;
+     width: 90%;
 }
 .Intro .waysToHelp .questions div {
      height: 50px;
-     width: 80vw;
+     width: 100%;
      max-width: 300px;
      display: flex;
      align-items: center;
@@ -53,10 +62,12 @@
 
 .Intro .waysToHelp .questions button {
      height: 50px;
-     width: 80vw;
+     width: 100%;
      max-width: 300px;
-     background-color: #3bcd84;
+     background-color: #6c7777;
+     font-family: "Montserrat";
      color: #fff;
+     box-shadow: 0px 5px 3px -3px #000000;
      border: none;
      border-radius: 15px;
      margin-bottom: 10px;
@@ -72,11 +83,12 @@
      display: flex;
      flex-direction: column;
      align-items: center;
+     width: 90%;
 }
 
 .Intro .selectActivities header {
      margin-top: 10px;
-     width: 90vw;
+     width: 90%;
      max-width: 320px;
 }
 
@@ -97,7 +109,7 @@
 .Intro .activities {
      display: flex;
      flex-direction: row;
-     width: 80vw;
+     width: 100%;
      max-width: 300px;
      flex-wrap: wrap;
      justify-content: space-between;
@@ -116,11 +128,9 @@
 }
 
 .Intro .selectActivities .nav {
-     width: 80vw;
+     width: 100%;
      height: 60px;
-     max-width: 300px;
-     display: flex;
-     align-items: center;
+     margin-top: 30px;
 }
 
 .Intro .activities div img {
@@ -192,14 +202,16 @@
 
 .Intro .selectActivities button {
      height: 50px;
-     width: 80vw;
+     width: 100%;
      max-width: 300px;
-     background-color: #3bcd84;
+     background-color: #6c7777;
+     font-family: "Montserrat";
      color: #fff;
+     box-shadow: 0px 5px 3px -3px #000000;
      border: none;
      border-radius: 15px;
      margin-bottom: 10px;
-     margin-top: 20px;
+     margin-top: 40px;
 }
 
 .Intro .username {
@@ -240,6 +252,7 @@
      padding-right: 20px;
      text-align: center;
      border-radius: 12px;
+     background-color: transparent;
 }
 
 .Intro .username input:focus {

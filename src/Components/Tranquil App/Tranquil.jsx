@@ -14,7 +14,7 @@ import communityGreen from "./Assets/communityGreen.svg";
 import communityBlack from "./Assets/communityBlack.svg";
 import profileGreen from "./Assets/profileGreen.svg";
 import profileBlack from "./Assets/profileBlack.svg";
-import { Route, Routes, useNavigate } from "react-router";
+import { Routes, Route, useNavigate, Navigate } from "react-router";
 
 function Tranquil() {
      var navigate = useNavigate();
@@ -38,6 +38,7 @@ function Tranquil() {
                               onClick={() => {
                                    if (currentPage !== "home") {
                                         setCurrentPage("home");
+                                        navigate("/tranquil/home");
                                    }
                               }}
                          >
@@ -59,6 +60,7 @@ function Tranquil() {
                               onClick={() => {
                                    if (currentPage !== "resources") {
                                         setCurrentPage("resources");
+                                        navigate("/tranquil/resources");
                                    }
                               }}
                          >
@@ -80,6 +82,7 @@ function Tranquil() {
                               onClick={() => {
                                    if (currentPage !== "goals") {
                                         setCurrentPage("goals");
+                                        navigate("/tranquil/goals");
                                    }
                               }}
                          >
@@ -101,6 +104,7 @@ function Tranquil() {
                               onClick={() => {
                                    if (currentPage !== "community") {
                                         setCurrentPage("community");
+                                        navigate("/tranquil/community");
                                    }
                               }}
                          >
@@ -143,10 +147,14 @@ function Tranquil() {
 
      return (
           <div className="Tranquil">
-               {currentPage === "home" && <Home />}
-               {currentPage === "resources" && <Resources />}
-               {currentPage === "goals" && <Goals />}
-               {currentPage === "community" && <Community />}
+               <Routes>
+                    <Route path="" element={<Navigate to="home" />} />
+                    <Route path="home/*" element={<Home />} />
+                    <Route path="resources" element={<Resources />} />
+                    <Route path="goals" element={<Goals />} />
+                    <Route path="community" element={<Community />} />
+               </Routes>
+
                <Footer image={images} />
           </div>
      );

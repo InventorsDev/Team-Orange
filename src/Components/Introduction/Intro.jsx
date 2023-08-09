@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import "./Intro.css";
-import journal from "../Assets/Journal.svg";
-import breathe from "../Assets/Breathe.svg";
-import meditate from "../Assets/Meditate.svg";
-import read from "../Assets/Read.svg";
-import listen from "../Assets/Listen.svg";
-import health from "../Assets/Health.svg";
-import backwards from "../Assets/back.svg";
+import journal from "../Tranquil App/Assets/Journal.svg";
+import breathe from "../Tranquil App/Assets/Breathe.svg";
+import meditate from "../Tranquil App/Assets/Meditate.svg";
+import read from "../Tranquil App/Assets/Read.svg";
+import listen from "../Tranquil App/Assets/Listen.svg";
+import health from "../Tranquil App/Assets/Health.svg";
+import backwards from "../Tranquil App/Assets/back.svg";
 import { FormDetails } from "../FormContext";
 import { preloadImages, api } from "../Globals";
 import { useNavigate } from "react-router";
-import logo from "../../../Assets/brand_gold.svg";
+import logo from "../../Assets/brand_gold.svg";
 import Spinner from "../Spinner";
 
 function Intro() {

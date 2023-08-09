@@ -19,6 +19,8 @@ import Redirector from "./Components/redirector";
 import Tranquil from "./Components/Tranquil App/Tranquil";
 import Profile from "./Components/Tranquil App/Profile/Profile";
 import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/UpdateProfile";
+import Intro from "./Components/Introduction/Intro";
+import DailyQuestions from "./Components/Tranquil App/Home/DailyAssessment/Daily";
 
 function App() {
      var navigate = useNavigate();
@@ -80,13 +82,17 @@ function App() {
                          path="/redirectPage/:token"
                          element={<Redirector />}
                     />
-                    <Route path="/tranquil" element={<Tranquil />} />
+                    <Route path="/tranquil/*" element={<Tranquil />} />
                     <Route path="/tranquil/profile/" element={<Profile />} />
-
+                    <Route
+                         path="/tranquil/dailyQuestions/"
+                         element={<DailyQuestions />}
+                    />
                     <Route
                          path="/tranquil/profile/editProfile"
                          element={<EditProfile />}
                     />
+                    <Route path="/intro" element={<Intro />} />
                </Routes>
           </FormProvider>
           //These are the routes to various pages of the app

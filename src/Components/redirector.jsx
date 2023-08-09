@@ -22,7 +22,7 @@ function Redirector() {
                .then((result) => {
                     setEmail(result.data.email);
                     if (result.data.username) {
-                         navigate("/home");
+                         navigate("/tranquil");
                     } else if (!result.data.username) {
                          navigate("/intro");
                     }
