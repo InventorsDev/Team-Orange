@@ -20,83 +20,68 @@ import Tranquil from "./Components/Tranquil App/Tranquil";
 import Profile from "./Components/Tranquil App/Profile/Profile";
 import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/UpdateProfile";
 import Intro from "./Components/Introduction/Intro";
-import DailyQuestions from "./Components/Tranquil App/Home/DailyAssessment/Daily";
 
 function App() {
-     var navigate = useNavigate();
-     var [openingCompleted, setCompletionState] = useState(false);
-     var [firstTextDisplay, setNewTextDisplay] = useState(true);
-     function Opening() {
-          useEffect(() => {
-               const firstTextTimer = setTimeout(() => {
-                    setNewTextDisplay(false);
-               }, 2000);
+  var navigate = useNavigate();
+  var [openingCompleted, setCompletionState] = useState(false);
+  var [firstTextDisplay, setNewTextDisplay] = useState(true);
+  function Opening() {
+    useEffect(() => {
+      const firstTextTimer = setTimeout(() => {
+        setNewTextDisplay(false);
+      }, 2000);
 
-               const introTimer = setTimeout(() => {
-                    setCompletionState(true);
-               }, 2100);
+      const introTimer = setTimeout(() => {
+        setCompletionState(true);
+      }, 2100);
 
-               return () => {
-                    clearTimeout(firstTextTimer);
-                    clearTimeout(introTimer);
-               };
-          }, []);
-          useEffect(() => {
-               openingCompleted === true && navigate("/login");
-          });
+      return () => {
+        clearTimeout(firstTextTimer);
+        clearTimeout(introTimer);
+      };
+    }, []);
+    useEffect(() => {
+      openingCompleted === true && navigate("/login");
+    });
 
-          return (
-               <div className="Opening">
-                    <header>
-                         <div className="imgText">
-                              <div className="logo">
-                                   <img src={tranquilLogo} alt="" />
-                              </div>
+    return (
+      <div className="Opening">
+        <header>
+          <div className="imgText">
+            <div className="logo">
+              <img src={tranquilLogo} alt="" />
+            </div>
 
-                              {firstTextDisplay ? (
-                                   <p className="firstText">
-                                        Unleash the Power within
-                                   </p>
-                              ) : (
-                                   <p className="secondText">
-                                        Find your inner Balance
-                                   </p>
-                              )}
-                         </div>
-                    </header>
-               </div>
-          );
-     }
+            {firstTextDisplay ? (
+              <p className="firstText">Unleash the Power within</p>
+            ) : (
+              <p className="secondText">Find your inner Balance</p>
+            )}
+          </div>
+        </header>
+      </div>
+    );
+  }
 
-     return (
-          <FormProvider>
-               <Routes>
-                    <Route index element={<Opening />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signIn" element={<SignIn />} />
-                    <Route path="/signIn/forgotPassword" element={<Forgot />} />
-                    <Route path="/signUp" element={<SignUp />} />
-                    <Route path="/getStarted" element={<Slides />} />
-                    <Route path="/otp" element={<Otp />} />
-                    <Route
-                         path="/redirectPage/:token"
-                         element={<Redirector />}
-                    />
-                    <Route path="/tranquil/*" element={<Tranquil />} />
-                    <Route path="/tranquil/profile/" element={<Profile />} />
-                    <Route
-                         path="/tranquil/dailyQuestions/"
-                         element={<DailyQuestions />}
-                    />
-                    <Route
-                         path="/tranquil/profile/editProfile"
-                         element={<EditProfile />}
-                    />
-                    <Route path="/intro" element={<Intro />} />
-               </Routes>
-          </FormProvider>
-          //These are the routes to various pages of the app
-     );
+  return (
+    <FormProvider>
+      <Routes>
+        <Route index element={<Opening />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signIn/forgotPassword" element={<Forgot />} />
+        <Route path="/signUp" element={<SignUp />} />
+        <Route path="/getStarted" element={<Slides />} />
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/redirectPage/:token" element={<Redirector />} />
+        <Route path="/tranquil/*" element={<Tranquil />} />
+        <Route path="/tranquil/profile/" element={<Profile />} />
+        <Route path="/tranquil/profile/editProfile" element={<EditProfile />} />
+        <Route path="/intro" element={<Intro />} />
+      </Routes>
+    </FormProvider>
+    //These are the routes to various pages of the app
+  );
 }
 
 export default App;

@@ -17,147 +17,125 @@ import profileBlack from "./Assets/profileBlack.svg";
 import { Routes, Route, useNavigate, Navigate } from "react-router";
 
 function Tranquil() {
-     var navigate = useNavigate();
-     var [currentPage, setCurrentPage] = useState("home");
-     var images = {
-          home: currentPage === "home" ? homeGreen : homeBlack,
-          resources:
-               currentPage === "resources" ? resourcesGreen : resourcesBlack,
-          goals: currentPage === "goals" ? goalsGreen : goalsBlack,
-          community:
-               currentPage === "community" ? communityGreen : communityBlack,
-          profile: currentPage === "profile" ? profileGreen : profileBlack,
-     };
+  var navigate = useNavigate();
+  var [currentPage, setCurrentPage] = useState("home");
+  var images = {
+    home: currentPage === "home" ? homeGreen : homeBlack,
+    resources: currentPage === "resources" ? resourcesGreen : resourcesBlack,
+    goals: currentPage === "goals" ? goalsGreen : goalsBlack,
+    community: currentPage === "community" ? communityGreen : communityBlack,
+    profile: currentPage === "profile" ? profileGreen : profileBlack,
+  };
 
-     const Footer = (props) => {
-          var { image } = props;
-          return (
-               <footer>
-                    <div className="routes">
-                         <div
-                              onClick={() => {
-                                   if (currentPage !== "home") {
-                                        setCurrentPage("home");
-                                        navigate("/tranquil/home");
-                                   }
-                              }}
-                         >
-                              <img src={image.home} alt="" />
-                              <p
-                                   style={{
-                                        color: `${
-                                             currentPage === "home"
-                                                  ? "#3bcd84"
-                                                  : "#000"
-                                        }`,
-                                   }}
-                              >
-                                   Home
-                              </p>
-                         </div>
-
-                         <div
-                              onClick={() => {
-                                   if (currentPage !== "resources") {
-                                        setCurrentPage("resources");
-                                        navigate("/tranquil/resources");
-                                   }
-                              }}
-                         >
-                              <img src={image.resources} alt="" />
-                              <p
-                                   style={{
-                                        color: `${
-                                             currentPage === "resources"
-                                                  ? "#3bcd84"
-                                                  : "#000"
-                                        }`,
-                                   }}
-                              >
-                                   Resources
-                              </p>
-                         </div>
-
-                         <div
-                              onClick={() => {
-                                   if (currentPage !== "goals") {
-                                        setCurrentPage("goals");
-                                        navigate("/tranquil/goals");
-                                   }
-                              }}
-                         >
-                              <img src={image.goals} alt="" />
-                              <p
-                                   style={{
-                                        color: `${
-                                             currentPage === "goals"
-                                                  ? "#3bcd84"
-                                                  : "#000"
-                                        }`,
-                                   }}
-                              >
-                                   Goals
-                              </p>
-                         </div>
-
-                         <div
-                              onClick={() => {
-                                   if (currentPage !== "community") {
-                                        setCurrentPage("community");
-                                        navigate("/tranquil/community");
-                                   }
-                              }}
-                         >
-                              <img src={image.community} alt="" />
-                              <p
-                                   style={{
-                                        color: `${
-                                             currentPage === "community"
-                                                  ? "#3bcd84"
-                                                  : "#000"
-                                        }`,
-                                   }}
-                              >
-                                   Community
-                              </p>
-                         </div>
-
-                         <div
-                              onClick={() => {
-                                   navigate("profile");
-                              }}
-                         >
-                              <img src={image.profile} alt="" />
-                              <p
-                                   style={{
-                                        color: `${
-                                             currentPage === "profile"
-                                                  ? "#3bcd84"
-                                                  : "#000"
-                                        }`,
-                                   }}
-                              >
-                                   Profile
-                              </p>
-                         </div>
-                    </div>
-               </footer>
-          );
-     };
-
-     return (
-          <div className="Tranquil">
-               <Routes>
-                    <Route path="" element={<Navigate to="home" />} />
-                    <Route path="home/*" element={<Home />} />
-                    <Route path="resources" element={<Resources />} />
-                    <Route path="goals" element={<Goals />} />
-                    <Route path="community" element={<Community />} />
-               </Routes>
-
-               <Footer image={images} />
+  const Footer = (props) => {
+    var { image } = props;
+    return (
+      <footer>
+        <div className="routes">
+          <div
+            onClick={() => {
+              if (currentPage !== "home") {
+                setCurrentPage("home");
+                navigate("/tranquil/home");
+              }
+            }}
+          >
+            <img src={image.home} alt="" />
+            <p
+              style={{
+                color: `${currentPage === "home" ? "#3bcd84" : "#000"}`,
+              }}
+            >
+              Home
+            </p>
           </div>
-     );
+
+          <div
+            onClick={() => {
+              if (currentPage !== "resources") {
+                setCurrentPage("resources");
+                navigate("/tranquil/resources");
+              }
+            }}
+          >
+            <img src={image.resources} alt="" />
+            <p
+              style={{
+                color: `${currentPage === "resources" ? "#3bcd84" : "#000"}`,
+              }}
+            >
+              Resources
+            </p>
+          </div>
+
+          <div
+            onClick={() => {
+              if (currentPage !== "goals") {
+                setCurrentPage("goals");
+                navigate("/tranquil/goals");
+              }
+            }}
+          >
+            <img src={image.goals} alt="" />
+            <p
+              style={{
+                color: `${currentPage === "goals" ? "#3bcd84" : "#000"}`,
+              }}
+            >
+              Goals
+            </p>
+          </div>
+
+          <div
+            onClick={() => {
+              if (currentPage !== "community") {
+                setCurrentPage("community");
+                navigate("/tranquil/community");
+              }
+            }}
+          >
+            <img src={image.community} alt="" />
+            <p
+              style={{
+                color: `${currentPage === "community" ? "#3bcd84" : "#000"}`,
+              }}
+            >
+              Community
+            </p>
+          </div>
+
+          <div
+            onClick={() => {
+              navigate("profile");
+            }}
+          >
+            <img src={image.profile} alt="" />
+            <p
+              style={{
+                color: `${currentPage === "profile" ? "#3bcd84" : "#000"}`,
+              }}
+            >
+              Profile
+            </p>
+          </div>
+        </div>
+      </footer>
+    );
+  };
+
+  return (
+    <div className="Tranquil">
+      <Routes>
+        <Route path="" element={<Navigate to="home" />} />
+        <Route path="home/*" element={<Home />} />
+        <Route path="resources" element={<Resources />} />
+        <Route path="goals" element={<Goals />} />
+        <Route path="community" element={<Community />} />
+      </Routes>
+
+      <Footer image={images} />
+    </div>
+  );
 }
 
 export default Tranquil;
