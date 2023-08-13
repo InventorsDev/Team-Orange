@@ -1,140 +1,141 @@
 .Tests {
-  width: 100vw;
-  height: 100vh;
-  max-width: 550px;
-  background: linear-gradient(270deg, #dae9da, #fff);
-  box-shadow: 0px 0px 2px #00000020;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 100vw;
+    height: 100vh;
+    max-width: 550px;
+    background: linear-gradient(270deg, #dae9da, #fff);
+    box-shadow: 0px 0px 2px #00000020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .testForm {
-  width: 100%;
-  height: 100%;
-  padding-bottom: 70px;
-  overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 70px;
+    overflow-x: hidden;
 }
 
 .testForm::-webkit-scrollbar {
-  height: 0px;
-  width: 0px;
+    height: 0px;
+    width: 0px;
 }
 .testFormPgs {
-  display: flex;
-  flex-direction: row;
-  width: fit-content;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
 }
 
 .qst {
-  width: 100vw;
-  max-width: 550px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 100vw;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .qst nav {
-  margin-top: 20px;
-  width: 90%;
-  display: flex;
-  height: 20px;
-  font-size: 15px;
-  font-family: "Lato";
-  gap: 20px;
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    height: 20px;
+    font-size: 15px;
+    font-family: "Lato";
+    gap: 20px;
 }
 
 .qst nav div img {
-  width: 15px;
-  height: 15px;
+    width: 15px;
+    height: 15px;
 }
 
 .qst header {
-  margin-top: 40px;
-  width: 100%;
+    margin-top: 40px;
+    width: 100%;
 }
 
 .qst header h1 {
-  font-family: "Lato";
-  font-size: 18px;
-  text-align: center;
+    font-family: "Lato";
+    font-size: 18px;
+    text-align: center;
 }
 
 .qst .questions {
-  margin-top: 20px;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+    margin-top: 40px;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .qst .questions .par {
-  font-family: "Lato";
-  font-size: 18px;
-  text-align: center;
+    font-family: "Lato";
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .qst .questions fieldset {
-  width: 85%;
-  border: none;
-  height: 50px;
-  background-color: #449072;
-  display: flex;
-  flex-direction: row;
-  border-radius: 8px;
+    width: 85%;
+    border: none;
+    height: 50px;
+    background-color: #449072;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
 }
 
 .qst .questions .picked {
-  border: solid 1px #449072;
-  background-color: #e8fbf2;
+    border: solid 1px #449072;
+    background-color: #e8fbf2;
 }
 
 .qst .questions fieldset div {
-  height: 50px;
-  display: flex;
-  align-items: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 .qst .questions fieldset div input {
-  height: 20px;
-  appearance: none;
-  width: 20px;
-  margin-left: 10px;
-  border-radius: 50%;
-  background-color: #449072;
-  border: solid 5px #e8fbf2;
+    height: 17px;
+    appearance: none;
+    width: 17px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: #449072;
+    border: solid 5px #e8fbf2;
 }
 
 .qst .questions .picked div input {
-  border-radius: 50%;
-  background-color: #e8fbf2;
-  border: solid 5px #449072;
+    border-radius: 50%;
+    background-color: #e8fbf2;
+    border: solid 5px #449072;
 }
 
 .qst .questions fieldset div p {
-  color: #e8fbf2;
-  margin-left: 10px;
-  font-family: "Lato";
-  font-size: 17px;
+    color: #e8fbf2;
+    margin-left: 20px;
+    font-family: "Lato";
+    font-size: 15px;
 }
 
 .qst .questions .picked p {
-  color: #449072;
+    color: #449072;
 }
 
 .qst .questions button {
-  width: 50%;
-  height: 50px;
-  border: none;
-  align-self: center;
-  background-color: #71c19a;
-  border-radius: 10px;
-  font-family: "Montserrat";
-  color: #e8fbf2;
-  font-size: 15px;
-  margin-top: 100px;
+    width: 50%;
+    height: 50px;
+    border: none;
+    align-self: center;
+    background-color: #71c19a;
+    border-radius: 10px;
+    font-family: "Montserrat";
+    color: #e8fbf2;
+    font-size: 15px;
+    margin-top: 100px;
 }
 
 .qst .questions button:disabled {
-  background-color: #71c19a50;
+    background-color: #71c19a50;
 }

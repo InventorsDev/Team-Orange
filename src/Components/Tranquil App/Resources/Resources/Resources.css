@@ -1,0 +1,111 @@
+.ResourcesPage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    max-width: 550px;
+    background-color: #fefefe;
+    box-shadow: 0px 0px 2px #00000020;
+}
+.ResourcesPage::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+}
+
+.ResourcesPage .nav {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.ResourcesPage .nav div {
+    border: solid 1px #3bcd84;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+}
+
+.ResourcesPage header {
+    margin-top: 30px;
+}
+
+.ResourcesPage header h1 {
+    font-size: 20px;
+    font-family: "Lato";
+    font-weight: 700;
+}
+
+.ResourcesPage .sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 85%;
+    max-width: 500px;
+    gap: 20px;
+    margin-top: 50px;
+    padding-bottom: 5px;
+    margin-bottom: 70px;
+}
+
+.ResourcesPage .sections .group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 110px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-family: "Lato";
+    font-weight: 400;
+    box-shadow: 0px 5px 5px -3px #00000020;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ResourcesPage .sections .group p {
+    margin-top: 10px;
+}
+
+.ResourcesPage .sections .group:nth-child(1) {
+    background-color: #f2fffc;
+    color: #3bcd84;
+}
+
+.ResourcesPage .sections .group:nth-child(1):hover {
+    border: solid 1px #327153;
+    transform: scale(1.01);
+}
+
+.ResourcesPage .sections .group:nth-child(2) {
+    background-color: #fcf2ff;
+    color: #b72ace;
+}
+
+.ResourcesPage .sections .group:nth-child(2):hover {
+    border: solid 1px #7d3a88;
+    transform: scale(1.01);
+}
+
+.ResourcesPage .sections .group:nth-child(3) {
+    background-color: #fffdf8;
+    color: #ffad00;
+}
+
+.ResourcesPage .sections .group:nth-child(3):hover {
+    border: solid 1px #d0a449;
+    transform: scale(1.01);
+}
+
+.ResourcesPage .sections .group:nth-child(4) {
+    background-color: #fff6f1;
+    color: #f25600;
+}
+
+.ResourcesPage .sections .group:nth-child(4):hover {
+    border: solid 1px #c84e0b;
+    transform: scale(1.01);
+}
