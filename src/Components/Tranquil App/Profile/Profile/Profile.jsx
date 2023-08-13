@@ -7,6 +7,7 @@ import inviteFriends from "../../Assets/inviteFriends.svg";
 import logOut from "../../Assets/logOut.svg";
 import arrowLeft from "../../Assets/arrowLeft.svg";
 import darkModeToggle from "../../Assets/darkModeToggle.svg";
+import setImage from "../../Assets/setImage.svg";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { FormDetails } from "../../../Globals/FormContext";
@@ -14,144 +15,242 @@ import Spinner from "../../../Globals/Spinner/Spinner";
 import { preloadImages, api } from "../../../Globals/Globals";
 
 function Profile() {
-  var navigate = useNavigate();
-  var { token } = FormDetails();
-  var [state, setState] = useState({
-    fullName: "",
-  });
-  var [isImagesLoading, setImagesLoaded] = useState(false);
-  var [isUserLogggingOut, setLogstatus] = useState(false);
+    var navigate = useNavigate();
+    var { token } = FormDetails();
+    var [state, setState] = useState({
+        fullName: "",
+        image: "",
+    });
+    var [isImagesLoading, setImagesLoaded] = useState(false);
+    var [isUserLogggingOut, setLogstatus] = useState(false);
 
-  const handleEditProfile = () => {
-    navigate("editProfile");
-  };
-
-  useEffect(() => {
-    const imagesToPreload = [
-      editProfile,
-      notifications,
-      language,
-      darkMode,
-      inviteFriends,
-      logOut,
-    ];
-    preloadImages(imagesToPreload)
-      .then(() => {
-        const imageTimer = setTimeout(() => {
-          setImagesLoaded(true);
-        }, 1000);
-
-        return () => {
-          clearTimeout(imageTimer);
-        };
-      })
-      .catch((error) => {
-        console.log("Error Loading Images", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    var requests = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      redirect: "follow",
+    const handleEditProfile = () => {
+        navigate("editProfile");
     };
-    if (token) {
-      fetch(`${api}/user`, requests)
-        .then((response) => response.json())
-        .then((result) => {
-          var { data } = result;
-          if (result.statusCode === 200) {
-            setState((prevState) => ({
-              ...prevState,
-              fullName: data.full_name,
-            }));
-          }
+
+    useEffect(() => {
+        const imagesToPreload = [
+            editProfile,
+            notifications,
+            language,
+            darkMode,
+            inviteFriends,
+            logOut,
+            state.image,
+            setImage,
+        ];
+        preloadImages(imagesToPreload)
+            .then(() => {
+                const imageTimer = setTimeout(() => {
+                    setImagesLoaded(true);
+                }, 1000);
+
+                return () => {
+                    clearTimeout(imageTimer);
+                };
+            })
+            .catch((error) => {
+                console.log("Error Loading Images", error);
+            });
+    }, [state]);
+
+    useEffect(() => {
+        var requests = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            redirect: "follow",
+        };
+        if (token) {
+            fetch(`${api}/user`, requests)
+                .then((response) => response.json())
+                .then((result) => {
+                    var { data } = result;
+                    if (result.statusCode === 200) {
+                        setState((prevState) => ({
+                            ...prevState,
+                            fullName: data.full_name,
+                            image: data.profile_image_url,
+                        }));
+                    }
+                });
+        }
+    }, [token]);
+
+    var [message, setMessage] = useState({
+        string: "",
+        status: true,
+    });
+
+    const handleImageChange = (e) => {
+        e.preventDefault();
+        setMessage({
+            ...message,
+            string: "This may take a few minutes, kindly hold on . . .",
+            status: true,
         });
-    }
-  }, [token]);
+        var selectedfile = e.target.files[0];
+        var myHeaders = new Headers();
+        myHeaders.append("enctype", "multipart/related");
+        myHeaders.append("Authorization", `Bearer ${token}`);
 
-  return (
-    <div className="Profile">
-      {isImagesLoading === false ? <Spinner /> : null}
-      <header>
-        <h1>Profile</h1>
+        var formdata = new FormData();
 
-        <div></div>
+        formdata.append("full_name", state.fullName);
 
-        <p>{state.fullName}</p>
-      </header>
-      <div className="profileOptions">
-        <div onClick={handleEditProfile}>
-          <img src={editProfile} alt="" />
-          <p>Edit Profile</p>
-          <img src={arrowLeft} alt="" />
-        </div>
-        <div>
-          <img src={notifications} alt="" />
-          <p>Notifications</p>
-          <img src={arrowLeft} alt="" />
-        </div>
-        <div>
-          <img src={language} alt="" />
-          <p>Language</p>
-          <img src={arrowLeft} alt="" />
-        </div>
-        <div>
-          <img src={darkMode} alt="" />
-          <p>Dark Mode</p>
-          <img src={darkModeToggle} alt="" />
-        </div>
-        <div>
-          <img src={inviteFriends} alt="" />
-          <p>Invite Friends</p>
-          <img src={arrowLeft} alt="" />
-        </div>
+        formdata.append("image", selectedfile);
 
-        <div
-          className="logOut"
-          onClick={() => {
-            setLogstatus(true);
-          }}
-        >
-          <img src={logOut} alt="" />
-          <p>Logout</p>
-        </div>
-      </div>
+        var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: formdata,
+            redirect: "follow",
+        };
 
-      {isUserLogggingOut === true ? (
-        <div className="UserExit">
-          <div className="container">
-            <div className="logout">
-              <img src={logOut} alt="" />
-              <p>Logout</p>
+        fetch(`${api}/user/update-profile`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+                if (result.statusCode === 200) {
+                    setMessage({
+                        ...message,
+                        string: result.message,
+                        status: true,
+                    });
+
+                    const imageUrl = URL.createObjectURL(selectedfile);
+                    setState((prevState) => ({
+                        ...prevState,
+                        image: imageUrl,
+                    }));
+                    setTimeout(() => {
+                        setMessage({
+                            ...message,
+                            string: "",
+                            status: true,
+                        });
+                    }, 1500);
+                } else {
+                    setMessage({
+                        ...message,
+                        string: result.message,
+                        status: false,
+                    });
+                }
+            })
+            .catch((error) => console.log("Error:", error));
+    };
+
+    return (
+        <div className="Profile">
+            {isImagesLoading === false ? <Spinner /> : null}
+            <header>
+                <h1>Profile</h1>
+                <div className="imageDiv">
+                    <div>
+                        <img src={state.image} alt="" />
+                        <section
+                            style={{
+                                width: "20%",
+                                height: "20%",
+                                maxHeight: "50px",
+                                maxWidth: "50px",
+                                borderRadius: "50%",
+                                position: "absolute",
+                                left: "75%",
+                                top: "80%",
+                                backgroundImage: `url(${setImage})`,
+                                backgroundRepeat: "no-repeat",
+                                backgroundSize: "cover",
+                            }}
+                        >
+                            <input
+                                type="file"
+                                accept="image/png, image/jpg, image/jpeg, image/gif"
+                                className="imageInput"
+                                onChange={(e) => handleImageChange(e)}
+                            />
+                        </section>
+                    </div>
+                    {message.string ? (
+                        <p className={message.status ? "success" : "fail"}>
+                            {message.string}
+                        </p>
+                    ) : null}
+                </div>
+
+                <h1 className="fullname">{state.fullName}</h1>
+            </header>
+            <div className="profileOptions">
+                <div onClick={handleEditProfile}>
+                    <img src={editProfile} alt="" />
+                    <p>Edit Profile</p>
+                    <img src={arrowLeft} alt="" />
+                </div>
+                <div>
+                    <img src={notifications} alt="" />
+                    <p>Notifications</p>
+                    <img src={arrowLeft} alt="" />
+                </div>
+                <div>
+                    <img src={language} alt="" />
+                    <p>Language</p>
+                    <img src={arrowLeft} alt="" />
+                </div>
+                <div>
+                    <img src={darkMode} alt="" />
+                    <p>Dark Mode</p>
+                    <img src={darkModeToggle} alt="" />
+                </div>
+                <div>
+                    <img src={inviteFriends} alt="" />
+                    <p>Invite Friends</p>
+                    <img src={arrowLeft} alt="" />
+                </div>
+
+                <div
+                    className="logOut"
+                    onClick={() => {
+                        setLogstatus(true);
+                    }}
+                >
+                    <img src={logOut} alt="" />
+                    <p>Logout</p>
+                </div>
             </div>
-            <p className="par">Are you sure you want to Logout</p>
-            <div className="buttons">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setLogstatus(false);
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate("/login");
-                }}
-              >
-                Yes, Logout
-              </button>
-            </div>
-          </div>
+
+            {isUserLogggingOut === true ? (
+                <div className="UserExit">
+                    <div className="container">
+                        <div className="logout">
+                            <img src={logOut} alt="" />
+                            <p>Logout</p>
+                        </div>
+                        <p className="par">Are you sure you want to Logout</p>
+                        <div className="buttons">
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setLogstatus(false);
+                                }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate("/login");
+                                }}
+                            >
+                                Yes, Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
         </div>
-      ) : null}
-    </div>
-  );
+    );
 }
 
 export default Profile;
