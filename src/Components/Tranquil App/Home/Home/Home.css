@@ -31,9 +31,16 @@
 .Home nav div:nth-child(1) {
     width: 30px;
     height: 30px;
+    box-sizing: content-box;
     border-radius: 50%;
-    border: solid 1px #3bcd84;
+    border: solid 5px #3bcd8440;
     margin-left: 5%;
+}
+
+.Home nav div:nth-child(1) img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 
 .Home .homePageContainer {
@@ -41,6 +48,8 @@
     width: 90%;
     margin-left: 5%;
     overflow: hidden;
+    margin-bottom: 70px;
+    position: relative;
 }
 
 .Home header {
@@ -310,9 +319,6 @@
     padding-top: 5px;
 }
 
-.Home .Resources {
-    margin-bottom: 70px;
-}
 .Home .Resources h2 {
     color: #060e0a;
     font-size: 17px;
@@ -392,46 +398,93 @@
     bottom: 0px;
 }
 
-/* .Prompts {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-}
-
-.Prompts .promptContainer {
-    height: 50vh;
+.Home .Prompt {
+    position: fixed;
     width: 100%;
-    border-radius: 40px 40px 0px 0px;
-    background-color: #ffa;
+    bottom: 60px;
+    max-width: 550px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.promptContainer .image {
-    background-color: #ffcfcf;
-    width: 130px;
-    height: 130px;
+.Prompts {
+    width: 90%;
+    border-radius: 40px 40px 0px 0px;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0px 0px 15px 3px #00000020;
+}
+
+.Prompts .image {
+    background-color: #f5fffa;
+    width: 100px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    box-shadow: 0px 0px 10px 3px #00000020;
 }
 
-.promptContainer .flexs {
+.Prompts .image img {
+    width: 60px;
+    height: 60px;
+}
+
+.Prompts .cancel p {
+    margin-top: 80px;
+    color: #000000;
+    font-size: 15px;
+    font-family: "Montserrat";
+}
+.Prompts .flexs {
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 90%;
     justify-content: space-between;
+    padding-bottom: 30px;
 }
 
-.promptContainer .flexs section {
+.Prompts .flexs section {
     width: 48%;
-    height: 80px;
-    background-color: #404040;
     margin-top: 10px;
-} */
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "lato";
+    font-size: 15px;
+    box-shadow: 0px 2px 5px -2px #00000040;
+}
+
+.Prompts .flexs section div:nth-child(1) {
+    color: #3bcd84;
+    margin-bottom: 20px;
+}
+
+.Prompts .flexs section:nth-child(1) {
+    background-color: #fcf2ff;
+}
+
+.Prompts .flexs section:nth-child(2) {
+    background-color: #f5ffe2;
+}
+
+.Prompts .flexs section:nth-child(3) {
+    background-color: #f1f6ff;
+}
+
+.Prompts .flexs section:nth-child(4) {
+    background-color: #fff8eb;
+}

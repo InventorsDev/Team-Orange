@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./Tranquil.css";
 import Home from "../Home/Home/Home.jsx";
 import Resources from "../Resources/Resources/Resources.jsx";
@@ -142,28 +141,28 @@ function Tranquil() {
         );
     };
 
-    const [scrollPosition, setScrollPosition] = useState(0);
-    const [footerVisible, setFooterVisible] = useState(true);
+    // const [scrollPosition, setScrollPosition] = useState(0);
+    // const [footerVisible, setFooterVisible] = useState(true);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentPosition = window.scrollY;
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const currentPosition = window.scrollY;
 
-            if (currentPosition > scrollPosition && currentPosition > 20) {
-                setFooterVisible(false);
-            } else {
-                setFooterVisible(true);
-            }
+    //         if (currentPosition > scrollPosition && currentPosition > 20) {
+    //             setFooterVisible(false);
+    //         } else {
+    //             setFooterVisible(true);
+    //         }
 
-            setScrollPosition(currentPosition);
-        };
+    //         setScrollPosition(currentPosition);
+    //     };
 
-        window.addEventListener("scroll", handleScroll);
+    //     window.addEventListener("scroll", handleScroll);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [scrollPosition]);
+    //     return () => {
+    //         window.removeEventListener("scroll", handleScroll);
+    //     };
+    // }, [scrollPosition]);
 
     return (
         <div className="Tranquil">
@@ -175,7 +174,8 @@ function Tranquil() {
                 <Route path="community" element={<Community />} />
             </Routes>
 
-            {footerVisible && <Footer image={images} />}
+            {/* {footerVisible && <Footer image={images} />} */}
+            <Footer image={images} />
         </div>
     );
 }

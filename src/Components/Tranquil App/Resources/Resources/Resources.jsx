@@ -8,6 +8,7 @@ import Spinner from "../../../Globals/Spinner/Spinner";
 import { preloadImages } from "../../../Globals/Globals";
 import { useEffect, useState } from "react";
 import { PageDetails } from "../../Tranquil/PageContext";
+import Nav from "../../Tranquil/Nav/Nav";
 
 function Resources() {
     var [isImagesLoading, setImagesLoaded] = useState(false);
@@ -42,10 +43,7 @@ function Resources() {
         <div className="ResourcesPage">
             {isImagesLoading === false ? <Spinner /> : null}
 
-            <div className="nav">
-                <img src={backwards} alt="" />
-                <div></div>
-            </div>
+            <Nav link="/tranquil/home" />
             <header>
                 <h1>Resources</h1>
             </header>

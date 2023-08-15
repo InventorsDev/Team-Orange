@@ -14,19 +14,21 @@ import writingSun from "../../Assets/writingSun.svg";
 import selfCareLove from "../../Assets/selfCareLove.svg";
 import selfCareStar from "../../Assets/selfCareStar.svg";
 import goalsFlower from "../../Assets/goalsFlowers.svg";
-// import proptImage from "../../Assets/battery.svg";
+import promptImage from "../../Assets/battery.svg";
 import { preloadImages, api } from "../../../Globals/Globals";
 import Spinner from "../../../Globals/Spinner/Spinner";
 import { FormDetails } from "../../../Globals/FormContext";
-import { Route, Routes, useNavigate } from "react-router";
-import Assessments from "../AssessmentSchema/Assessment";
+import { useNavigate } from "react-router";
 import { PageDetails } from "../../Tranquil/PageContext";
 
-function Initial() {
+function Home() {
     var { setCurrentPage } = PageDetails();
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var { token } = FormDetails();
-    var [username, setUsername] = useState("");
+    var [state, setState] = useState({
+        userName: "",
+        image: "",
+    });
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth();
@@ -87,6 +89,7 @@ function Initial() {
             selfCareLove,
             selfCareStar,
             goalsFlower,
+            state.image,
         ];
 
         preloadImages(imagesToPreload)
@@ -102,7 +105,7 @@ function Initial() {
             .catch((error) => {
                 console.log("Error Loading Images", error);
             });
-    }, []);
+    }, [state]);
 
     useEffect(() => {
         if (token) {
@@ -116,76 +119,111 @@ function Initial() {
             fetch(`${api}/user`, requests)
                 .then((response) => response.json())
                 .then((result) => {
-                    if (result.data.username) {
-                        setUsername(result.data.username);
+                    if (result) {
+                        setState({
+                            userName: result?.data?.username,
+                            image: result?.data?.profile_image_url,
+                        });
                     }
                 });
         }
     }, [token]);
 
-    const handleDaily = () => {
-        navigate("assessments/daily/Anxiety");
+    const handleDaily = (e) => {
+        e.preventDefault();
+        showPrompt(true);
     };
 
-    // const Prompt = () => {
-    //     return (
-    //         <div className="Prompts">
-    //             <div className="promptContainer">
-    //                 <div className="image">
-    //                     <img src={promptImage} />
-    //                 </div>
-    //                 <div className="flexs">
-    //                     <section>
-    //                         <div>
-    //                             <p>1</p>
-    //                         </div>
-    //                         <div>
-    //                             <p>Anxiety</p>
-    //                         </div>
-    //                     </section>
-    //                     <section>
-    //                         <div>
-    //                             <p>2</p>
-    //                         </div>
-    //                         <div>
-    //                             <p>Depression</p>
-    //                         </div>
-    //                     </section>
-    //                     <section>
-    //                         <div>
-    //                             <p>3</p>
-    //                         </div>
-    //                         <div>
-    //                             <p>Stress</p>
-    //                         </div>
-    //                     </section>
-    //                     <section>
-    //                         <div>
-    //                             <p>4</p>
-    //                         </div>
-    //                         <div>
-    //                             <p>Eating Disorder</p>
-    //                         </div>
-    //                     </section>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // };
+    const Prompt = () => {
+        return (
+            <div className="Prompts">
+                <div className="image">
+                    <img src={promptImage} alt="" />
+                </div>
+                <div
+                    className="cancel"
+                    onClick={() => {
+                        showPrompt(false);
+                    }}
+                >
+                    <p>Cancel</p>
+                </div>
+                <div className="flexs">
+                    <section
+                        onClick={() => {
+                            navigate("/tranquil/assessments/daily/Anxiety");
+                        }}
+                    >
+                        <div>
+                            <p>1</p>
+                        </div>
+                        <div>
+                            <p>Anxiety</p>
+                        </div>
+                    </section>
+                    <section
+                        onClick={() => {
+                            navigate("/tranquil/assessments/daily/Depression");
+                        }}
+                    >
+                        <div>
+                            <p>2</p>
+                        </div>
+                        <div>
+                            <p>Depression</p>
+                        </div>
+                    </section>
+                    <section
+                        onClick={() => {
+                            navigate("/tranquil/assessments/daily/Stress");
+                        }}
+                    >
+                        <div>
+                            <p>3</p>
+                        </div>
+                        <div>
+                            <p>Stress</p>
+                        </div>
+                    </section>
+                    <section
+                        onClick={() => {
+                            navigate(
+                                "/tranquil/assessments/daily/Eating Disorder"
+                            );
+                        }}
+                    >
+                        <div>
+                            <p>4</p>
+                        </div>
+                        <div>
+                            <p>Eating Disorder</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        );
+    };
+
+    var [prompt, showPrompt] = useState(false);
+
     return (
         <div className="Home">
             <nav>
-                <div></div>
+                <div>
+                    <img src={state.image} alt="" />
+                </div>
                 <div></div>
             </nav>
+
             {isImagesLoading === false ? <Spinner /> : null}
             <div className="homePageContainer">
                 <header>
-                    <h1>Hi {username}</h1>
+                    <h1>Hi {state.userName} !</h1>
                     <p>
                         {monthString} {day}, {year}
                     </p>
                 </header>
+
                 <div className="Quote">
                     <p>"There's only one of you in the entire world, </p>
                     <p>Live it. Love it!"</p>
@@ -249,7 +287,7 @@ function Initial() {
                                     key={index}
                                     onClick={() => {
                                         navigate(
-                                            `assessments/assessment/${test.name}`
+                                            `/tranquil/assessments/assessment/${test.name}`
                                         );
                                     }}
                                 >
@@ -365,21 +403,12 @@ function Initial() {
                     </div>
                 </div>
             </div>
+            {prompt ? (
+                <div className="Prompt">
+                    <Prompt />
+                </div>
+            ) : null}
         </div>
-    );
-}
-
-function Home() {
-    return (
-        <>
-            <Routes>
-                <Route path="" element={<Initial />} />
-                <Route
-                    path="assessments/:test/:specifics"
-                    element={<Assessments />}
-                />
-            </Routes>
-        </>
     );
 }
 

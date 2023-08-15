@@ -4,6 +4,7 @@ import Spinner from "../../Globals/Spinner/Spinner";
 import { useState, useEffect } from "react";
 import { preloadImages } from "../../Globals/Globals";
 import { PageDetails } from "../Tranquil/PageContext";
+import Nav from "../Tranquil/Nav/Nav";
 
 function Goals() {
     var [isImagesLoading, setImagesLoaded] = useState(false);
@@ -31,6 +32,7 @@ function Goals() {
     return (
         <div className="Goals">
             {isImagesLoading === false ? <Spinner /> : null}
+            <Nav link="/tranquil/home" />
             <header>
                 <h1>Goal Setting</h1>
             </header>

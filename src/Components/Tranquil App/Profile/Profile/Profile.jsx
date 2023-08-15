@@ -147,19 +147,20 @@ function Profile() {
             {isImagesLoading === false ? <Spinner /> : null}
             <header>
                 <h1>Profile</h1>
+
                 <div className="imageDiv">
                     <div>
                         <img src={state.image} alt="" />
                         <section
                             style={{
-                                width: "20%",
-                                height: "20%",
+                                width: "15%",
+                                height: "15%",
                                 maxHeight: "50px",
                                 maxWidth: "50px",
                                 borderRadius: "50%",
                                 position: "absolute",
-                                left: "75%",
-                                top: "80%",
+                                left: "78%",
+                                top: "78%",
                                 backgroundImage: `url(${setImage})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: "cover",

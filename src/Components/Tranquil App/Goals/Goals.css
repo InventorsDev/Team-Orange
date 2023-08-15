@@ -17,21 +17,25 @@
 
 .Goals header h1 {
     font-family: "Lato";
-    font-size: 20px;
-    margin-top: 80px;
+    font-size: 18px;
+    margin-top: 10px;
     font-weight: 700;
 }
 
 .Goals .Image {
+    margin-top: 40px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 300px;
-    width: 100vh;
+    height: 40%;
+    width: 100%;
 }
 
 .Goals .Image img {
-    margin-top: 40px;
+    width: 90%;
+    height: 90%;
+    margin: auto;
 }
 
 .Goals .Paragraph {
@@ -41,13 +45,13 @@
 }
 
 .Goals .Paragraph p {
-    margin-top: 70px;
+    margin-top: 10px;
     font-family: "Lato";
     font-size: 14px;
     text-align: center;
 }
 
-.Goals button {
+.Goals .Paragraph button {
     appearance: none;
     margin-top: 70px;
     margin-bottom: 100px;
