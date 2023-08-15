@@ -37,7 +37,9 @@ function Nav(props) {
             <button
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate(`${link}`);
+                    if (link) {
+                        navigate(`${link}`);
+                    }
                 }}
             >
                 <img src={backward} alt="" />

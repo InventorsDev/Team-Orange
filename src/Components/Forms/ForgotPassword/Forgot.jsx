@@ -49,7 +49,6 @@ function Forgot() {
         fetch(`${api}/auth/forgot-password`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
                 if (result.statusCode === 200) {
                     setEmailMessage({
                         ...emailSentMessage,
@@ -70,8 +69,7 @@ function Forgot() {
                         state: false,
                     });
                 }
-            })
-            .catch((error) => console.log("error", error));
+            });
     };
 
     const Email = (
@@ -142,7 +140,6 @@ function Forgot() {
         fetch(`${api}/auth/reset-password`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
                 if (result.statusCode === 200) {
                     setToken({
                         ...tokenResetMessage,
@@ -166,8 +163,7 @@ function Forgot() {
                         state: false,
                     });
                 }
-            })
-            .catch((error) => console.log("error", error));
+            });
     };
 
     var newPasswordRef = useRef();

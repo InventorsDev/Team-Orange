@@ -49,8 +49,8 @@ function Profile() {
                     clearTimeout(imageTimer);
                 };
             })
-            .catch((error) => {
-                console.log("Error Loading Images", error);
+            .catch(() => {
+                console.log("Error Loading Images");
             });
     }, [state]);
 
@@ -139,7 +139,7 @@ function Profile() {
                     });
                 }
             })
-            .catch((error) => console.log("Error:", error));
+            
     };
 
     return (

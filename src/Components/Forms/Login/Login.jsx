@@ -6,7 +6,7 @@ import brand from "../../../Assets/brand_gold.svg";
 import Typewriter from "typewriter-effect";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { preloadImages } from "../../Globals/Globals";
+import { preloadImages, Oauth } from "../../Globals/Globals";
 import Spinner from "../../Globals/Spinner/Spinner";
 
 function LogIn() {
@@ -20,8 +20,9 @@ function LogIn() {
     };
 
     const handleGoogle = () => {
-        window.location.href =
-            "https://accounts.google.com/o/oauth2/auth?client_id=834746144707-caq2kavpv92okmv38beutlabr023qg7p.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Ftranquil.skrind.com%2Fapi%2Fv1%2Fauth%2Fgoogle%2Fcallback&scope=openid+profile+email&response_type=code";
+        if (Oauth) {
+            window.location.href = Oauth;
+        }
     };
 
     const appleClicked = () => {
@@ -46,8 +47,8 @@ function LogIn() {
                     clearTimeout(imageTimer);
                 };
             })
-            .catch((error) => {
-                console.log("Error Loading Images", error);
+            .catch(() => {
+                console.log("Error Loading Images");
             });
     }, []);
     return (

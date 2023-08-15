@@ -102,8 +102,8 @@ function Home() {
                     clearTimeout(imageTimer);
                 };
             })
-            .catch((error) => {
-                console.log("Error Loading Images", error);
+            .catch(() => {
+                console.log("");
             });
     }, [state]);
 

@@ -22,27 +22,19 @@ import Profile from "./Components/Tranquil App/Profile/Profile/Profile";
 import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/UpdateProfile";
 import { PageProvider } from "./Components/Tranquil App/Tranquil/PageContext";
 import Assessments from "./Components/Tranquil App/Home/AssessmentSchema/Assessment";
+
 function App() {
     var navigate = useNavigate();
-    var [openingCompleted, setCompletionState] = useState(false);
     var [firstTextDisplay, setNewTextDisplay] = useState(true);
     function Opening() {
         useEffect(() => {
-            const firstTextTimer = setTimeout(() => {
+            setTimeout(() => {
                 setNewTextDisplay(false);
             }, 2000);
 
-            const introTimer = setTimeout(() => {
-                setCompletionState(true);
-            }, 2100);
-
-            return () => {
-                clearTimeout(firstTextTimer);
-                clearTimeout(introTimer);
-            };
-        }, []);
-        useEffect(() => {
-            openingCompleted === true && navigate("/login");
+            setTimeout(() => {
+                navigate("/login");
+            }, 4100);
         });
 
         return (

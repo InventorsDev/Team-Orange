@@ -102,9 +102,10 @@ function SignUp() {
         };
 
         setEmail(state.email);
-        fetch(`${api}/auth/register`, requestOptions)
-            .then((response) => response.json())
-            .catch((error) => console.log("error", error));
+        fetch(`${api}/auth/register`, requestOptions).then((response) =>
+            response.json()
+        );
+
         clearForm();
         navigate("/otp");
     };

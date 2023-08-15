@@ -14,7 +14,7 @@ input[type="password"]::-ms-reveal {
 }
 
 .Opening {
-    background: linear-gradient(#182625, #dae9da);
+    background-color: #060e0a;
     height: 100vh;
 }
 

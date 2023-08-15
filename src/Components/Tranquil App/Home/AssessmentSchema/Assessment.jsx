@@ -4,6 +4,7 @@ import { api } from "../../../Globals/Globals";
 import arrowBack from "../../Assets/back.svg";
 import { useParams } from "react-router";
 import Spinner from "../../../Globals/Spinner/Spinner";
+import Nav from "../../Tranquil/Nav/Nav";
 
 function Assessments() {
     var { test, specifics } = useParams();
@@ -40,7 +41,7 @@ function Assessments() {
                 setIndex(3);
                 break;
             default:
-                console.log("");
+                setIndex(null);
         }
     }, [specifics]);
 
@@ -50,12 +51,10 @@ function Assessments() {
             redirect: "follow",
         };
 
-        console.log(endPoint, index);
         if (endPoint && endPoint === "daily-assessment-questions") {
             fetch(`${api}/${endPoint}`, requests)
                 .then((response) => response.json())
                 .then((result) => {
-                    console.log(result);
                     if (result && result.data.daily_assessment_conditions) {
                         const asmtData =
                             result.data.daily_assessment_conditions[index];
@@ -68,15 +67,11 @@ function Assessments() {
                             }))
                         );
                     }
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
                 });
         } else if (endPoint && endPoint === "assessment-questions") {
             fetch(`${api}/${endPoint}`, requests)
                 .then((response) => response.json())
                 .then((result) => {
-                    console.log(result);
                     if (result && result.data.assessment_conditions) {
                         const asmtData =
                             result.data.assessment_conditions[index];
@@ -91,9 +86,6 @@ function Assessments() {
                             }))
                         );
                     }
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
                 });
         }
     }, [endPoint, index]);
@@ -142,7 +134,9 @@ function Assessments() {
                     <div className="testFormPgs">
                         {asmt.questions.map((elmnt, pgIdx) => (
                             <div key={pgIdx} className="qst">
-                                <nav>
+                                <Nav link="/tranquil/home" />
+
+                                <nav className="nave">
                                     <div
                                         onClick={() => {
                                             formRef.current.scrollLeft -=
