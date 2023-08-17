@@ -8,6 +8,7 @@ import logOut from "../../Assets/logOut.svg";
 import arrowLeft from "../../Assets/arrowLeft.svg";
 import darkModeToggle from "../../Assets/darkModeToggle.svg";
 import setImage from "../../Assets/setImage.svg";
+import profileImage from "../../Assets/profile_img_default.svg";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { FormDetails } from "../../../Globals/FormContext";
@@ -19,7 +20,7 @@ function Profile() {
     var { token } = FormDetails();
     var [state, setState] = useState({
         fullName: "",
-        image: "",
+        image: profileImage,
     });
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var [isUserLogggingOut, setLogstatus] = useState(false);
@@ -138,8 +139,7 @@ function Profile() {
                         status: false,
                     });
                 }
-            })
-            
+            });
     };
 
     return (

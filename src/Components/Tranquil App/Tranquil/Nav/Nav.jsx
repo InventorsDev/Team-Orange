@@ -1,5 +1,6 @@
 import "./Nav.css";
 import backward from "../../Assets/backwardsArrow.svg";
+import navImage from "../../Assets/profile_img_default.svg";
 import { useEffect, useState } from "react";
 import { FormDetails } from "../../../Globals/FormContext";
 import { useNavigate } from "react-router";
@@ -10,7 +11,7 @@ function Nav(props) {
     var { token } = FormDetails();
     var navigate = useNavigate();
 
-    var [userProfileImage, setUserProfileImage] = useState(null);
+    var [userProfileImage, setUserProfileImage] = useState(navImage);
 
     useEffect(() => {
         if (token) {

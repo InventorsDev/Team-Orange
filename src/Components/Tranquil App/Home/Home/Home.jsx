@@ -15,6 +15,7 @@ import selfCareLove from "../../Assets/selfCareLove.svg";
 import selfCareStar from "../../Assets/selfCareStar.svg";
 import goalsFlower from "../../Assets/goalsFlowers.svg";
 import promptImage from "../../Assets/battery.svg";
+import navImage from "../../Assets/profile_img_default.svg";
 import { preloadImages, api } from "../../../Globals/Globals";
 import Spinner from "../../../Globals/Spinner/Spinner";
 import { FormDetails } from "../../../Globals/FormContext";
@@ -27,7 +28,7 @@ function Home() {
     var { token } = FormDetails();
     var [state, setState] = useState({
         userName: "",
-        image: "",
+        image: navImage,
     });
     var date = new Date();
     var day = date.getDate();

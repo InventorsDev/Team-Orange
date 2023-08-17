@@ -1,6 +1,6 @@
 import "./Resources.css";
 import backwards from "../../Assets/backwardsArrow.svg";
-import Articles from "../../Assets/Articles.svg";
+import Article from "../../Assets/Articles.svg";
 import Videos from "../../Assets/Videos.svg";
 import Materials from "../../Assets/Materials.svg";
 import Listen from "../../Assets/Listen.svg";
@@ -9,21 +9,18 @@ import { preloadImages } from "../../../Globals/Globals";
 import { useEffect, useState } from "react";
 import { PageDetails } from "../../Tranquil/PageContext";
 import Nav from "../../Tranquil/Nav/Nav";
+import { Route, Routes, useNavigate } from "react-router";
+import Articles from "../Articles/Articles";
 
-function Resources() {
+function Initial() {
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var { setCurrentPage } = PageDetails();
+    var navigate = useNavigate();
     useEffect(() => {
         setCurrentPage("resources");
     });
     useEffect(() => {
-        const imagesToPreload = [
-            backwards,
-            Articles,
-            Videos,
-            Materials,
-            Listen,
-        ];
+        const imagesToPreload = [backwards, Article, Videos, Materials, Listen];
         preloadImages(imagesToPreload)
             .then(() => {
                 const imageTimer = setTimeout(() => {
@@ -48,9 +45,14 @@ function Resources() {
                 <h1>Resources</h1>
             </header>
             <div className="sections">
-                <div className="group">
+                <div
+                    className="group"
+                    onClick={() => {
+                        navigate("articles");
+                    }}
+                >
                     <div>
-                        <img src={Articles} alt="" />
+                        <img src={Article} alt="" />
                     </div>
                     <p>Articles</p>
                 </div>
@@ -80,4 +82,12 @@ function Resources() {
     );
 }
 
+function Resources() {
+    return (
+        <Routes>
+            <Route path="" element={<Initial />} />
+            <Route path="articles" element={<Articles />} />
+        </Routes>
+    );
+}
 export default Resources;
