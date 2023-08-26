@@ -9,16 +9,20 @@ import { FormDetails } from "../../../Globals/FormContext";
 import navImage from "../../Assets/profile_img_default.svg";
 import { api } from "../../../Globals/Globals";
 import backward from "../../Assets/backwardsArrow.svg";
+// import axios from "axios";
+// import { HttpProxyAgent } from "http-proxy-agent";
 
 function Articles() {
+    var { token } = FormDetails();
     var [articles, setArticles] = useState([]);
+    var [ardx, setArdx] = useState();
+    var [articlePage, setArticlePage] = useState(false);
+    var [userProfileImage, setUserProfileImage] = useState(navImage);
+    var [inputText, setInput] = useState("");
+    var [sbut, setSbut] = useState(false);
     var [topic, setTopic] = useState(
         "stress, anxiety, depression, eating disorder"
     );
-    var [ardx, setArdx] = useState();
-    var [articlePage, setArticlePage] = useState(false);
-    var { token } = FormDetails();
-    var [userProfileImage, setUserProfileImage] = useState(navImage);
     var months = [
         "Jan",
         "Feb",
@@ -33,13 +37,12 @@ function Articles() {
         "Nov",
         "Dec",
     ];
+
     const handleString = (elem) => {
         const [yearstr, monthstr, datestr] = elem?.split("-");
-
         const year = parseInt(yearstr, 10);
         const month = parseInt(monthstr, 10);
         const date = parseInt(datestr, 10);
-
         return `${months[month - 1]} ${date}, ${year}`;
     };
 
@@ -53,13 +56,13 @@ function Articles() {
 
     const handleLongContent = (elem) => {
         const ellipsisIndex = elem.indexOf("…");
-
         if (ellipsisIndex !== -1) {
             const cont = elem.substring(0, ellipsisIndex);
 
             return `${cont}`;
         }
     };
+
     useEffect(() => {
         var requests = {
             method: "GET",
@@ -67,8 +70,14 @@ function Articles() {
                 Authorization: `Bearer ${newstoken}`,
             },
         };
+        // const httpsAgent = new HttpProxyAgent("http://50.219.106.83:3000");
+        // const config = {
+        //     url: `${newsapi}/everything?q=${topic} mental health&language=en&pageSize=50`,
+        //     httpsAgent,
+        // };
+
         fetch(
-            `${newsapi}/everything?q=${topic} mental health&language=en`,
+            `${newsapi}/everything?q=${topic} mental health&language=en&pageSize=50`,
             requests
         )
             .then((response) => response.json())
@@ -76,6 +85,14 @@ function Articles() {
                 setArticles(result.articles);
             })
             .catch((err) => console.log(err));
+
+        // axios
+        //     .request(config, requests)
+        //     .then((res) => {
+        //         console.log(res);
+        //         res.articles;
+        //     })
+        //     .catch((err) => console.log(err));
     }, [topic]);
 
     useEffect(() => {
@@ -98,8 +115,6 @@ function Articles() {
         }
     }, [token]);
 
-    var [inputText, setInput] = useState("");
-    var [sbut, setSbut] = useState(false);
     return (
         <div className="Articles">
             {articlePage === false ? (

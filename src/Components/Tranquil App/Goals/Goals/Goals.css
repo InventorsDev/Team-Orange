@@ -51,9 +51,19 @@
     text-align: center;
 }
 
+.Goals .viewSetGoals {
+    width: 100%;
+    text-decoration: underline #71727a;
+    font-size: 15px;
+    margin-top: 10px;
+    font-family: "Lato";
+    color: #71727a;
+    text-align: center;
+}
+
 .Goals .Paragraph button {
     appearance: none;
-    margin-top: 70px;
+    margin-top: 30px;
     margin-bottom: 100px;
     width: 60%;
     justify-self: center;

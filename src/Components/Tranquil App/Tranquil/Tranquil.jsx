@@ -1,7 +1,7 @@
 import "./Tranquil.css";
 import Home from "../Home/Home/Home.jsx";
 import Resources from "../Resources/Resources/Resources.jsx";
-import Goals from "../Goals/Goals.jsx";
+import Goals from "../Goals/Goals/Goals.jsx";
 import Community from "../Community/Community.jsx";
 import homeGreen from "../Assets/homeGreen.svg";
 import homeBlack from "../Assets/homeBlack.svg";
@@ -170,7 +170,7 @@ function Tranquil() {
                 <Route path="" element={<Navigate to="home" />} />
                 <Route path="home/*" element={<Home />} />
                 <Route path="resources/*" element={<Resources />} />
-                <Route path="goals" element={<Goals />} />
+                <Route path="goals/*" element={<Goals />} />
                 <Route path="community" element={<Community />} />
             </Routes>
 
