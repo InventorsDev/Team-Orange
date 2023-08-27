@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Team-Orange/static/css/main.348493cf.css",
-    "main.js": "/Team-Orange/static/js/main.faa2ce41.js",
+    "main.css": "/Team-Orange/static/css/main.90f724de.css",
+    "main.js": "/Team-Orange/static/js/main.2c49fef0.js",
     "static/js/787.aa894972.chunk.js": "/Team-Orange/static/js/787.aa894972.chunk.js",
     "static/media/happy.svg": "/Team-Orange/static/media/happy.f6573c61168daabf8b97f85835723077.svg",
     "static/media/anxious.svg": "/Team-Orange/static/media/anxious.410dea771d36d03aedff6d375259392b.svg",
@@ -27,6 +27,7 @@
     "static/media/writingSun.svg": "/Team-Orange/static/media/writingSun.3bae00e5b1ecb7dd45ff808c22f4ae18.svg",
     "static/media/setImage.svg": "/Team-Orange/static/media/setImage.a5af760ef5f3b130f9185d64efc5bd76.svg",
     "static/media/Breathe.svg": "/Team-Orange/static/media/Breathe.1dd5e6670ef984cf6c30f69ccc8bac3e.svg",
+    "static/media/calGrey.svg": "/Team-Orange/static/media/calGrey.da32c6c082ac492241303d48388f8302.svg",
     "static/media/Meditate.svg": "/Team-Orange/static/media/Meditate.ea12b21596a3821022e9c2720b4b1229.svg",
     "static/media/Listen.svg": "/Team-Orange/static/media/Listen.6c90f51c836a39630a92efdca6d4dc34.svg",
     "static/media/Journal.svg": "/Team-Orange/static/media/Journal.9a978e6a3cfd5e1ace5cb678461b0062.svg",
@@ -40,6 +41,7 @@
     "static/media/communityGreen.svg": "/Team-Orange/static/media/communityGreen.61bf1aecc9c812b9e2585c32ca017826.svg",
     "static/media/communityBlack.svg": "/Team-Orange/static/media/communityBlack.62dcc5837c0ed9e32daa1d3d9ccddde0.svg",
     "static/media/inviteFriends.svg": "/Team-Orange/static/media/inviteFriends.0a4e1c1bc5a501c61091888dd4595ae3.svg",
+    "static/media/curlBack.svg": "/Team-Orange/static/media/curlBack.0e593dc4ce413814fab943cc196bb090.svg",
     "static/media/resourcesGreen.svg": "/Team-Orange/static/media/resourcesGreen.62a69ec3e61be75670e7721e0a11e0f5.svg",
     "static/media/resourcesBlack.svg": "/Team-Orange/static/media/resourcesBlack.47545edf90003810aae3d71a15ea87e1.svg",
     "static/media/Read.svg": "/Team-Orange/static/media/Read.f0312b7c6b5866ce020ea8308414774e.svg",
@@ -66,12 +68,12 @@
     "static/media/backwardsArrow.svg": "/Team-Orange/static/media/backwardsArrow.b37c6928ecfeb93898bd82c15a8aec85.svg",
     "static/media/arrowLeft.svg": "/Team-Orange/static/media/arrowLeft.94c6e84e50c09562668570fca3417506.svg",
     "static/media/dropDown.svg": "/Team-Orange/static/media/dropDown.eb4d9489b1505cdc52f6652eeef63a5b.svg",
-    "main.348493cf.css.map": "/Team-Orange/static/css/main.348493cf.css.map",
-    "main.faa2ce41.js.map": "/Team-Orange/static/js/main.faa2ce41.js.map",
+    "main.90f724de.css.map": "/Team-Orange/static/css/main.90f724de.css.map",
+    "main.2c49fef0.js.map": "/Team-Orange/static/js/main.2c49fef0.js.map",
     "787.aa894972.chunk.js.map": "/Team-Orange/static/js/787.aa894972.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.348493cf.css",
-    "static/js/main.faa2ce41.js"
+    "static/css/main.90f724de.css",
+    "static/js/main.2c49fef0.js"
   ]
 }
