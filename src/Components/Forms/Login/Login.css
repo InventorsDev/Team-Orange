@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?&family=Montserrat:wght@100;200;300;400&family=Poppins:wght@300;400&family=The+Nautigal:wght@700&display=swap");
+
+.Login {
+    background-color: #fefefe;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.Login .brain {
+    position: absolute;
+    right: 0px;
+    height: 150px;
+    top: 0px;
+}
+.Login .head {
+    position: relative;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Login .head img {
+    height: 40px;
+    margin-bottom: 50px;
+}
+
+.Login .head h1 {
+    font-size: 25px;
+    color: #3bcd84;
+    font-family: "Montserrat", sans-serif;
+}
+
+.Login .head div {
+    margin-top: 5px;
+    font-size: 15px;
+    color: #71727a;
+    font-family: "Montserrat", sans-serif;
+}
+
+.loginOptions {
+    width: 100vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginOptions .auths {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    border: none;
+    width: 230px;
+    height: 50px;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    box-shadow: 0px 0px 15px 1px #00000020;
+    background-color: #fff;
+}
+
+.loginOptions .auths.google {
+    margin-top: 30px;
+}
+
+.loginOptions .auths.apple {
+    margin-top: 10px;
+}
+
+.loginOptions .authImageDiv {
+    display: flex;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #fff;
+    justify-content: center;
+    box-shadow: 0px 0px 10px 0.1px #00000020;
+    align-items: center;
+    vertical-align: text-bottom;
+}
+
+.loginOptions .authImageDiv img {
+    align-self: center;
+    width: 20px;
+    height: 20px;
+}
+
+.loginOptions .auths .textDiv {
+    height: 50px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #161616;
+}
+
+.loginOptions .auths .textDiv p {
+    font-size: 12px;
+}
+
+.loginOptions .appleUnavailable {
+    color: #fa3c6a;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.loginOptions .auths.tranquil {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #71c29a;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.loginOptions .or {
+    margin-top: 20px;
+    font-family: "Lato";
+    color: #71727a;
+    font-size: 15px;
+}
+
+.Login .newAccount {
+    font-family: "Lato", sans-serif;
+    display: block;
+    font-size: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login .newAccount p {
+    color: #71727a;
+    font-size: 13px;
+    text-align: center;
+    display: inline;
+}
+
+.Login .newAccount .span {
+    display: inline;
+    color: #3bcd84;
+    text-decoration: none;
+}

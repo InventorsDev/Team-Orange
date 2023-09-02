@@ -1,53 +1,24 @@
-import homeBlack from "../Assets/homeBlack.svg";
-import resourcesBlack from "../Assets/resourcesBlack.svg";
-import goalsBlack from "../Assets/goalsBlack.svg";
-import communityGreen from "../Assets/communityGreen.svg";
-import profileBlack from "../Assets/profileBlack.svg";
-import Spinner from "../../Spinner";
-import Footer from "../Footer";
-import { useState, useEffect } from "react";
-import { preloadImages } from "../../Globals";
+import { useEffect } from "react";
+import { PageDetails } from "../Tranquil/PageContext";
+import "./Community.css";
+import logo from "../../../Assets/brand_gold.svg";
 
 function Community() {
-     var [isImagesLoading, setImagesLoaded] = useState(false);
-     useEffect(() => {
-          const imagesToPreload = [
-               homeBlack,
-               resourcesBlack,
-               goalsBlack,
-               communityGreen,
-               profileBlack,
-          ];
-          preloadImages(imagesToPreload)
-               .then(() => {
-                    const imageTimer = setTimeout(() => {
-                         setImagesLoaded(true);
-                    }, 1000);
+    var { setCurrentPage } = PageDetails();
+    useEffect(() => {
+        setCurrentPage("community");
+    });
 
-                    return () => {
-                         clearTimeout(imageTimer);
-                    };
-               })
-               .catch((error) => {
-                    console.log("Error Loading Images", error);
-               });
-     }, []);
-
-     var images = {
-          home: homeBlack,
-          resources: resourcesBlack,
-          goals: goalsBlack,
-          community: communityGreen,
-          profile: profileBlack,
-     };
-
-     return (
-          <div>
-               {isImagesLoading === false ? <Spinner /> : null}
-               <p>Community</p>;
-               <Footer currentPage="community" image={images} />
-          </div>
-     );
+    return (
+        <div className="Community">
+            <img src={logo} alt="" />
+            <p>
+                Tranquil is developing an interface where users can all interact
+                together.
+            </p>
+            <p>In the meantime, do well to explore other parts of the app.</p>
+        </div>
+    );
 }
 
 export default Community;

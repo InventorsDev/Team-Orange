@@ -1,0 +1,79 @@
+.Goals {
+    width: 100vw;
+    max-width: 550px;
+    height: 100vh;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    box-shadow: 0px 0px 2px #00000020;
+}
+
+.Goals::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+}
+
+.Goals header h1 {
+    font-family: "Lato";
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.Goals .Image {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+    width: 100%;
+}
+
+.Goals .Image img {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+}
+
+.Goals .Paragraph {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Goals .Paragraph p {
+    margin-top: 10px;
+    font-family: "Lato";
+    font-size: 14px;
+    text-align: center;
+}
+
+.Goals .viewSetGoals {
+    width: 100%;
+    text-decoration: underline #71727a;
+    font-size: 15px;
+    margin-top: 10px;
+    font-family: "Lato";
+    color: #71727a;
+    text-align: center;
+}
+
+.Goals .Paragraph button {
+    appearance: none;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    width: 60%;
+    justify-self: center;
+    border: none;
+    height: 50px;
+    color: #fff;
+    border-radius: 12px;
+    background-color: #71c29a;
+    font-family: "Montserrat";
+    font-size: 14px;
+    margin-left: 20%;
+    font-weight: 700;
+}
