@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300&family=Epilogue:wght@300&family=Lato:wght@300;400;700&family=Montserrat:wght@100;400&family=Poppins:wght@200&family=The+Nautigal:wght@700&family=Ubuntu+Mono&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+.Opening {
+    background-color: #060e0a;
+    height: 100vh;
+}
+
+.Opening header {
+    background-image: url(./Assets/home.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Opening .imgText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.imgText p {
+    font-family: "Lato";
+    text-align: center;
+    color: #d7b31b;
+    font-weight: 300;
+}
+
+.imgText .firstText {
+    animation: textOpacityChangeForOpeningPage1 2s;
+}
+
+.imgText .secondText {
+    animation: textOpacityChangeForOpeningPage2 2s;
+}
+
+@keyframes textOpacityChangeForOpeningPage1 {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes textOpacityChangeForOpeningPage2 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

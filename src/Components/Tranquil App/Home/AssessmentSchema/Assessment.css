@@ -1,0 +1,148 @@
+.Tests {
+    width: 100vw;
+    height: 100vh;
+    max-width: 550px;
+    background: #fefefe;
+    box-shadow: 0px 0px 2px #00000020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.testForm {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.testForm::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+}
+.testFormPgs {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    height: 100%;
+}
+
+.qst {
+    width: 100vw;
+    max-width: 550px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qst .nave {
+    margin-top: 10px;
+    width: 90%;
+    display: flex;
+    font-size: 15px;
+    font-family: "Lato";
+    gap: 20px;
+    padding-left: 10px;
+}
+
+.qst .nave div img {
+    width: 12px;
+    height: 12px;
+}
+
+.qst header {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.qst header h1 {
+    font-family: "Lato";
+    font-size: 18px;
+    text-align: center;
+}
+
+.qst .questions {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.qst .questions .par {
+    padding-top: 30px;
+    font-family: "Lato";
+    font-size: 17px;
+    font-weight: 400;
+    text-align: center;
+    padding-bottom: 30px;
+    width: 90%;
+    color: #161616;
+}
+
+.qst .questions fieldset {
+    width: 85%;
+    max-width: 300px;
+    border: none;
+    height: 50px;
+    background-color: #449072;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+}
+
+.qst .questions .picked {
+    border: solid 1px #449072;
+    background-color: #e8fbf2;
+}
+
+.qst .questions fieldset div {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.qst .questions fieldset div input {
+    height: 17px;
+    appearance: none;
+    width: 17px;
+    margin-left: 20px;
+    border-radius: 50%;
+    background-color: #449072;
+    border: solid 5px #e8fbf2;
+}
+
+.qst .questions .picked div input {
+    border-radius: 50%;
+    background-color: #e8fbf2;
+    border: solid 5px #449072;
+}
+
+.qst .questions fieldset div p {
+    color: #e8fbf2;
+    margin-left: 20px;
+    font-family: "Lato";
+    font-size: 15px;
+}
+
+.qst .questions .picked p {
+    color: #449072;
+}
+
+.qst .questions button {
+    width: 50%;
+    height: 50px;
+    border: none;
+    background-color: #71c19a;
+    border-radius: 10px;
+    font-family: "Montserrat";
+    color: #e8fbf2;
+    font-size: 15px;
+    margin-top: auto;
+    max-width: 150px;
+}
+
+.qst .questions button:disabled {
+    background-color: #71c19a50;
+}

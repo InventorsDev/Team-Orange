@@ -1,0 +1,130 @@
+.SignIn {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: #fefefe;
+}
+
+.SignIn header {
+    width: 80vw;
+    max-width: 300px;
+    margin-bottom: 40px;
+}
+
+.SignIn header {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+.SignIn header h1 {
+    font-family: "Lato", sans-serif;
+    font-size: 24px;
+    color: #1f2024;
+    font-weight: 100;
+}
+
+.SignIn header p {
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    color: #71727a;
+    margin-bottom: 5px;
+}
+
+.signInForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.signInForm fieldset {
+    border: none;
+    margin-top: 10px;
+    position: relative;
+}
+
+.signInForm fieldset input {
+    width: 80vw;
+    max-width: 300px;
+    height: 50px;
+    border: none;
+    border: solid 1px #71727a;
+    border-radius: 12px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background: transparent;
+}
+
+.signInForm fieldset input::placeholder {
+    font-family: "Lato";
+}
+
+.signInForm input:focus {
+    border: solid 1px #9a3258;
+    background: transparent;
+    font-size: 12px;
+    caret-color: #9a3258;
+    color: #9a3258;
+    outline: none;
+}
+
+.signInForm fieldset .eyeIcon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 10px;
+    top: 12px;
+    font-size: 16px;
+    color: #71727a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signInForm .emailValidated {
+    color: #9a3258 !important;
+    font-size: 10px !important;
+    text-align: left !important;
+    margin-top: 5px;
+}
+
+.signInForm button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    align-self: center;
+    height: 50px;
+    background-color: #71c29a;
+    border-radius: 12px;
+    color: #fff;
+    border: none;
+}
+
+.signInForm button:disabled {
+    background-color: #71c29a50;
+}
+
+.signInForm .valids {
+    margin-bottom: 10px;
+    font-size: 10px;
+    text-align: center;
+    color: #3bcd84;
+}
+
+.signInForm .valids.red {
+    color: #9a3258;
+}
+
+.signInForm .forgot {
+    font-size: 12px;
+    width: 100%;
+    text-align: right;
+    color: #f7003e;
+    margin-top: 10px;
+    text-decoration: none;
+    font-family: "Lato";
+    font-weight: 400;
+}
