@@ -22,6 +22,7 @@ import Profile from "./Components/Tranquil App/Profile/Profile/Profile";
 import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/UpdateProfile";
 import { PageProvider } from "./Components/Tranquil App/Tranquil/PageContext";
 import Assessments from "./Components/Tranquil App/Home/AssessmentSchema/Assessment";
+import Results from "./Components/Tranquil App/Home/AssessmentResults/Results";
 
 function App() {
     var navigate = useNavigate();
@@ -85,6 +86,10 @@ function App() {
                     <Route
                         path="/tranquil/assessments/:test/:specifics"
                         element={<Assessments />}
+                    />
+                    <Route
+                        path="/tranquil/assessments/results/:test/:score"
+                        element={<Results />}
                     />
                 </Routes>
             </PageProvider>

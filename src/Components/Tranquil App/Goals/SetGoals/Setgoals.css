@@ -186,7 +186,7 @@
 
 .goalSet div {
     width: 250px;
-    height: 250px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -209,7 +209,7 @@
 
 .goalSet div p {
     margin-top: 10px;
-    width: 60%;
+    width: 70%;
     font-family: "Lato";
     font-weight: 100;
     text-align: center;
@@ -226,4 +226,5 @@
     width: 50%;
     font-family: "Montserrat";
     color: #fff;
+    margin-bottom: 20px;
 }

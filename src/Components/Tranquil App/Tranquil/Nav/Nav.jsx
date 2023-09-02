@@ -28,8 +28,11 @@ function Nav(props) {
                 .then((result) => {
                     if (result && result.data.profile_image_url) {
                         setUserProfileImage(result.data.profile_image_url);
+                    } else {
+                        setUserProfileImage(navImage);
                     }
-                });
+                })
+                .catch(console.log("error"));
         }
     }, [token]);
 

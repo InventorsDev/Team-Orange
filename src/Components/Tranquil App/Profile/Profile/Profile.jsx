@@ -9,6 +9,7 @@ import arrowLeft from "../../Assets/arrowLeft.svg";
 import darkModeToggle from "../../Assets/darkModeToggle.svg";
 import setImage from "../../Assets/setImage.svg";
 import profileImage from "../../Assets/profile_img_default.svg";
+import back from "../../Assets/backwardsArrow.svg";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { FormDetails } from "../../../Globals/FormContext";
@@ -37,6 +38,7 @@ function Profile() {
             darkMode,
             inviteFriends,
             logOut,
+            back,
             state.image,
             setImage,
         ];
@@ -72,10 +74,23 @@ function Profile() {
                         setState((prevState) => ({
                             ...prevState,
                             fullName: data.full_name,
-                            image: data.profile_image_url,
                         }));
+
+                        if (data.profile_image_url) {
+                            setState((prevState) => ({
+                                ...prevState,
+
+                                image: data.profile_image_url,
+                            }));
+                        } else {
+                            setState((prevState) => ({
+                                ...prevState,
+                                image: profileImage,
+                            }));
+                        }
                     }
-                });
+                })
+                .catch(console.log("error"));
         }
     }, [token]);
 
@@ -97,9 +112,7 @@ function Profile() {
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         var formdata = new FormData();
-
         formdata.append("full_name", state.fullName);
-
         formdata.append("image", selectedfile);
 
         var requestOptions = {
@@ -146,8 +159,16 @@ function Profile() {
         <div className="Profile">
             {isImagesLoading === false ? <Spinner /> : null}
             <header>
+                <div
+                    onClick={() => {
+                        navigate("/tranquil/home");
+                    }}
+                >
+                    <img src={back} alt="" />
+                </div>
                 <h1>Profile</h1>
-
+            </header>
+            <div className="imgCont">
                 <div className="imageDiv">
                     <div>
                         <img src={state.image} alt="" />
@@ -182,7 +203,7 @@ function Profile() {
                 </div>
 
                 <h1 className="fullname">{state.fullName}</h1>
-            </header>
+            </div>
             <div className="profileOptions">
                 <div onClick={handleEditProfile}>
                     <img src={editProfile} alt="" />

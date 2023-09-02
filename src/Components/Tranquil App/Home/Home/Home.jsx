@@ -18,11 +18,12 @@ import promptImage from "../../Assets/battery.svg";
 import navImage from "../../Assets/profile_img_default.svg";
 import { preloadImages, api } from "../../../Globals/Globals";
 import Spinner from "../../../Globals/Spinner/Spinner";
+import Journal from "../Journal/Journal";
 import { FormDetails } from "../../../Globals/FormContext";
-import { useNavigate } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import { PageDetails } from "../../Tranquil/PageContext";
 
-function Home() {
+function HomePageInitial() {
     var { setCurrentPage } = PageDetails();
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var { token } = FormDetails();
@@ -121,10 +122,22 @@ function Home() {
                 .then((response) => response.json())
                 .then((result) => {
                     if (result) {
-                        setState({
+                        setState((prevState) => ({
+                            ...prevState,
                             userName: result?.data?.username,
+                        }));
+                    }
+
+                    if (result.data.profile_image_url) {
+                        setState((prevState) => ({
+                            ...prevState,
                             image: result?.data?.profile_image_url,
-                        });
+                        }));
+                    } else {
+                        setState((prevState) => ({
+                            ...prevState,
+                            image: navImage,
+                        }));
                     }
                 });
         }
@@ -210,7 +223,11 @@ function Home() {
     return (
         <div className="Home">
             <nav>
-                <div>
+                <div
+                    onClick={() => {
+                        navigate("/tranquil/profile");
+                    }}
+                >
                     <img src={state.image} alt="" />
                 </div>
                 <div></div>
@@ -341,7 +358,12 @@ function Home() {
                             </div>
                         </div>
 
-                        <div className="group">
+                        <div
+                            className="group"
+                            onClick={() => {
+                                navigate("/tranquil/home/journal");
+                            }}
+                        >
                             <div>
                                 <section>
                                     <img alt="" src={journal} />
@@ -410,6 +432,15 @@ function Home() {
                 </div>
             ) : null}
         </div>
+    );
+}
+
+function Home() {
+    return (
+        <Routes>
+            <Route index path="" element={<HomePageInitial />} />
+            <Route path="journal/*" element={<Journal />} />
+        </Routes>
     );
 }
 

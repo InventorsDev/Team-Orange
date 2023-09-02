@@ -9,8 +9,7 @@ import { FormDetails } from "../../../Globals/FormContext";
 import navImage from "../../Assets/profile_img_default.svg";
 import { api } from "../../../Globals/Globals";
 import backward from "../../Assets/backwardsArrow.svg";
-// import axios from "axios";
-// import { HttpProxyAgent } from "http-proxy-agent";
+import { PageDetails } from "../../Tranquil/PageContext";
 
 function Articles() {
     var { token } = FormDetails();
@@ -23,6 +22,8 @@ function Articles() {
     var [topic, setTopic] = useState(
         "stress, anxiety, depression, eating disorder"
     );
+    var [showSpinner, setShowSpinner] = useState(false);
+    var { setCurrentPage } = PageDetails();
     var months = [
         "Jan",
         "Feb",
@@ -64,35 +65,26 @@ function Articles() {
     };
 
     useEffect(() => {
+        setCurrentPage("resources");
+    });
+
+    useEffect(() => {
+        setShowSpinner(true);
         var requests = {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${newstoken}`,
             },
         };
-        // const httpsAgent = new HttpProxyAgent("http://50.219.106.83:3000");
-        // const config = {
-        //     url: `${newsapi}/everything?q=${topic} mental health&language=en&pageSize=50`,
-        //     httpsAgent,
-        // };
 
-        fetch(
-            `${newsapi}/everything?q=${topic} mental health&language=en&pageSize=50`,
-            requests
-        )
+        fetch(`${newsapi}/everything?q=${topic} mental health`, requests)
             .then((response) => response.json())
             .then((result) => {
+                console.log(result);
                 setArticles(result.articles);
+                setShowSpinner(false);
             })
-            .catch((err) => console.log(err));
-
-        // axios
-        //     .request(config, requests)
-        //     .then((res) => {
-        //         console.log(res);
-        //         res.articles;
-        //     })
-        //     .catch((err) => console.log(err));
+            .catch(console.log("err"));
     }, [topic]);
 
     useEffect(() => {
@@ -120,6 +112,7 @@ function Articles() {
             {articlePage === false ? (
                 <>
                     <Nav link="/tranquil/resources" />
+                    {showSpinner ? <Spinner /> : null}
                     {!sbut ? (
                         <header>
                             <h1>Articles</h1>
@@ -157,50 +150,48 @@ function Articles() {
                     )}
 
                     <div className="artcont">
-                        {articles ? (
-                            articles.map((elem, index) => (
-                                <div
-                                    key={index}
-                                    className="articleBox"
-                                    onClick={() => {
-                                        setArdx(index);
-                                        setTimeout(() => {
-                                            setArticlePage(true);
-                                        }, 0);
-                                    }}
-                                >
-                                    <div>
-                                        <img
-                                            src={elem?.urlToImage}
-                                            alt=""
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <div>
-                                        <p>
-                                            {elem.publishedAt &&
-                                                handleString(
-                                                    elem.publishedAt.slice(
-                                                        0,
-                                                        10
-                                                    )
-                                                )}
-                                        </p>
-                                        <p>
-                                            {elem.title &&
-                                                handleTrim(elem.title, 75)}
-                                        </p>
-                                        <p>
-                                            {elem.author
-                                                ? handleTrim(elem.author, 25)
-                                                : "Anonymous"}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <Spinner />
-                        )}
+                        {articles
+                            ? articles.map((elem, index) => (
+                                  <div
+                                      key={index}
+                                      className="articleBox"
+                                      onClick={() => {
+                                          setArdx(index);
+                                          setTimeout(() => {
+                                              setArticlePage(true);
+                                          }, 0);
+                                      }}
+                                  >
+                                      <div>
+                                          <img
+                                              src={elem?.urlToImage}
+                                              alt=""
+                                              loading="lazy"
+                                          />
+                                      </div>
+                                      <div>
+                                          <p>
+                                              {elem.publishedAt &&
+                                                  handleString(
+                                                      elem.publishedAt.slice(
+                                                          0,
+                                                          10
+                                                      )
+                                                  )}
+                                          </p>
+                                          <p>
+                                              {elem.title &&
+                                                  handleTrim(elem.title, 75)}
+                                          </p>
+                                          <p>
+                                              {elem.author
+                                                  ? handleTrim(elem.author, 25)
+                                                  : "Anonymous"}
+                                          </p>
+                                      </div>
+                                  </div>
+                              ))
+                            : null}
                     </div>
                 </>
             ) : (

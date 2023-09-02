@@ -1,39 +1,22 @@
-// import Spinner from "../../Spinner";
-
 import { useEffect } from "react";
 import { PageDetails } from "../Tranquil/PageContext";
-
-// import { useState, useEffect } from "react";
-// import { preloadImages } from "../../Globals";
+import "./Community.css";
+import logo from "../../../Assets/brand_gold.svg";
 
 function Community() {
-    // var [isImagesLoading, setImagesLoaded] = useState(false);
-    // useEffect(() => {
-    //      const imagesToPreload = [
-    //
-    //      ];
-    //      preloadImages(imagesToPreload)
-    //           .then(() => {
-    //                const imageTimer = setTimeout(() => {
-    //                     setImagesLoaded(true);
-    //                }, 1000);
-
-    //                return () => {
-    //                     clearTimeout(imageTimer);
-    //                };
-    //           })
-    //           .catch((error) => {
-    //                console.log("Error Loading Images", error);
-    //           });
-    // }, []);
     var { setCurrentPage } = PageDetails();
     useEffect(() => {
         setCurrentPage("community");
     });
+
     return (
-        <div>
-            {/* {isImagesLoading === false ? <Spinner /> : null} */}
-            <p>Community</p>;
+        <div className="Community">
+            <img src={logo} alt="" />
+            <p>
+                Tranquil is developing an interface where users can all interact
+                together.
+            </p>
+            <p>In the meantime, do well to explore other parts of the app.</p>
         </div>
     );
 }

@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import Nav from "../../Tranquil/Nav/Nav";
 import "./Viewgoals.css";
+import "../SetGoals/Setgoals.css";
+import goalDel from "../../Assets/profileUpdateSuccess.svg";
 import { api } from "../../../Globals/Globals";
-
+import Spinner from "../../../Globals/Spinner/Spinner";
 import { FormDetails } from "../../../Globals/FormContext";
+import { PageDetails } from "../../Tranquil/PageContext";
 
 function ViewGoals() {
+    var { setCurrentPage } = PageDetails();
     var [userGoals, setUserGoals] = useState([]);
     var { token } = FormDetails();
-
+    var [showSpinner, setShowSpinner] = useState(true);
+    var [nogoals, setNogoals] = useState("");
     var months = [
         "Jan",
         "Feb",
@@ -23,6 +28,7 @@ function ViewGoals() {
         "Nov",
         "Dec",
     ];
+    var [isgoalDeleted, setIsGoalDeleted] = useState(false);
 
     const handleDate = (elem) => {
         const [yearstr, monthstr, datestr] = elem?.split("-");
@@ -73,6 +79,7 @@ function ViewGoals() {
     };
 
     const handleDel = (index, id) => {
+        setShowSpinner(true);
         var requests = {
             method: "DELETE",
             headers: {
@@ -82,9 +89,23 @@ function ViewGoals() {
         fetch(`${api}/goal-settings/${id}`, requests)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
+                if (result && result.statusCode === 200) {
+                    setUserGoals((prevGoals) => {
+                        const newGoals = [...prevGoals];
+                        newGoals.splice(index, 1);
+                        return newGoals;
+                    });
+                    setTimeout(() => {
+                        setShowSpinner(false);
+                        setIsGoalDeleted(true);
+                    });
+                }
             });
     };
+
+    useEffect(() => {
+        setCurrentPage("goals");
+    });
 
     useEffect(() => {
         var requests = {
@@ -96,9 +117,21 @@ function ViewGoals() {
         fetch(`${api}/goal-settings`, requests)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
-                if (result && result.data) {
-                    setUserGoals(result.data.data);
+                if (result && result.statusCode === 200) {
+                    if (result.data.data.length > 0) {
+                        setUserGoals(result.data.data);
+                    } else {
+                        setNogoals(
+                            <p className="nogoals">
+                                You've exhausted your goal list, try setting new
+                                ones
+                            </p>
+                        );
+                    }
+
+                    setTimeout(() => {
+                        setShowSpinner(false);
+                    }, 200);
                 }
             });
     }, [token]);
@@ -112,7 +145,8 @@ function ViewGoals() {
                 <h1>My Goals</h1>
             </header>
             <div className="goals">
-                {userGoals
+                {showSpinner ? <Spinner /> : null}
+                {userGoals.length > 0
                     ? userGoals.map((elem, index) => (
                           <div className="Eachgoal" key={index}>
                               <section>
@@ -135,8 +169,24 @@ function ViewGoals() {
                               {handleDue(elem.end_date, index, elem.id)}
                           </div>
                       ))
-                    : null}
+                    : nogoals}
             </div>
+            {isgoalDeleted ? (
+                <div className="goalSet">
+                    <div>
+                        <img src={goalDel} alt="" />
+                        <h1>Weldone</h1>
+                        <p>You just completed a goal, we're proud of you.</p>
+                        <button
+                            onClick={() => {
+                                setIsGoalDeleted(false);
+                            }}
+                        >
+                            Done
+                        </button>
+                    </div>
+                </div>
+            ) : null}
         </div>
     );
 }

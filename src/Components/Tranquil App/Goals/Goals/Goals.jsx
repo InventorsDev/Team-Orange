@@ -2,8 +2,9 @@ import "./Goals.css";
 import Goal from "../../Assets/Goals.svg";
 import Spinner from "../../../Globals/Spinner/Spinner";
 import { useState, useEffect } from "react";
-import { preloadImages } from "../../../Globals/Globals";
+import { preloadImages, api } from "../../../Globals/Globals";
 import { PageDetails } from "../../Tranquil/PageContext";
+import { FormDetails } from "../../../Globals/FormContext";
 import Nav from "../../Tranquil/Nav/Nav";
 import { Route, Routes, useNavigate } from "react-router";
 import SetGoals from "../SetGoals/Setgoals";
@@ -11,12 +12,15 @@ import ViewGoals from "../VIewGoals/Viewgoals";
 import { Link } from "react-router-dom";
 
 function Initial() {
+    var { token } = FormDetails();
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var { setCurrentPage } = PageDetails();
     var navigate = useNavigate();
     useEffect(() => {
         setCurrentPage("goals");
     });
+    var [showView, setShowView] = useState(false);
+    var [showSpinner, setShowSpinner] = useState(true);
     useEffect(() => {
         const imagesToPreload = [Goal];
         preloadImages(imagesToPreload)
@@ -34,9 +38,36 @@ function Initial() {
             });
     }, []);
 
+    useEffect(() => {
+        var requests = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        fetch(`${api}/goal-settings`, requests)
+            .then((response) => response.json())
+            .then((result) => {
+                if (result && result.statusCode === 200) {
+                    console.log(result.data.data);
+                    if (result.data.data.length > 0) {
+                        setShowView(true);
+                        if (isImagesLoading) {
+                            setShowSpinner(false);
+                        }
+                    } else {
+                        setShowView(false);
+                        if (isImagesLoading) {
+                            setShowSpinner(false);
+                        }
+                    }
+                }
+            });
+    }, [token, isImagesLoading]);
+
     return (
         <div className="Goals">
-            {isImagesLoading === false ? <Spinner /> : null}
+            {showSpinner ? <Spinner /> : null}
             <Nav link="/tranquil/home" />
             <header>
                 <h1>Goal Setting</h1>
@@ -52,9 +83,14 @@ function Initial() {
                     to you, and make steady progress towards achieving your
                     dreams.
                 </p>
-                <Link className="viewSetGoals" to="/tranquil/goals/viewGoals">
-                    View Set Goals
-                </Link>
+                {showView ? (
+                    <Link
+                        className="viewSetGoals"
+                        to="/tranquil/goals/viewGoals"
+                    >
+                        View Set Goals
+                    </Link>
+                ) : null}
                 <button
                     onClick={() => {
                         navigate("/tranquil/goals/newGoal");

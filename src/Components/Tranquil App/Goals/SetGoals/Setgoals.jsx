@@ -6,11 +6,10 @@ import { useEffect, useState } from "react";
 import { FormDetails } from "../../../Globals/FormContext";
 import { api } from "../../../Globals/Globals";
 import goalSet from "../../Assets/profileUpdateSuccess.svg";
-import { useNavigate } from "react-router";
+import Spinner from "../../../Globals/Spinner/Spinner";
 
 function SetGoals() {
     var { setCurrentPage } = PageDetails();
-    var navigate = useNavigate();
     var { token } = FormDetails();
     var date = new Date();
     var year = date.getFullYear();
@@ -25,10 +24,8 @@ function SetGoals() {
         endDate: `${year}-${month}-${nextday}`,
     });
     var [isgoalSet, setGoalstatus] = useState(false);
-    var [message, setMessage] = useState({
-        string: "",
-        state: false,
-    });
+
+    var [showSpinner, setShowSpinner] = useState(false);
 
     // useEffect(() => {
     //     console.log(state);
@@ -43,6 +40,7 @@ function SetGoals() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        setShowSpinner(true);
         var goalsBody = {
             goal_plan: state.goalPlan,
             goal_information: state.goalInfo,
@@ -64,16 +62,18 @@ function SetGoals() {
         fetch(`${api}/goal-settings`, requests)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
-                if ((result.statusCode = 201)) {
+                if (result && result.statusCode === 201) {
+                    setTimeout(() => {
+                        setShowSpinner(false);
+                    }, 200);
                     setGoalstatus(true);
                 }
-            })
-            .catch((err) => console.log(err));
+            });
     };
 
     return (
         <div className="SetGoals">
+            {showSpinner ? <Spinner /> : null}
             <div className="navCont">
                 <Nav link="/tranquil/goals" />
             </div>
@@ -98,7 +98,7 @@ function SetGoals() {
                 <fieldset className="goalInfo">
                     <label>Goal Information</label>
                     <textarea
-                        placeholder="e.g The main aim of the goal is to read books regarding mental health to improve on how I think and behave to things"
+                        placeholder="e.g The main aim of this goal is to read books regarding mental health to improve on how I think and react to people"
                         value={state.goalInfo}
                         onChange={(e) => {
                             setState({
@@ -137,11 +137,6 @@ function SetGoals() {
                     />
                     <img src={calgrey} alt="" />
                 </fieldset>
-                {message.string ? (
-                    <p className={message.state ? "success" : "fail"}>
-                        {message.string}
-                    </p>
-                ) : null}
                 <button type="submit" disabled={!isGoalsSetValid()}>
                     Set Goal
                 </button>
@@ -154,7 +149,15 @@ function SetGoals() {
                         <p>You have successfully set a goal</p>
                         <button
                             onClick={() => {
-                                navigate("/tranquil/goals");
+                                setState({
+                                    ...state,
+                                    goalPlan: "",
+                                    goalInfo: "",
+                                    duration: "weekly",
+                                    startDate: `${year}-${month}-${day}`,
+                                    endDate: `${year}-${month}-${nextday}`,
+                                });
+                                setGoalstatus(false);
                             }}
                         >
                             Done
