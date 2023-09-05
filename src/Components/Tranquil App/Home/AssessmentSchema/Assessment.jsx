@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./Assessment.css";
 import { api } from "../../../Globals/Globals";
 import arrowBack from "../../Assets/back.svg";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Spinner from "../../../Globals/Spinner/Spinner";
 import Nav from "../../Tranquil/Nav/Nav";
 
@@ -10,7 +10,7 @@ function Assessments() {
     var { test, specifics } = useParams();
     var [asmt, setAsmt] = useState();
     var [state, setState] = useState([]);
-
+    var navigate = useNavigate();
     var [endPoint, setEndPoint] = useState();
 
     useEffect(() => {
@@ -125,6 +125,12 @@ function Assessments() {
 
         const percent = (total.optionWeight / total.questionValue) * 100;
         console.log(`${percent}%`);
+
+        navigate(
+            `/tranquil/assessments/results/${specifics}/${
+                Math.ceil(percent * 10) / 10
+            }`
+        );
     };
 
     return (

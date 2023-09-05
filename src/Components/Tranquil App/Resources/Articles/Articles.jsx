@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import Nav from "../../Tranquil/Nav/Nav";
 import "../../Tranquil/Nav/Nav.css";
 import search from "../../Assets/search.svg";
-import { newsapi, newstoken } from "../../../Globals/Globals";
 import Spinner from "../../../Globals/Spinner/Spinner";
 import { FormDetails } from "../../../Globals/FormContext";
 import navImage from "../../Assets/profile_img_default.svg";
 import { api } from "../../../Globals/Globals";
 import backward from "../../Assets/backwardsArrow.svg";
 import { PageDetails } from "../../Tranquil/PageContext";
+import LazyLoad from "react-lazy-load";
 
 function Articles() {
     var { token } = FormDetails();
@@ -73,19 +73,20 @@ function Articles() {
         var requests = {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${newstoken}`,
+                Authorization: `Bearer ${token}`,
             },
         };
 
-        fetch(`${newsapi}/everything?q=${topic} mental health`, requests)
+        fetch(`${api}/articles?q=${topic} mental health`, requests)
             .then((response) => response.json())
             .then((result) => {
-                console.log(result);
-                setArticles(result.articles);
-                setShowSpinner(false);
+                if (result.data && result.data.articles) {
+                    setArticles(result.data.articles);
+                    setShowSpinner(false);
+                }
             })
             .catch(console.log("err"));
-    }, [topic]);
+    }, [topic, token]);
 
     useEffect(() => {
         if (token) {
@@ -129,6 +130,7 @@ function Articles() {
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 if (inputText !== "") {
+                                    setArticles([]);
                                     setSbut(false);
                                     setTopic(inputText);
                                     setInput("");
@@ -150,7 +152,7 @@ function Articles() {
                     )}
 
                     <div className="artcont">
-                        {articles
+                        {articles.length > 0
                             ? articles.map((elem, index) => (
                                   <div
                                       key={index}
@@ -163,11 +165,18 @@ function Articles() {
                                       }}
                                   >
                                       <div>
-                                          <img
-                                              src={elem?.urlToImage}
-                                              alt=""
-                                              loading="lazy"
-                                          />
+                                          <LazyLoad
+                                              height={100}
+                                              width={100}
+                                              offset={300}
+                                              threshold={0.95}
+                                          >
+                                              <img
+                                                  src={elem?.urlToImage}
+                                                  alt=""
+                                                  loading="lazy"
+                                              />
+                                          </LazyLoad>
                                       </div>
                                       <div>
                                           <p>

@@ -113,6 +113,7 @@ function SetGoals() {
                     <label>Start Date</label>
                     <input
                         type="date"
+                        min={`${year}-${month}-${day}`}
                         value={state.startDate}
                         onChange={(e) => {
                             setState({
@@ -127,6 +128,7 @@ function SetGoals() {
                     <label>End Date</label>
                     <input
                         type="date"
+                        min={`${year}-${month}-${day}`}
                         value={state.endDate}
                         onChange={(e) => {
                             setState({
