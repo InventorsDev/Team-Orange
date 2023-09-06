@@ -31,6 +31,7 @@ function HomePageInitial() {
         userName: "",
         image: navImage,
     });
+    var [prompt, showPrompt] = useState(false);
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth();
@@ -51,7 +52,6 @@ function HomePageInitial() {
         "Dec",
     ];
     var monthString = months[month];
-
     var tests = [
         {
             name: "Anxiety",
@@ -75,6 +75,7 @@ function HomePageInitial() {
     useEffect(() => {
         setCurrentPage("home");
     });
+
     useEffect(() => {
         const imagesToPreload = [
             resources,
@@ -217,8 +218,6 @@ function HomePageInitial() {
             </div>
         );
     };
-
-    var [prompt, showPrompt] = useState(false);
 
     return (
         <div className="Home">

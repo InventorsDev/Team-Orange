@@ -141,29 +141,6 @@ function Tranquil() {
         );
     };
 
-    // const [scrollPosition, setScrollPosition] = useState(0);
-    // const [footerVisible, setFooterVisible] = useState(true);
-
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const currentPosition = window.scrollY;
-
-    //         if (currentPosition > scrollPosition && currentPosition > 20) {
-    //             setFooterVisible(false);
-    //         } else {
-    //             setFooterVisible(true);
-    //         }
-
-    //         setScrollPosition(currentPosition);
-    //     };
-
-    //     window.addEventListener("scroll", handleScroll);
-
-    //     return () => {
-    //         window.removeEventListener("scroll", handleScroll);
-    //     };
-    // }, [scrollPosition]);
-
     return (
         <div className="Tranquil">
             <Routes>
@@ -174,7 +151,6 @@ function Tranquil() {
                 <Route path="community" element={<Community />} />
             </Routes>
 
-            {/* {footerVisible && <Footer image={images} />} */}
             <Footer image={images} />
         </div>
     );

@@ -24,12 +24,7 @@ function SetGoals() {
         endDate: `${year}-${month}-${nextday}`,
     });
     var [isgoalSet, setGoalstatus] = useState(false);
-
     var [showSpinner, setShowSpinner] = useState(false);
-
-    // useEffect(() => {
-    //     console.log(state);
-    // }, [state]);
 
     useEffect(() => {
         setCurrentPage("goals");

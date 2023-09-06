@@ -1,11 +1,15 @@
 .Otp {
     height: 100vh;
+    width: 100vw;
     display: flex;
     overflow-x: hidden;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #fefefe;
+    max-width: 550px;
+    margin: auto;
+    box-shadow: 0px 0px 2px #00000020;
 }
 
 .Otp header {
@@ -75,6 +79,7 @@
     font-size: 15px;
     background: transparent;
     border: none;
+    cursor: pointer;
 }
 
 .Otp .resendOTP {
@@ -90,6 +95,7 @@
     color: #3bcd84;
     text-decoration: none;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .Otp .resendMessage {

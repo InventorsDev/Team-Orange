@@ -1,8 +1,8 @@
 import "./Forgot.css";
+import { useNavigate } from "react-router";
 import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
 import {
     globalValidateEmail,
     globalValidatePassword,
@@ -10,7 +10,7 @@ import {
 } from "../../Globals/Globals";
 
 function Forgot() {
-    const navigate = useNavigate();
+    var navigate = useNavigate();
     var [step, setStep] = useState(1);
     var [state, setState] = useState({
         email: "",
@@ -18,15 +18,26 @@ function Forgot() {
         newPassword: "",
         confirmPassword: "",
     });
-
-    const getIsEmailValid = () => {
-        return globalValidateEmail(state.email);
-    };
-
     var [emailSentMessage, setEmailMessage] = useState({
         string: "",
         state: false,
     });
+
+    var [tokenResetMessage, setToken] = useState({
+        string: "",
+        state: true,
+    });
+    var newPasswordRef = useRef();
+    var confirmPasswordRef = useRef();
+    var newTokenRef = useRef();
+    var [eyeclick, setEyeclick] = useState(false);
+    var [eyeclick2, setEyeclick2] = useState(false);
+    var [passwordValidated, setPasswordVal] = useState();
+    var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
+
+    const getIsEmailValid = () => {
+        return globalValidateEmail(state.email);
+    };
 
     const fetchNewOtp = (e) => {
         e.preventDefault();
@@ -113,11 +124,6 @@ function Forgot() {
         </form>
     );
 
-    var [tokenResetMessage, setToken] = useState({
-        string: "",
-        state: true,
-    });
-
     const handleSetNewPassword = (e) => {
         e.preventDefault();
         setToken({
@@ -166,13 +172,6 @@ function Forgot() {
             });
     };
 
-    var newPasswordRef = useRef();
-    var confirmPasswordRef = useRef();
-    var newTokenRef = useRef();
-
-    var [passwordValidated, setPasswordVal] = useState();
-    var [confirmPasswordValidated, setConfirmPasswordVal] = useState();
-
     const validateFields = () => {
         return (
             state.token.length === 4 &&
@@ -180,9 +179,6 @@ function Forgot() {
             state.confirmPassword.trim() === state.newPassword.trim()
         );
     };
-
-    var [eyeclick, setEyeclick] = useState(false);
-    var [eyeclick2, setEyeclick2] = useState(false);
 
     const validatePassword = () => {
         const isPasswordValid = globalValidatePassword(state.newPassword);

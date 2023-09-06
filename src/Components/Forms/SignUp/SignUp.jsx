@@ -91,7 +91,6 @@ function SignUp() {
             email: state.email.trim(),
             password: state.password.trim(),
         };
-        console.log(userDetails);
         var requestOptions = {
             method: "POST",
             headers: {

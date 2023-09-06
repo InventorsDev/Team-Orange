@@ -8,6 +8,9 @@
     overflow: hidden;
     font-family: "Lato";
     background-color: #fefefe;
+    max-width: 550px;
+    margin: auto;
+    box-shadow: 0px 0px 2px #00000020;
 }
 
 .ForgotPassword header {
@@ -25,7 +28,6 @@
 .ForgotPassword header p {
     font-size: 14px;
     color: #71727a;
-
     font-family: "Lato", sans-serif;
     margin-bottom: 5px;
 }

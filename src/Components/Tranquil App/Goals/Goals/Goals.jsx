@@ -16,11 +16,13 @@ function Initial() {
     var [isImagesLoading, setImagesLoaded] = useState(false);
     var { setCurrentPage } = PageDetails();
     var navigate = useNavigate();
+    var [showView, setShowView] = useState(false);
+    var [showSpinner, setShowSpinner] = useState(true);
+
     useEffect(() => {
         setCurrentPage("goals");
     });
-    var [showView, setShowView] = useState(false);
-    var [showSpinner, setShowSpinner] = useState(true);
+
     useEffect(() => {
         const imagesToPreload = [Goal];
         preloadImages(imagesToPreload)

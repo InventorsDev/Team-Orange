@@ -1,4 +1,9 @@
 import "./Prompt.css";
+import { FormDetails } from "../../Globals/FormContext";
+import { preloadImages, api } from "../../Globals/Globals";
+import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+import Spinner from "../../Globals/Spinner/Spinner";
 import logo from "../../../Assets/brand_gold.svg";
 import journal from "../../Tranquil App/Assets/Journal.svg";
 import breathe from "../../Tranquil App/Assets/Breathe.svg";
@@ -7,11 +12,6 @@ import read from "../../Tranquil App/Assets/Read.svg";
 import listen from "../../Tranquil App/Assets/Listen.svg";
 import health from "../../Tranquil App/Assets/Health.svg";
 import backwards from "../../Tranquil App/Assets/back.svg";
-import { FormDetails } from "../../Globals/FormContext";
-import { preloadImages, api } from "../../Globals/Globals";
-import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
-import Spinner from "../../Globals/Spinner/Spinner";
 
 function Prompt() {
     var [currentPage, setCurrentPage] = useState(1);

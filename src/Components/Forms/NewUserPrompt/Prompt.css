@@ -124,6 +124,7 @@
     width: 48%;
     margin-top: 10px;
     border-radius: 20px;
+    box-shadow: 1px 2px 2px -1px #00000020;
 }
 
 .Intro .selectActivities .nav {

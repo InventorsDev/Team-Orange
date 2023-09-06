@@ -1,14 +1,8 @@
-// importing css
 import "./App.css";
-//react hooks, some of react's basic functionality
 import { useEffect, useState } from "react";
-//React Hook used for defining routes to pages
 import { Routes, Route, useNavigate } from "react-router";
-//context
 import { FormProvider } from "./Components/Globals/FormContext";
-//logo import
 import tranquilLogo from "./Assets/home_logo.svg";
-//importing pages/components
 import Login from "./Components/Forms/Login/Login";
 import SignIn from "./Components/Forms/SignIn/SignIn";
 import SignUp from "./Components/Forms/SignUp/SignUp";
@@ -23,41 +17,47 @@ import EditProfile from "./Components/Tranquil App/Profile/Profile_Update/Update
 import { PageProvider } from "./Components/Tranquil App/Tranquil/PageContext";
 import Assessments from "./Components/Tranquil App/Home/AssessmentSchema/Assessment";
 import Results from "./Components/Tranquil App/Home/AssessmentResults/Results";
+import { useRef } from "react";
+import { preloadImages } from "./Components/Globals/Globals";
 
 function App() {
     var navigate = useNavigate();
-    var [firstTextDisplay, setNewTextDisplay] = useState(true);
+    var textRef = useRef();
+    var [loaded, setLoaded] = useState(false);
     function Opening() {
         useEffect(() => {
             setTimeout(() => {
-                setNewTextDisplay(false);
-            }, 2000);
+                textRef.current.innerText = "Find your inner Balance";
+            }, 1500);
 
             setTimeout(() => {
                 navigate("/login");
             }, 4100);
         });
 
+        preloadImages([tranquilLogo]).then(() => {
+            setLoaded(true);
+        });
         return (
-            <div className="Opening">
-                <header>
-                    <div className="imgText">
-                        <div className="logo">
-                            <img src={tranquilLogo} alt="" />
+            <>
+                {" "}
+                {loaded ? (
+                    <div className="Opening">
+                        <div className="container">
+                            <header>
+                                <div className="imgText">
+                                    <div className="logo">
+                                        <img src={tranquilLogo} alt="" />
+                                    </div>
+                                    <p className="firstText" ref={textRef}>
+                                        Unleash the Power within
+                                    </p>
+                                </div>
+                            </header>
                         </div>
-
-                        {firstTextDisplay ? (
-                            <p className="firstText">
-                                Unleash the Power within
-                            </p>
-                        ) : (
-                            <p className="secondText">
-                                Find your inner Balance
-                            </p>
-                        )}
                     </div>
-                </header>
-            </div>
+                ) : null}
+            </>
         );
     }
 

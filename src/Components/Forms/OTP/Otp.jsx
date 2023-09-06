@@ -1,9 +1,9 @@
 import "./Otp.css";
 import { useReducer, useState, useEffect } from "react";
-import tranquil from "../../../Assets/brand_gold.svg";
 import { useNavigate } from "react-router";
 import { FormDetails } from "../../Globals/FormContext";
 import { api } from "../../Globals/Globals";
+import tranquil from "../../../Assets/brand_gold.svg";
 
 function Otp() {
     var navigate = useNavigate();
@@ -61,6 +61,12 @@ function Otp() {
                             string: "Invalid Token",
                             state: false,
                         });
+                        setTimeout(() => {
+                            setOtp({
+                                ...Otp,
+                                token: "",
+                            });
+                        }, 1000);
                     }
                 });
         }
@@ -69,6 +75,10 @@ function Otp() {
     const handleResend = (e) => {
         e.preventDefault();
         setInitialTimeCount(30 + initialTimeCount);
+        setOtp({
+            ...Otp,
+            token: "",
+        });
         setResendMessage({
             ...resendMessage,
             string: "A new token has been sent to you",
